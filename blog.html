@@ -26,12 +26,7 @@
     html { scroll-behavior: smooth; }
     body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
-
-    /* ── TICKER ── */
     .tv-ticker-wrap { width: 100%; background: #1a1a18; }
-    .tv-ticker-wrap .tradingview-widget-container { margin: 0 !important; }
-
-    /* ── NAV ── */
     nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
@@ -54,254 +49,93 @@
     .mobile-menu { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 16px 24px; flex-direction: column; gap: 4px; }
     .mobile-menu a { font-size: 14px; font-weight: 500; color: var(--text2); padding: 10px 12px; border-radius: 8px; display: block; }
     .mobile-menu.open { display: flex; }
-
-    /* ── PAGE HEADER ── */
-    .page-header {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: 48px 24px 40px;
-    }
+    .page-header { background: var(--card); border-bottom: 1px solid var(--border); padding: 48px 24px 40px; }
     .page-header-inner { max-width: 1200px; margin: 0 auto; }
     .page-eyebrow { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
     .page-title { font-family: var(--serif); font-size: 42px; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
     .page-title em { font-style: italic; color: var(--green); }
     .page-desc { font-size: 16px; color: var(--text2); max-width: 520px; line-height: 1.7; margin-bottom: 28px; }
-
-    /* Search bar */
     .search-wrap { display: flex; gap: 12px; align-items: center; max-width: 560px; }
-    .search-box {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--bg);
-      border: 1px solid var(--border2);
-      border-radius: 12px;
-      padding: 10px 16px;
-      transition: all 0.15s;
-    }
+    .search-box { flex: 1; display: flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--border2); border-radius: 12px; padding: 10px 16px; transition: all 0.15s; }
     .search-box:focus-within { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-light); }
-    .search-icon { font-size: 15px; color: var(--text3); flex-shrink: 0; }
     .search-box input { border: none; background: transparent; font-family: var(--sans); font-size: 14px; color: var(--text); outline: none; width: 100%; }
     .search-box input::placeholder { color: var(--text3); }
     .search-count { font-size: 13px; color: var(--text3); white-space: nowrap; }
-
-    /* ── CATEGORY FILTERS ── */
-    .filters-bar {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
+    .filters-bar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; scrollbar-width: none; }
     .filters-bar::-webkit-scrollbar { display: none; }
     .filters-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 4px; padding: 12px 0; }
-    .filter-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--text2);
-      font-family: var(--sans);
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
+    .filter-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid transparent; background: transparent; color: var(--text2); font-family: var(--sans); transition: all 0.15s; white-space: nowrap; }
     .filter-btn:hover { background: var(--card); color: var(--text); border-color: var(--border2); }
     .filter-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
     .filter-count { font-size: 10px; font-weight: 600; background: rgba(255,255,255,0.25); padding: 1px 6px; border-radius: 10px; }
     .filter-btn:not(.active) .filter-count { background: var(--bg3); color: var(--text3); }
-
-    /* ── MAIN LAYOUT ── */
     .blog-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 24px 64px; display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: start; }
-
-    /* ── FEATURED ARTICLE ── */
-    .featured-article {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 24px;
-      cursor: pointer;
-      transition: all 0.2s;
-      position: relative;
-    }
+    .featured-article { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-bottom: 24px; cursor: pointer; transition: all 0.2s; }
     .featured-article:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.09); transform: translateY(-3px); }
-    .featured-banner {
-      background: linear-gradient(135deg, #0f4c2a 0%, #1a7a52 50%, #2a9e6a 100%);
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-      min-height: 180px;
-      display: flex;
-      align-items: flex-end;
-    }
-    .featured-banner::before {
-      content: '';
-      position: absolute;
-      top: -30px; right: -30px;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-    }
-    .featured-banner::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; left: 40%;
-      width: 160px; height: 160px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-    }
-    .featured-badge {
-      position: absolute;
-      top: 20px; left: 20px;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 20px;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
+    .featured-banner { padding: 32px; position: relative; overflow: hidden; min-height: 160px; display: flex; align-items: flex-end; }
+    .featured-banner::before { content: ''; position: absolute; top: -30px; right: -30px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+    .featured-badge { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.15); color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
     .featured-emoji { font-size: 52px; position: relative; z-index: 1; }
     .featured-body { padding: 24px; }
-    .featured-tag { display: inline-flex; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; background: var(--green-light); color: var(--green); }
+    .featured-cat-tag { display: inline-flex; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; }
     .featured-title { font-family: var(--serif); font-size: 24px; line-height: 1.3; letter-spacing: -0.5px; margin-bottom: 10px; color: var(--text); }
     .featured-excerpt { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 16px; }
     .featured-meta { display: flex; align-items: center; justify-content: space-between; }
     .meta-left { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--text3); }
-    .meta-left span { display: flex; align-items: center; gap: 4px; }
     .read-btn { font-size: 13px; font-weight: 600; color: var(--green); display: flex; align-items: center; gap: 4px; transition: gap 0.15s; }
-    .read-btn:hover { gap: 8px; }
-
-    /* ── ARTICLE GRID ── */
     .articles-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
     .articles-count { font-size: 13px; color: var(--text3); }
-    .sort-select {
-      font-size: 13px;
-      color: var(--text2);
-      background: var(--card);
-      border: 1px solid var(--border2);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-family: var(--sans);
-      cursor: pointer;
-      outline: none;
-    }
+    .sort-select { font-size: 13px; color: var(--text2); background: var(--card); border: 1px solid var(--border2); border-radius: 8px; padding: 6px 12px; font-family: var(--sans); cursor: pointer; outline: none; }
     .articles-list { display: flex; flex-direction: column; gap: 16px; }
-    .article-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    .article-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; display: flex; gap: 18px; align-items: flex-start; cursor: pointer; transition: all 0.2s; }
     .article-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.07); transform: translateY(-2px); border-color: rgba(0,0,0,0.12); }
-    .article-card.hidden { display: none; }
-    .card-icon {
-      width: 52px; height: 52px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
+    .card-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
     .card-body { flex: 1; min-width: 0; }
-    .card-tags { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+    .card-tags { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
     .tag { display: inline-flex; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; padding: 2px 8px; border-radius: 6px; }
     .tag-green { background: var(--green-light); color: var(--green); }
     .tag-blue { background: var(--blue-light); color: var(--blue); }
     .tag-amber { background: var(--amber-light); color: var(--amber); }
     .tag-red { background: var(--red-light); color: var(--red); }
     .tag-purple { background: var(--purple-light); color: var(--purple); }
-    .card-title { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 6px; letter-spacing: -0.2px; }
+    .card-title { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 6px; }
     .card-excerpt { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .card-footer { display: flex; align-items: center; justify-content: space-between; }
     .card-meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--text3); }
-    .card-meta span { display: flex; align-items: center; gap: 3px; }
     .card-arrow { font-size: 13px; color: var(--green); font-weight: 500; opacity: 0; transition: opacity 0.15s; }
     .article-card:hover .card-arrow { opacity: 1; }
-
-    /* ── PAGINATION ── */
-    .pagination { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 36px; }
-    .page-btn {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      border: 1px solid var(--border2);
-      background: var(--card);
-      color: var(--text2);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      font-family: var(--sans);
-      transition: all 0.15s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .page-btn:hover { background: var(--bg2); color: var(--text); }
-    .page-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
-    .page-btn.arrow { font-size: 16px; }
-
-    /* ── SIDEBAR ── */
+    .loading-state { text-align: center; padding: 60px 24px; }
+    .loading-spinner { width: 28px; height: 28px; border: 3px solid var(--border2); border-top-color: var(--green-mid); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-size: 14px; color: var(--text3); }
+    .empty-state { text-align: center; padding: 64px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; }
+    .empty-emoji { font-size: 48px; margin-bottom: 16px; }
+    .empty-title { font-family: var(--serif); font-size: 26px; margin-bottom: 10px; }
+    .empty-desc { font-size: 14px; color: var(--text2); line-height: 1.7; max-width: 380px; margin: 0 auto 24px; }
+    .empty-coming { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--green); background: var(--green-light); padding: 8px 18px; border-radius: 20px; }
+    .no-results { text-align: center; padding: 48px 24px; display: none; background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+    .no-results.show { display: block; }
     .sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 80px; }
     .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
     .sidebar-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
     .sidebar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-
-    /* Popular posts */
-    .popular-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.15s; }
-    .popular-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .popular-item:hover { opacity: 0.7; }
-    .popular-num { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--bg3); line-height: 1; flex-shrink: 0; width: 24px; }
-    .popular-title { font-size: 12px; font-weight: 500; color: var(--text); line-height: 1.5; margin-bottom: 4px; }
-    .popular-meta { font-size: 11px; color: var(--text3); }
-
-    /* Categories sidebar */
     .cat-list { display: flex; flex-direction: column; gap: 4px; }
     .cat-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
     .cat-item:hover { background: var(--bg2); }
     .cat-name { font-size: 13px; color: var(--text2); font-weight: 500; display: flex; align-items: center; gap: 8px; }
     .cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .cat-count { font-size: 11px; font-weight: 600; color: var(--text3); background: var(--bg2); padding: 2px 8px; border-radius: 10px; }
-
-    /* Newsletter */
     .newsletter-card { background: var(--green); border-radius: 16px; padding: 22px; color: #fff; }
     .newsletter-card h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 6px; line-height: 1.2; }
     .newsletter-card p { font-size: 13px; opacity: 0.85; margin-bottom: 14px; line-height: 1.5; }
     .nl-input { display: flex; flex-direction: column; gap: 8px; }
     .nl-input input { width: 100%; padding: 10px 14px; border-radius: 10px; border: none; font-family: var(--sans); font-size: 13px; background: rgba(255,255,255,0.2); color: #fff; outline: none; }
     .nl-input input::placeholder { color: rgba(255,255,255,0.6); }
-    .nl-input input:focus { background: rgba(255,255,255,0.28); }
-    .btn-white { background: #fff; color: var(--green); font-weight: 600; padding: 10px 18px; border-radius: 10px; font-size: 13px; cursor: pointer; border: none; font-family: var(--sans); transition: all 0.15s; width: 100%; }
+    .btn-white { background: #fff; color: var(--green); font-weight: 600; padding: 10px; border-radius: 10px; font-size: 13px; cursor: pointer; border: none; font-family: var(--sans); width: 100%; }
     .btn-white:hover { background: var(--green-light); }
-
-    /* Tags cloud */
     .tags-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag-pill { font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; background: var(--bg2); color: var(--text2); border: 1px solid var(--border); cursor: pointer; transition: all 0.15s; }
-    .tag-pill:hover { background: var(--green-light); color: var(--green); border-color: rgba(26,122,82,0.2); }
-
-    /* ── NO RESULTS ── */
-    .no-results { text-align: center; padding: 48px 24px; display: none; }
-    .no-results.show { display: block; }
-    .no-results-emoji { font-size: 40px; margin-bottom: 12px; }
-    .no-results h3 { font-family: var(--serif); font-size: 22px; margin-bottom: 8px; }
-    .no-results p { font-size: 14px; color: var(--text2); }
-
-    /* ── FOOTER ── */
+    .tag-pill:hover { background: var(--green-light); color: var(--green); }
     footer { background: var(--text); color: rgba(255,255,255,0.65); }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
@@ -315,83 +149,31 @@
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
     .footer-bottom-links { display: flex; gap: 20px; }
     .footer-bottom-links a:hover { color: #fff; }
-
-    /* ── ANIMATIONS ── */
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .blog-wrap { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      .nav-links, .nav-right { display: none; }
-      .hamburger { display: flex; }
-      .page-title { font-size: 32px; }
-      .featured-title { font-size: 20px; }
-      .article-card { flex-direction: column; gap: 12px; }
-      .card-icon { width: 44px; height: 44px; font-size: 18px; }
-    }
-    @media (max-width: 560px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-      .search-wrap { flex-direction: column; align-items: stretch; }
-    }
+    @media (max-width: 960px) { .blog-wrap { grid-template-columns: 1fr; } .sidebar { position: static; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) { .nav-links, .nav-right { display: none; } .hamburger { display: flex; } .page-title { font-size: 32px; } .article-card { flex-direction: column; } }
+    @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } }
   </style>
 </head>
 <body>
 
-<!-- LIVE TICKER BAR -->
 <div class="tv-ticker-wrap">
   <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-      "symbols": [
-        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
-        { "proName": "NASDAQ:IXIC", "title": "NASDAQ" },
-        { "proName": "INDEX:SENSEX", "title": "SENSEX" },
-        { "proName": "INDEX:NIFTY50", "title": "NIFTY 50" },
-        { "proName": "INDEX:BANKNIFTY", "title": "BANK NIFTY" },
-        { "proName": "BSE:RELIANCE", "title": "RELIANCE" },
-        { "proName": "BSE:TCS", "title": "TCS" },
-        { "proName": "BSE:HDFCBANK", "title": "HDFC BANK" },
-        { "proName": "BSE:INFY", "title": "INFOSYS" },
-        { "proName": "BSE:TATAMOTORS", "title": "TATA MOTORS" },
-        { "proName": "BSE:WIPRO", "title": "WIPRO" },
-        { "proName": "BSE:ICICIBANK", "title": "ICICI BANK" },
-        { "proName": "BSE:AXISBANK", "title": "AXIS BANK" },
-        { "proName": "BSE:BAJFINANCE", "title": "BAJAJ FINANCE" },
-        { "proName": "FX_IDC:USDINR", "title": "USD/INR" },
-        { "proName": "FOREXCOM:XAUUSD", "title": "GOLD" },
-        { "proName": "TVC:USOIL", "title": "CRUDE OIL" }
-      ],
-      "showSymbolLogo": false,
-      "isTransparent": false,
-      "displayMode": "adaptive",
-      "colorTheme": "dark",
-      "locale": "en"
-    }
+    {"symbols":[{"proName":"INDEX:SENSEX","title":"SENSEX"},{"proName":"INDEX:NIFTY50","title":"NIFTY 50"},{"proName":"INDEX:BANKNIFTY","title":"BANK NIFTY"},{"proName":"BSE:RELIANCE","title":"RELIANCE"},{"proName":"BSE:TCS","title":"TCS"},{"proName":"BSE:HDFCBANK","title":"HDFC BANK"},{"proName":"BSE:INFY","title":"INFOSYS"},{"proName":"BSE:TATAMOTORS","title":"TATA MOTORS"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"FOREXCOM:XAUUSD","title":"GOLD"},{"proName":"TVC:USOIL","title":"CRUDE OIL"}],"showSymbolLogo":false,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
     </script>
   </div>
 </div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">
       <div class="logo-mark">
-        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 14L7 9L10 12L14 6L17 9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="17" cy="9" r="1.5" fill="white"/>
-        </svg>
+        <svg viewBox="0 0 20 20" fill="none"><path d="M3 14L7 9L10 12L14 6L17 9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="9" r="1.5" fill="white"/></svg>
       </div>
-      <div>
-        <div class="logo-name">TheAlgoJinn</div>
-        <div class="logo-tagline">Indian Market Intelligence</div>
-      </div>
+      <div><div class="logo-name">TheAlgoJinn</div><div class="logo-tagline">Indian Market Intelligence</div></div>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -410,415 +192,54 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="#">Learn</a>
-    <a href="#">Strategies</a><a href="#">News</a><a href="#">Tools</a>
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="#">Learn</a><a href="#">Strategies</a><a href="#">News</a><a href="#">Tools</a>
   </div>
 </nav>
 
-<!-- PAGE HEADER -->
 <div class="page-header">
   <div class="page-header-inner">
     <div class="page-eyebrow">The AlgoJinn Blog</div>
     <h1 class="page-title">Market wisdom, <em>decoded</em></h1>
-    <p class="page-desc">In-depth articles on trading strategies, technical analysis, algo systems, market news, and everything a serious Indian investor needs to know.</p>
+    <p class="page-desc">In-depth articles on trading strategies, technical analysis, algo systems, and market news — everything a serious Indian investor needs.</p>
     <div class="search-wrap">
       <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search articles — e.g. candlestick, SEBI, options..." oninput="handleSearch()" />
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="Search articles..." oninput="handleSearch()" />
       </div>
-      <span class="search-count" id="searchCount">20 articles</span>
+      <span class="search-count" id="searchCount">Loading...</span>
     </div>
   </div>
 </div>
 
-<!-- CATEGORY FILTERS -->
 <div class="filters-bar">
   <div class="filters-inner">
-    <button class="filter-btn active" onclick="filterBy('all', this)">All Articles <span class="filter-count">20</span></button>
-    <button class="filter-btn" onclick="filterBy('technical', this)">📈 Technical Analysis <span class="filter-count">6</span></button>
-    <button class="filter-btn" onclick="filterBy('fundamental', this)">📊 Fundamental Analysis <span class="filter-count">4</span></button>
-    <button class="filter-btn" onclick="filterBy('algo', this)">🤖 Algo Trading <span class="filter-count">4</span></button>
-    <button class="filter-btn" onclick="filterBy('options', this)">🎯 Options <span class="filter-count">3</span></button>
-    <button class="filter-btn" onclick="filterBy('news', this)">📰 Market News <span class="filter-count">3</span></button>
+    <button class="filter-btn active" onclick="filterBy('all',this)">All Articles <span class="filter-count" id="count-all">0</span></button>
+    <button class="filter-btn" onclick="filterBy('technical',this)">📈 Technical Analysis <span class="filter-count" id="count-technical">0</span></button>
+    <button class="filter-btn" onclick="filterBy('fundamental',this)">📊 Fundamental Analysis <span class="filter-count" id="count-fundamental">0</span></button>
+    <button class="filter-btn" onclick="filterBy('algo',this)">🤖 Algo Trading <span class="filter-count" id="count-algo">0</span></button>
+    <button class="filter-btn" onclick="filterBy('options',this)">🎯 Options <span class="filter-count" id="count-options">0</span></button>
+    <button class="filter-btn" onclick="filterBy('news',this)">📰 Market News <span class="filter-count" id="count-news">0</span></button>
   </div>
 </div>
 
-<!-- MAIN BLOG LAYOUT -->
 <div class="blog-wrap">
   <div>
-
-    <!-- FEATURED ARTICLE -->
-    <div class="featured-article fade-in" data-category="algo">
-      <div class="featured-banner">
-        <div class="featured-badge">⭐ Featured Article</div>
-        <div class="featured-emoji">🤖</div>
-      </div>
-      <div class="featured-body">
-        <div class="featured-tag">Algo Trading</div>
-        <div class="featured-title">SEBI's algo trading rules in 2026 — what every retail trader must know</div>
-        <div class="featured-excerpt">SEBI has fundamentally changed how retail investors can use automated systems. This comprehensive guide breaks down the new framework in plain English — what you can automate, how approval works, which platforms are compliant, and what the future of retail algo trading looks like in India.</div>
-        <div class="featured-meta">
-          <div class="meta-left">
-            <span>📅 May 14, 2026</span>
-            <span>⏱ 12 min read</span>
-            <span>👁 4.2k views</span>
-          </div>
-          <div class="read-btn">Read article →</div>
-        </div>
-      </div>
+    <div id="blogMain">
+      <div class="loading-state"><div class="loading-spinner"></div><div class="loading-text">Loading articles...</div></div>
     </div>
-
-    <!-- ARTICLES HEADER -->
-    <div class="articles-header">
-      <div class="articles-count" id="articlesCount">Showing 19 articles</div>
-      <select class="sort-select" onchange="sortArticles(this.value)">
-        <option value="newest">Newest first</option>
-        <option value="popular">Most popular</option>
-        <option value="readtime">Shortest read</option>
-      </select>
-    </div>
-
-    <!-- ARTICLE LIST -->
-    <div class="articles-list" id="articlesList">
-
-      <div class="article-card fade-in" data-category="technical" data-date="2026-05-14" data-views="3800" data-readtime="8">
-        <div class="card-icon" style="background:#e8f5ee;">📉</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-green">Technical Analysis</span><span style="font-size:11px;color:var(--green);font-weight:500;">Beginner</span></div>
-          <div class="card-title">How to read candlestick patterns like a professional trader</div>
-          <div class="card-excerpt">Doji, Hammer, Engulfing, Morning Star — we break down the 12 most important patterns every Indian trader must know, with real NSE chart examples.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 14, 2026</span><span>⏱ 8 min</span><span>👁 3.8k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="fundamental" data-date="2026-05-12" data-views="2900" data-readtime="6">
-        <div class="card-icon" style="background:#e8eef8;">🏦</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-blue">Fundamental Analysis</span><span style="font-size:11px;color:var(--blue);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">RBI policy decoded — what rate changes actually do to your stocks</div>
-          <div class="card-excerpt">Most investors panic during RBI announcements. Here's a sector-by-sector framework to understand exactly who wins and who loses when rates move.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 12, 2026</span><span>⏱ 6 min</span><span>👁 2.9k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="options" data-date="2026-05-10" data-views="3200" data-readtime="10">
-        <div class="card-icon" style="background:#fdf0ee;">🎯</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-red">Options</span><span style="font-size:11px;color:var(--red);font-weight:500;">Advanced</span></div>
-          <div class="card-title">Iron Condor on NIFTY — a beginner's complete step-by-step guide</div>
-          <div class="card-excerpt">One of the most popular options strategies for sideways markets. Setup, strike selection, max profit, max loss, and when to exit — all covered.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 10, 2026</span><span>⏱ 10 min</span><span>👁 3.2k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="technical" data-date="2026-05-08" data-views="2100" data-readtime="7">
-        <div class="card-icon" style="background:#e8f5ee;">📐</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-green">Technical Analysis</span><span style="font-size:11px;color:var(--green);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">Support & resistance levels — how to draw them correctly on Indian stocks</div>
-          <div class="card-excerpt">The most misunderstood concept in technical analysis. Learn how to identify strong S&R zones, avoid fake breakouts, and use them to time entries.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 8, 2026</span><span>⏱ 7 min</span><span>👁 2.1k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="algo" data-date="2026-05-06" data-views="1800" data-readtime="15">
-        <div class="card-icon" style="background:#ede9fe;">🐍</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-purple">Algo Trading</span><span style="font-size:11px;color:var(--purple);font-weight:500;">Advanced</span></div>
-          <div class="card-title">Python for stock market analysis — getting started with NSE data</div>
-          <div class="card-excerpt">How to use Python to download NSE historical data, calculate indicators, and build a simple backtesting engine from scratch. No prior coding experience needed.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 6, 2026</span><span>⏱ 15 min</span><span>👁 1.8k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="news" data-date="2026-05-05" data-views="4100" data-readtime="5">
-        <div class="card-icon" style="background:#fdf6e3;">📰</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-amber">Market News</span><span style="font-size:11px;color:var(--amber);font-weight:500;">Analysis</span></div>
-          <div class="card-title">FII vs DII battle — what the data says about who's really moving NIFTY</div>
-          <div class="card-excerpt">Foreign and domestic institutions often take opposite sides of the market. Here's how to read FII/DII data and what it actually signals about market direction.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 5, 2026</span><span>⏱ 5 min</span><span>👁 4.1k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="fundamental" data-date="2026-05-03" data-views="1600" data-readtime="9">
-        <div class="card-icon" style="background:#e8eef8;">📋</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-blue">Fundamental Analysis</span><span style="font-size:11px;color:var(--blue);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">How to read a company's balance sheet in under 10 minutes</div>
-          <div class="card-excerpt">Assets, liabilities, equity, debt-to-equity, current ratio — we cut through the jargon and show you exactly what to look for when evaluating any Indian stock.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 3, 2026</span><span>⏱ 9 min</span><span>👁 1.6k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="technical" data-date="2026-05-01" data-views="2400" data-readtime="6">
-        <div class="card-icon" style="background:#e8f5ee;">〽️</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-green">Technical Analysis</span><span style="font-size:11px;color:var(--green);font-weight:500;">Beginner</span></div>
-          <div class="card-title">RSI indicator explained — how to use it without getting faked out</div>
-          <div class="card-excerpt">RSI is one of the most popular indicators but also the most misused. Learn the right way to interpret overbought/oversold signals in trending Indian markets.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 May 1, 2026</span><span>⏱ 6 min</span><span>👁 2.4k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="options" data-date="2026-04-29" data-views="2700" data-readtime="11">
-        <div class="card-icon" style="background:#fdf0ee;">⚡</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-red">Options</span><span style="font-size:11px;color:var(--red);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">Options Greeks explained — Delta, Gamma, Theta, Vega in plain English</div>
-          <div class="card-excerpt">No maths degree needed. We explain all four Greeks using simple analogies and show you how they affect your options P&L in real market conditions.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 29, 2026</span><span>⏱ 11 min</span><span>👁 2.7k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="algo" data-date="2026-04-27" data-views="1400" data-readtime="13">
-        <div class="card-icon" style="background:#ede9fe;">🔁</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-purple">Algo Trading</span><span style="font-size:11px;color:var(--purple);font-weight:500;">Advanced</span></div>
-          <div class="card-title">Backtesting your strategy — common mistakes that give fake results</div>
-          <div class="card-excerpt">Overfitting, look-ahead bias, survivorship bias — these are the silent killers of backtests. Learn how to build honest, realistic tests for Indian markets.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 27, 2026</span><span>⏱ 13 min</span><span>👁 1.4k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="news" data-date="2026-04-25" data-views="3500" data-readtime="4">
-        <div class="card-icon" style="background:#fdf6e3;">🌐</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-amber">Market News</span><span style="font-size:11px;color:var(--amber);font-weight:500;">Macro</span></div>
-          <div class="card-title">US Fed rate decisions and their impact on Indian markets — a primer</div>
-          <div class="card-excerpt">Every time the US Fed speaks, Indian markets react. Here's the exact transmission mechanism — how US rates flow through to FIIs, rupee, and Indian equities.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 25, 2026</span><span>⏱ 4 min</span><span>👁 3.5k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="fundamental" data-date="2026-04-23" data-views="1200" data-readtime="8">
-        <div class="card-icon" style="background:#e8eef8;">💰</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-blue">Fundamental Analysis</span><span style="font-size:11px;color:var(--blue);font-weight:500;">Beginner</span></div>
-          <div class="card-title">PE ratio and why it alone is not enough to value a stock</div>
-          <div class="card-excerpt">PE is the most quoted metric but also the most misunderstood. We compare PE with PEG, EV/EBITDA, and Price-to-Book to give you a complete valuation toolkit.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 23, 2026</span><span>⏱ 8 min</span><span>👁 1.2k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="technical" data-date="2026-04-20" data-views="1900" data-readtime="7">
-        <div class="card-icon" style="background:#e8f5ee;">📊</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-green">Technical Analysis</span><span style="font-size:11px;color:var(--green);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">Moving averages — EMA vs SMA and which one actually works for Indian stocks</div>
-          <div class="card-excerpt">Simple vs Exponential moving averages — which is better for NSE stocks? We ran a 5-year backtest on NIFTY 500 to find out what actually works.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 20, 2026</span><span>⏱ 7 min</span><span>👁 1.9k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="options" data-date="2026-04-18" data-views="2200" data-readtime="9">
-        <div class="card-icon" style="background:#fdf0ee;">🛡️</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-red">Options</span><span style="font-size:11px;color:var(--red);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">Covered Call strategy — earn regular income from stocks you already own</div>
-          <div class="card-excerpt">If you hold quality stocks long-term, you can earn monthly income by selling call options against them. Here's exactly how to set this up on NSE.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 18, 2026</span><span>⏱ 9 min</span><span>👁 2.2k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="algo" data-date="2026-04-15" data-views="1600" data-readtime="10">
-        <div class="card-icon" style="background:#ede9fe;">🎲</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-purple">Algo Trading</span><span style="font-size:11px;color:var(--purple);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">Rule-based trading — how to build a system without writing a single line of code</div>
-          <div class="card-excerpt">You don't need to code to think like an algo trader. Learn how to define entry rules, exit rules, and position sizing using tools like Streak and Chartink.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 15, 2026</span><span>⏱ 10 min</span><span>👁 1.6k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="news" data-date="2026-04-12" data-views="2800" data-readtime="5">
-        <div class="card-icon" style="background:#fdf6e3;">⚖️</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-amber">Market News</span><span style="font-size:11px;color:var(--amber);font-weight:500;">Regulation</span></div>
-          <div class="card-title">SEBI's new F&O rules — everything that changed for retail traders in 2026</div>
-          <div class="card-excerpt">Higher margin requirements, new lot sizes, weekly expiry changes — SEBI's F&O overhaul has reshaped how retail traders can participate. Full breakdown here.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 12, 2026</span><span>⏱ 5 min</span><span>👁 2.8k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="technical" data-date="2026-04-10" data-views="1500" data-readtime="8">
-        <div class="card-icon" style="background:#e8f5ee;">🌊</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-green">Technical Analysis</span><span style="font-size:11px;color:var(--green);font-weight:500;">Advanced</span></div>
-          <div class="card-title">Volume analysis — the one indicator most traders completely ignore</div>
-          <div class="card-excerpt">Price without volume is noise. Learn how to use OBV, VWAP, and volume profile to confirm breakouts and filter fake moves on Indian indices and stocks.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 10, 2026</span><span>⏱ 8 min</span><span>👁 1.5k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="fundamental" data-date="2026-04-08" data-views="1100" data-readtime="7">
-        <div class="card-icon" style="background:#e8eef8;">🏭</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-blue">Fundamental Analysis</span><span style="font-size:11px;color:var(--blue);font-weight:500;">Intermediate</span></div>
-          <div class="card-title">Sector rotation — understanding which sectors lead in each market cycle</div>
-          <div class="card-excerpt">IT leads in falling rates, banking in rising rates, FMCG in recessions. Learn the classic rotation playbook adapted for Indian market conditions.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 8, 2026</span><span>⏱ 7 min</span><span>👁 1.1k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="article-card fade-in" data-category="technical" data-date="2026-04-05" data-views="1300" data-readtime="6">
-        <div class="card-icon" style="background:#e8f5ee;">🎯</div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag tag-green">Technical Analysis</span><span style="font-size:11px;color:var(--green);font-weight:500;">Beginner</span></div>
-          <div class="card-title">MACD indicator — the complete beginner's guide with Indian stock examples</div>
-          <div class="card-excerpt">MACD, signal line, histogram — what they mean and how to use them to spot trend changes early. Includes real examples from NIFTY and Nifty Bank charts.</div>
-          <div class="card-footer">
-            <div class="card-meta"><span>📅 Apr 5, 2026</span><span>⏱ 6 min</span><span>👁 1.3k</span></div>
-            <div class="card-arrow">Read →</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- NO RESULTS -->
-    <div class="no-results" id="noResults">
-      <div class="no-results-emoji">🔍</div>
-      <h3>No articles found</h3>
-      <p>Try a different search term or browse by category above.</p>
-    </div>
-
-    <!-- PAGINATION -->
-    <div class="pagination" id="pagination">
-      <button class="page-btn arrow">←</button>
-      <button class="page-btn active">1</button>
-      <button class="page-btn">2</button>
-      <button class="page-btn">3</button>
-      <button class="page-btn arrow">→</button>
-    </div>
-
   </div>
 
-  <!-- SIDEBAR -->
   <div class="sidebar">
-
-    <!-- Popular Articles -->
-    <div class="sidebar-card fade-in">
-      <div class="sidebar-title"><div class="sidebar-icon" style="background:#fdf0ee;">🔥</div>Most Popular</div>
-      <div class="popular-item">
-        <div class="popular-num">01</div>
-        <div>
-          <div class="popular-title">FII vs DII battle — who's really moving NIFTY</div>
-          <div class="popular-meta">📈 Market News · 4.1k views</div>
-        </div>
-      </div>
-      <div class="popular-item">
-        <div class="popular-num">02</div>
-        <div>
-          <div class="popular-title">SEBI's algo trading rules in 2026</div>
-          <div class="popular-meta">🤖 Algo Trading · 4.2k views</div>
-        </div>
-      </div>
-      <div class="popular-item">
-        <div class="popular-num">03</div>
-        <div>
-          <div class="popular-title">How to read candlestick patterns</div>
-          <div class="popular-meta">📈 Technical · 3.8k views</div>
-        </div>
-      </div>
-      <div class="popular-item">
-        <div class="popular-num">04</div>
-        <div>
-          <div class="popular-title">US Fed decisions and Indian markets</div>
-          <div class="popular-meta">📰 Market News · 3.5k views</div>
-        </div>
-      </div>
-      <div class="popular-item">
-        <div class="popular-num">05</div>
-        <div>
-          <div class="popular-title">Iron Condor on NIFTY — complete guide</div>
-          <div class="popular-meta">🎯 Options · 3.2k views</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Categories -->
     <div class="sidebar-card fade-in">
       <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--blue-light);">📂</div>Browse by Category</div>
       <div class="cat-list">
-        <div class="cat-item" onclick="filterBy('technical', null)">
-          <div class="cat-name"><div class="cat-dot" style="background:var(--green-mid);"></div>Technical Analysis</div>
-          <div class="cat-count">6</div>
-        </div>
-        <div class="cat-item" onclick="filterBy('fundamental', null)">
-          <div class="cat-name"><div class="cat-dot" style="background:#2563eb;"></div>Fundamental Analysis</div>
-          <div class="cat-count">4</div>
-        </div>
-        <div class="cat-item" onclick="filterBy('algo', null)">
-          <div class="cat-name"><div class="cat-dot" style="background:var(--purple);"></div>Algo Trading</div>
-          <div class="cat-count">4</div>
-        </div>
-        <div class="cat-item" onclick="filterBy('options', null)">
-          <div class="cat-name"><div class="cat-dot" style="background:var(--red);"></div>Options</div>
-          <div class="cat-count">3</div>
-        </div>
-        <div class="cat-item" onclick="filterBy('news', null)">
-          <div class="cat-name"><div class="cat-dot" style="background:var(--amber);"></div>Market News</div>
-          <div class="cat-count">3</div>
-        </div>
+        <div class="cat-item" onclick="filterBy('technical',null)"><div class="cat-name"><div class="cat-dot" style="background:var(--green-mid);"></div>Technical Analysis</div><div class="cat-count" id="scat-technical">0</div></div>
+        <div class="cat-item" onclick="filterBy('fundamental',null)"><div class="cat-name"><div class="cat-dot" style="background:#2563eb;"></div>Fundamental Analysis</div><div class="cat-count" id="scat-fundamental">0</div></div>
+        <div class="cat-item" onclick="filterBy('algo',null)"><div class="cat-name"><div class="cat-dot" style="background:var(--purple);"></div>Algo Trading</div><div class="cat-count" id="scat-algo">0</div></div>
+        <div class="cat-item" onclick="filterBy('options',null)"><div class="cat-name"><div class="cat-dot" style="background:var(--red);"></div>Options</div><div class="cat-count" id="scat-options">0</div></div>
+        <div class="cat-item" onclick="filterBy('news',null)"><div class="cat-name"><div class="cat-dot" style="background:var(--amber);"></div>Market News</div><div class="cat-count" id="scat-news">0</div></div>
       </div>
     </div>
-
-    <!-- Newsletter -->
     <div class="newsletter-card fade-in">
       <h3>Weekly Edge in your inbox</h3>
       <p>One strategy, key market insights, best articles — every Sunday.</p>
@@ -827,152 +248,203 @@
         <button class="btn-white">Subscribe Free →</button>
       </div>
     </div>
-
-    <!-- Tags Cloud -->
     <div class="sidebar-card fade-in">
       <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--amber-light);">🏷️</div>Popular Tags</div>
       <div class="tags-cloud">
-        <div class="tag-pill">NIFTY 50</div>
-        <div class="tag-pill">Candlesticks</div>
-        <div class="tag-pill">RSI</div>
-        <div class="tag-pill">MACD</div>
-        <div class="tag-pill">Options Greeks</div>
-        <div class="tag-pill">SEBI</div>
-        <div class="tag-pill">Backtesting</div>
-        <div class="tag-pill">FII/DII</div>
-        <div class="tag-pill">Python</div>
-        <div class="tag-pill">EMA</div>
-        <div class="tag-pill">Algo</div>
-        <div class="tag-pill">F&O</div>
-        <div class="tag-pill">Breakout</div>
-        <div class="tag-pill">Volume</div>
+        <div class="tag-pill" onclick="search('NIFTY')">NIFTY 50</div>
+        <div class="tag-pill" onclick="search('candlestick')">Candlesticks</div>
+        <div class="tag-pill" onclick="search('RSI')">RSI</div>
+        <div class="tag-pill" onclick="search('MACD')">MACD</div>
+        <div class="tag-pill" onclick="search('options')">Options</div>
+        <div class="tag-pill" onclick="search('SEBI')">SEBI</div>
+        <div class="tag-pill" onclick="search('algo')">Algo</div>
+        <div class="tag-pill" onclick="search('breakout')">Breakout</div>
+        <div class="tag-pill" onclick="search('FII')">FII/DII</div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
       <div>
         <div class="footer-logo">TheAlgoJinn</div>
         <p class="footer-desc">India's algo-minded stock market knowledge hub. Free education, strategy breakdowns, and tools for the serious retail investor.</p>
-        <div class="footer-disclaimer">⚠️ Disclaimer: All content on TheAlgoJinn is for educational purposes only. Nothing here constitutes investment advice or a SEBI-registered recommendation. Please do your own research before making any financial decisions.</div>
+        <div class="footer-disclaimer">⚠️ Disclaimer: All content on TheAlgoJinn is for educational purposes only and does not constitute investment advice or a SEBI-registered recommendation.</div>
       </div>
-      <div>
-        <div class="footer-col-title">Learn</div>
-        <ul class="footer-links">
-          <li><a href="#">Market Basics</a></li><li><a href="#">Technical Analysis</a></li>
-          <li><a href="#">Fundamental Analysis</a></li><li><a href="#">Algo & Quant</a></li>
-          <li><a href="#">Options Strategies</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Explore</div>
-        <ul class="footer-links">
-          <li><a href="blog.html">Blog</a></li><li><a href="#">Strategy Library</a></li>
-          <li><a href="#">Market News</a></li><li><a href="#">Free Tools</a></li>
-          <li><a href="#">Newsletter</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-links">
-          <li><a href="#">About</a></li><li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li>
-          <li><a href="#">Disclaimer</a></li>
-        </ul>
-      </div>
+      <div><div class="footer-col-title">Learn</div><ul class="footer-links"><li><a href="#">Market Basics</a></li><li><a href="#">Technical Analysis</a></li><li><a href="#">Fundamental Analysis</a></li><li><a href="#">Algo & Quant</a></li></ul></div>
+      <div><div class="footer-col-title">Explore</div><ul class="footer-links"><li><a href="blog.html">Blog</a></li><li><a href="#">Strategy Library</a></li><li><a href="#">Free Tools</a></li><li><a href="#">Newsletter</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Disclaimer</a></li></ul></div>
     </div>
     <div class="footer-bottom">
       <div>© 2026 TheAlgoJinn.com · Made with ♥ for India's retail investors</div>
-      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a><a href="#">Contact</a></div>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
     </div>
   </div>
 </footer>
 
 <script>
-  // ── FILTER BY CATEGORY ──
-  function filterBy(cat, btn) {
-    // Update active filter button
-    if (btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    } else {
-      // Called from sidebar — sync filter buttons
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('active');
-        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + cat + "'")) {
-          b.classList.add('active');
-        }
-      });
+  let allPosts = [];
+  let currentFilter = 'all';
+
+  const CAT = {
+    algo:        { label:'Algo Trading',         tag:'tag-purple', icon:'🤖', bg:'#ede9fe', grad:'linear-gradient(135deg,#2e1065,#5b21b6,#7c3aed)' },
+    technical:   { label:'Technical Analysis',   tag:'tag-green',  icon:'📈', bg:'#e8f5ee', grad:'linear-gradient(135deg,#0f4c2a,#1a7a52,#2a9e6a)' },
+    fundamental: { label:'Fundamental Analysis', tag:'tag-blue',   icon:'📊', bg:'#e8eef8', grad:'linear-gradient(135deg,#0f2a4c,#1a4a7a,#2563eb)' },
+    options:     { label:'Options',              tag:'tag-red',    icon:'🎯', bg:'#fdf0ee', grad:'linear-gradient(135deg,#4c0f0f,#c0392b,#e74c3c)' },
+    news:        { label:'Market News',          tag:'tag-amber',  icon:'📰', bg:'#fdf6e3', grad:'linear-gradient(135deg,#4c3a0f,#b8860b,#d97706)' },
+  };
+
+  function fmt(d) { return new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}); }
+
+  function featuredHTML(p) {
+    const c = CAT[p.category] || CAT.technical;
+    return `<div class="featured-article fade-in" onclick="location.href='article.html?slug=${p.slug}'">
+      <div class="featured-banner" style="background:${c.grad}">
+        <div class="featured-badge">⭐ Featured Article</div>
+        <div class="featured-emoji">${c.icon}</div>
+      </div>
+      <div class="featured-body">
+        <div class="featured-cat-tag ${c.tag}">${c.label}</div>
+        <div class="featured-title">${p.title}</div>
+        <div class="featured-excerpt">${p.excerpt}</div>
+        <div class="featured-meta">
+          <div class="meta-left"><span>📅 ${fmt(p.date)}</span><span>⏱ ${p.readtime} min read</span><span>👁 ${p.views.toLocaleString()} views</span></div>
+          <div class="read-btn">Read article →</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function cardHTML(p) {
+    const c = CAT[p.category] || CAT.technical;
+    return `<div class="article-card fade-in" onclick="location.href='article.html?slug=${p.slug}'">
+      <div class="card-icon" style="background:${c.bg}">${c.icon}</div>
+      <div class="card-body">
+        <div class="card-tags"><span class="tag ${c.tag}">${c.label}</span></div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-excerpt">${p.excerpt}</div>
+        <div class="card-footer">
+          <div class="card-meta"><span>📅 ${fmt(p.date)}</span><span>⏱ ${p.readtime} min</span><span>👁 ${p.views.toLocaleString()}</span></div>
+          <div class="card-arrow">Read →</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function emptyHTML() {
+    return `<div class="empty-state fade-in">
+      <div class="empty-emoji">✍️</div>
+      <div class="empty-title">Articles coming soon</div>
+      <p class="empty-desc">We're crafting in-depth articles on Indian stock market trading, strategies, and analysis. Subscribe below to get notified when we publish!</p>
+      <div class="empty-coming">🔔 Subscribe for updates</div>
+    </div>`;
+  }
+
+  function updateCounts(posts) {
+    const cats = ['technical','fundamental','algo','options','news'];
+    document.getElementById('count-all').textContent = posts.length;
+    document.getElementById('searchCount').textContent = posts.length + ' article' + (posts.length !== 1 ? 's' : '');
+    cats.forEach(cat => {
+      const n = posts.filter(p => p.category === cat).length;
+      ['count-','scat-'].forEach(pre => { const el = document.getElementById(pre+cat); if(el) el.textContent = n; });
+    });
+  }
+
+  function render(filter, query) {
+    const featured = allPosts.find(p => p.featured);
+    const rest = allPosts.filter(p => !p.featured);
+    const q = (query || '').toLowerCase().trim();
+
+    function matches(p) {
+      const catOk = filter === 'all' || p.category === filter;
+      const qOk = !q || p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q) || p.categoryLabel.toLowerCase().includes(q);
+      return catOk && qOk;
     }
 
-    const cards = document.querySelectorAll('.article-card');
-    let visible = 0;
-    cards.forEach(card => {
-      const match = cat === 'all' || card.dataset.category === cat;
-      card.classList.toggle('hidden', !match);
-      if (match) visible++;
-    });
+    const showFeatured = featured && matches(featured);
+    const filteredRest = rest.filter(matches);
+    const total = filteredRest.length + (showFeatured ? 1 : 0);
 
-    document.getElementById('articlesCount').textContent = 'Showing ' + visible + ' article' + (visible !== 1 ? 's' : '');
-    document.getElementById('searchCount').textContent = (visible + 1) + ' articles';
-    document.getElementById('noResults').classList.toggle('show', visible === 0);
-    document.getElementById('pagination').style.display = visible === 0 ? 'none' : 'flex';
-    document.getElementById('searchInput').value = '';
+    let html = '';
+    if (showFeatured) html += featuredHTML(featured);
+
+    if (allPosts.length === 0) {
+      html += emptyHTML();
+    } else if (total === 0) {
+      html += `<div class="no-results show"><div style="font-size:36px;margin-bottom:12px;">🔍</div><h3 style="font-family:var(--serif);font-size:20px;margin-bottom:8px;">No articles found</h3><p style="font-size:13px;color:var(--text2);">Try a different search or browse all articles.</p></div>`;
+    } else {
+      if (filteredRest.length > 0 || showFeatured) {
+        html += `<div class="articles-header">
+          <div class="articles-count">${q ? 'Found' : 'Showing'} ${total} article${total!==1?'s':''}${q?' for "'+query+'"':''}</div>
+          <select class="sort-select" onchange="sortBy(this.value)">
+            <option value="newest">Newest first</option>
+            <option value="popular">Most popular</option>
+            <option value="shortest">Shortest read</option>
+          </select>
+        </div>`;
+        if (filteredRest.length > 0) {
+          html += '<div class="articles-list">' + filteredRest.map(cardHTML).join('') + '</div>';
+        }
+      }
+    }
+
+    document.getElementById('blogMain').innerHTML = html;
+    setTimeout(() => document.querySelectorAll('#blogMain .fade-in').forEach((el,i) => setTimeout(() => el.classList.add('visible'), i*60)), 50);
   }
 
-  // ── SEARCH ──
-  function handleSearch() {
-    const q = document.getElementById('searchInput').value.toLowerCase().trim();
-    const cards = document.querySelectorAll('.article-card');
+  function filterBy(cat, btn) {
+    currentFilter = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) { btn.classList.add('active'); }
+    else { document.querySelectorAll('.filter-btn').forEach(b => { if(b.getAttribute('onclick')?.includes("'"+cat+"'")) b.classList.add('active'); }); }
+    document.getElementById('searchInput').value = '';
+    render(cat, '');
+  }
 
-    // Reset category filter visually
+  function handleSearch() {
+    const q = document.getElementById('searchInput').value;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     document.querySelector('.filter-btn').classList.add('active');
-
-    let visible = 0;
-    cards.forEach(card => {
-      const title = card.querySelector('.card-title').textContent.toLowerCase();
-      const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
-      const tags = card.querySelector('.card-tags').textContent.toLowerCase();
-      const match = q === '' || title.includes(q) || excerpt.includes(q) || tags.includes(q);
-      card.classList.toggle('hidden', !match);
-      if (match) visible++;
-    });
-
-    document.getElementById('articlesCount').textContent = q
-      ? 'Found ' + visible + ' article' + (visible !== 1 ? 's' : '') + ' for "' + q + '"'
-      : 'Showing ' + visible + ' articles';
-    document.getElementById('searchCount').textContent = (visible + 1) + ' articles';
-    document.getElementById('noResults').classList.toggle('show', visible === 0);
-    document.getElementById('pagination').style.display = visible === 0 ? 'none' : 'flex';
+    currentFilter = 'all';
+    render('all', q);
   }
 
-  // ── SORT ──
-  function sortArticles(method) {
-    const list = document.getElementById('articlesList');
-    const cards = Array.from(list.querySelectorAll('.article-card'));
-    cards.sort((a, b) => {
-      if (method === 'newest') return new Date(b.dataset.date) - new Date(a.dataset.date);
-      if (method === 'popular') return parseInt(b.dataset.views) - parseInt(a.dataset.views);
-      if (method === 'readtime') return parseInt(a.dataset.readtime) - parseInt(b.dataset.readtime);
-    });
-    cards.forEach(card => list.appendChild(card));
+  function search(term) {
+    document.getElementById('searchInput').value = term;
+    handleSearch();
   }
 
-  // ── SCROLL ANIMATIONS ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
-      }
+  function sortBy(method) {
+    allPosts.sort((a,b) => {
+      if (method==='newest') return new Date(b.date)-new Date(a.date);
+      if (method==='popular') return b.views-a.views;
+      if (method==='shortest') return a.readtime-b.readtime;
     });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    render(currentFilter, document.getElementById('searchInput').value);
+  }
+
+  async function loadPosts() {
+    try {
+      const res = await fetch('posts/posts.json');
+      if (!res.ok) throw new Error('not found');
+      allPosts = (await res.json()).sort((a,b) => new Date(b.date)-new Date(a.date));
+      updateCounts(allPosts);
+      render('all','');
+    } catch(e) {
+      allPosts = [];
+      updateCounts([]);
+      document.getElementById('searchCount').textContent = '0 articles';
+      document.getElementById('blogMain').innerHTML = emptyHTML();
+      setTimeout(() => document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible')), 100);
+    }
+  }
+
+  const obs = new IntersectionObserver(entries => entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80); }), {threshold:0.08});
+  document.querySelectorAll('.sidebar .fade-in').forEach(el => obs.observe(el));
+
+  loadPosts();
 </script>
 </body>
 </html>
