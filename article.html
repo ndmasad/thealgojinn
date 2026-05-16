@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="pageTitle">Article — TheAlgoJinn</title>
+  <meta name="description" id="pageDesc" content="Read expert articles on Indian stock market trading, strategies and analysis."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Marked.js — converts Markdown to HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f7f4; --bg2: #f0ede6; --bg3: #e8e3d8;
+      --card: #ffffff; --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+      --text: #1a1a18; --text2: #5a5a52; --text3: #9a9a8e;
+      --green: #1a7a52; --green-light: #e8f5ee; --green-mid: #2a9e6a;
+      --red: #c0392b; --red-light: #fdf0ee;
+      --amber: #b8860b; --amber-light: #fdf6e3;
+      --blue: #1a4a7a; --blue-light: #e8eef8;
+      --purple: #5b21b6; --purple-light: #ede9fe;
+      --mono: 'JetBrains Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TICKER ── */
+    .tv-ticker-wrap { width: 100%; background: #1a1a18; }
+
+    /* ── NAV ── */
+    nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-mark { width: 36px; height: 36px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-mark svg { width: 20px; height: 20px; }
+    .logo-name { font-family: var(--serif); font-size: 17px; color: var(--text); line-height: 1.1; }
+    .logo-tagline { font-size: 10px; color: var(--text3); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text2); padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+    .nav-links a:hover { background: var(--bg2); color: var(--text); }
+    .nav-links a.active { color: var(--green); background: var(--green-light); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; font-family: var(--sans); }
+    .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+    .btn-ghost:hover { background: var(--bg2); }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: #155f40; }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-menu { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 16px 24px; flex-direction: column; gap: 4px; }
+    .mobile-menu a { font-size: 14px; font-weight: 500; color: var(--text2); padding: 10px 12px; border-radius: 8px; display: block; }
+    .mobile-menu.open { display: flex; }
+
+    /* ── READING PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--green-mid);
+      z-index: 999;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ── ARTICLE LAYOUT ── */
+    .article-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text3);
+      margin-bottom: 24px;
+    }
+    .breadcrumb a { color: var(--green); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb-sep { color: var(--text3); }
+
+    /* ── ARTICLE HEADER ── */
+    .article-header { margin-bottom: 32px; }
+    .article-tag {
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    .tag-algo { background: var(--purple-light); color: var(--purple); }
+    .tag-technical { background: var(--green-light); color: var(--green); }
+    .tag-fundamental { background: var(--blue-light); color: var(--blue); }
+    .tag-options { background: var(--red-light); color: var(--red); }
+    .tag-news { background: var(--amber-light); color: var(--amber); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: 40px;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .article-excerpt-lead {
+      font-size: 18px;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .article-meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      font-size: 13px;
+      color: var(--text3);
+      flex-wrap: wrap;
+    }
+    .meta-item { display: flex; align-items: center; gap: 6px; }
+    .meta-divider { width: 1px; height: 16px; background: var(--border2); }
+    .share-btn {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .share-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 1px solid var(--border2);
+      background: var(--card);
+      color: var(--text2);
+      font-family: var(--sans);
+      transition: all 0.15s;
+    }
+    .share-pill:hover { background: var(--bg2); color: var(--text); }
+
+    /* ── ARTICLE BODY ── */
+    .article-body { font-size: 16px; line-height: 1.85; color: var(--text); }
+    .article-body p { margin-bottom: 24px; }
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 28px;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin: 48px 0 16px;
+      line-height: 1.2;
+      padding-top: 16px;
+    }
+    .article-body h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 32px 0 12px;
+    }
+    .article-body h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text2);
+      margin: 24px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .article-body strong { font-weight: 600; color: var(--text); }
+    .article-body em { font-style: italic; }
+    .article-body a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+    .article-body a:hover { color: #155f40; }
+    .article-body ul, .article-body ol { padding-left: 24px; margin-bottom: 24px; }
+    .article-body li { margin-bottom: 8px; line-height: 1.7; }
+    .article-body ul li { list-style: disc; }
+    .article-body ol li { list-style: decimal; }
+    .article-body blockquote {
+      border-left: 3px solid var(--green-mid);
+      padding: 16px 20px;
+      margin: 32px 0;
+      background: var(--green-light);
+      border-radius: 0 12px 12px 0;
+      font-size: 16px;
+      color: var(--text);
+      font-style: italic;
+    }
+    .article-body blockquote strong { font-style: normal; }
+    .article-body code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: var(--bg2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--green);
+    }
+    .article-body pre {
+      background: var(--text);
+      padding: 20px 24px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+    .article-body pre code {
+      background: none;
+      color: #a8e6c8;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+    .article-body th {
+      background: var(--bg2);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      border-bottom: 2px solid var(--border2);
+      color: var(--text2);
+    }
+    .article-body td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .article-body tr:last-child td { border-bottom: none; }
+    .article-body tr:hover td { background: var(--bg2); }
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--border2);
+      margin: 40px 0;
+    }
+
+    /* ── ARTICLE FOOTER ── */
+    .article-footer {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .disclaimer-box {
+      background: var(--amber-light);
+      border: 1px solid rgba(184,134,11,0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--amber);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .back-to-blog {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--green);
+      padding: 10px 20px;
+      border: 1px solid rgba(26,122,82,0.3);
+      border-radius: 10px;
+      background: var(--green-light);
+      transition: all 0.15s;
+    }
+    .back-to-blog:hover { background: var(--green); color: #fff; }
+
+    /* ── SIDEBAR ── */
+    .article-sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 80px; }
+    .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+    .sidebar-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+    /* Table of contents */
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-item a {
+      display: block;
+      font-size: 13px;
+      color: var(--text2);
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .toc-item a:hover { background: var(--bg2); color: var(--text); }
+    .toc-item.active a { background: var(--green-light); color: var(--green); font-weight: 500; }
+
+    /* Related posts */
+    .related-item { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.15s; }
+    .related-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .related-item:hover { opacity: 0.7; }
+    .related-icon { font-size: 18px; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: var(--bg2); flex-shrink: 0; }
+    .related-title { font-size: 12px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
+    .related-meta { font-size: 11px; color: var(--text3); }
+
+    /* Newsletter */
+    .newsletter-card { background: var(--green); border-radius: 16px; padding: 22px; color: #fff; }
+    .newsletter-card h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 6px; line-height: 1.2; }
+    .newsletter-card p { font-size: 13px; opacity: 0.85; margin-bottom: 14px; line-height: 1.5; }
+    .nl-input { display: flex; flex-direction: column; gap: 8px; }
+    .nl-input input { width: 100%; padding: 10px 14px; border-radius: 10px; border: none; font-family: var(--sans); font-size: 13px; background: rgba(255,255,255,0.2); color: #fff; outline: none; }
+    .nl-input input::placeholder { color: rgba(255,255,255,0.6); }
+    .nl-input input:focus { background: rgba(255,255,255,0.28); }
+    .btn-white { background: #fff; color: var(--green); font-weight: 600; padding: 10px 18px; border-radius: 10px; font-size: 13px; cursor: pointer; border: none; font-family: var(--sans); transition: all 0.15s; width: 100%; }
+    .btn-white:hover { background: var(--green-light); }
+
+    /* ── LOADING STATE ── */
+    .loading-state {
+      text-align: center;
+      padding: 80px 24px;
+      grid-column: 1 / -1;
+    }
+    .loading-spinner {
+      width: 32px; height: 32px;
+      border: 3px solid var(--border2);
+      border-top-color: var(--green-mid);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-size: 14px; color: var(--text3); }
+
+    /* ── ERROR STATE ── */
+    .error-state { text-align: center; padding: 80px 24px; grid-column: 1 / -1; }
+    .error-emoji { font-size: 40px; margin-bottom: 16px; }
+    .error-state h2 { font-family: var(--serif); font-size: 28px; margin-bottom: 8px; }
+    .error-state p { font-size: 15px; color: var(--text2); margin-bottom: 24px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text); color: rgba(255,255,255,0.65); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 8px; }
+    .footer-desc { font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .footer-disclaimer { font-size: 11px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; line-height: 1.6; color: rgba(255,255,255,0.45); }
+    .footer-col-title { font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a:hover { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .article-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .article-sidebar { position: static; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+      .article-title { font-size: 28px; }
+      .article-excerpt-lead { font-size: 16px; }
+      .article-body { font-size: 15px; }
+      .article-body h2 { font-size: 22px; }
+      .share-btn { margin-left: 0; margin-top: 8px; width: 100%; }
+      .article-meta-bar { gap: 12px; }
+    }
+    @media (max-width: 560px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- READING PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- LIVE TICKER BAR -->
+<div class="tv-ticker-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+        { "proName": "NASDAQ:IXIC", "title": "NASDAQ" },
+        { "proName": "INDEX:SENSEX", "title": "SENSEX" },
+        { "proName": "INDEX:NIFTY50", "title": "NIFTY 50" },
+        { "proName": "INDEX:BANKNIFTY", "title": "BANK NIFTY" },
+        { "proName": "BSE:RELIANCE", "title": "RELIANCE" },
+        { "proName": "BSE:TCS", "title": "TCS" },
+        { "proName": "BSE:HDFCBANK", "title": "HDFC BANK" },
+        { "proName": "BSE:INFY", "title": "INFOSYS" },
+        { "proName": "BSE:TATAMOTORS", "title": "TATA MOTORS" },
+        { "proName": "FX_IDC:USDINR", "title": "USD/INR" },
+        { "proName": "FOREXCOM:XAUUSD", "title": "GOLD" },
+        { "proName": "TVC:USOIL", "title": "CRUDE OIL" }
+      ],
+      "showSymbolLogo": false,
+      "isTransparent": false,
+      "displayMode": "adaptive",
+      "colorTheme": "dark",
+      "locale": "en"
+    }
+    </script>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 14L7 9L10 12L14 6L17 9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="17" cy="9" r="1.5" fill="white"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-name">TheAlgoJinn</div>
+        <div class="logo-tagline">Indian Market Intelligence</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="#">Learn</a></li>
+      <li><a href="#">Strategies</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="#">Tools</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">Sign in</button>
+      <button class="btn btn-primary">Subscribe Free</button>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="#">Learn</a>
+    <a href="#">Strategies</a><a href="#">News</a><a href="#">Tools</a>
+  </div>
+</nav>
+
+<!-- ARTICLE CONTENT — dynamically loaded -->
+<div class="article-wrap" id="articleWrap">
+  <div class="loading-state">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading article...</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TheAlgoJinn</div>
+        <p class="footer-desc">India's algo-minded stock market knowledge hub. Free education, strategy breakdowns, and tools for the serious retail investor.</p>
+        <div class="footer-disclaimer">⚠️ Disclaimer: All content on TheAlgoJinn is for educational purposes only. Nothing here constitutes investment advice or a SEBI-registered recommendation. Please do your own research before making any financial decisions.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Learn</div>
+        <ul class="footer-links">
+          <li><a href="#">Market Basics</a></li><li><a href="#">Technical Analysis</a></li>
+          <li><a href="#">Fundamental Analysis</a></li><li><a href="#">Algo & Quant</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="blog.html">Blog</a></li><li><a href="#">Strategy Library</a></li>
+          <li><a href="#">Market News</a></li><li><a href="#">Free Tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li><li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li><li><a href="#">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TheAlgoJinn.com · Made with ♥ for India's retail investors</div>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── READING PROGRESS BAR ──
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const total = doc.scrollHeight - doc.clientHeight;
+    document.getElementById('progressBar').style.width = (scrolled / total * 100) + '%';
+  });
+
+  // ── CATEGORY TAG CLASS ──
+  function getCatClass(cat) {
+    const map = { algo: 'tag-algo', technical: 'tag-technical', fundamental: 'tag-fundamental', options: 'tag-options', news: 'tag-news' };
+    return map[cat] || 'tag-technical';
+  }
+
+  // ── FORMAT DATE ──
+  function formatDate(d) {
+    return new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  // ── STRIP FRONTMATTER ──
+  function stripFrontmatter(md) {
+    if (md.startsWith('---')) {
+      const end = md.indexOf('---', 3);
+      if (end !== -1) return md.slice(end + 3).trim();
+    }
+    return md;
+  }
+
+  // ── BUILD TABLE OF CONTENTS ──
+  function buildTOC(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    const headings = div.querySelectorAll('h2');
+    if (headings.length === 0) return '';
+    let toc = '<ul class="toc-list">';
+    headings.forEach((h, i) => {
+      const id = 'section-' + i;
+      h.id = id;
+      toc += `<li class="toc-item"><a href="#${id}">${h.textContent}</a></li>`;
+    });
+    toc += '</ul>';
+    return { toc, html: div.innerHTML };
+  }
+
+  // ── RENDER ARTICLE ──
+  async function loadArticle() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+
+    if (!slug) { showError('No article specified', 'Please go back to the blog and select an article to read.'); return; }
+
+    try {
+      // Load posts index
+      const indexRes = await fetch('posts/posts.json');
+      if (!indexRes.ok) throw new Error('Could not load posts index');
+      const posts = await indexRes.json();
+
+      // Find matching post
+      const post = posts.find(p => p.slug === slug);
+      if (!post) { showError('Article not found', 'This article may have been moved or deleted. Browse our blog for more articles.'); return; }
+
+      // Load markdown file
+      const mdRes = await fetch(post.file);
+      if (!mdRes.ok) throw new Error('Could not load article content');
+      const rawMd = await mdRes.text();
+      const cleanMd = stripFrontmatter(rawMd);
+
+      // Convert markdown to HTML
+      const rawHtml = marked.parse(cleanMd);
+      const { toc, html: articleHtml } = buildTOC(rawHtml);
+
+      // Update page title & meta
+      document.getElementById('pageTitle').textContent = post.title + ' — TheAlgoJinn';
+      document.getElementById('pageDesc').setAttribute('content', post.excerpt);
+
+      // Get related posts (same category, different slug)
+      const related = posts.filter(p => p.category === post.category && p.slug !== slug).slice(0, 3);
+
+      // Build related HTML
+      const relatedEmojis = { algo: '🤖', technical: '📈', fundamental: '📊', options: '🎯', news: '📰' };
+      const relatedHtml = related.length > 0 ? related.map(r => `
+        <div class="related-item" onclick="window.location.href='article.html?slug=${r.slug}'">
+          <div class="related-icon">${relatedEmojis[r.category] || '📝'}</div>
+          <div>
+            <div class="related-title">${r.title}</div>
+            <div class="related-meta">⏱ ${r.readtime} min · ${formatDate(r.date)}</div>
+          </div>
+        </div>`).join('') : '<div style="font-size:13px;color:var(--text3);">More articles coming soon!</div>';
+
+      // Render full article
+      document.getElementById('articleWrap').innerHTML = `
+        <div>
+          <!-- Breadcrumb -->
+          <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="breadcrumb-sep">›</span>
+            <a href="blog.html">Blog</a>
+            <span class="breadcrumb-sep">›</span>
+            <span>${post.categoryLabel}</span>
+          </div>
+
+          <!-- Article Header -->
+          <div class="article-header">
+            <div class="article-tag ${getCatClass(post.category)}">${post.categoryLabel}</div>
+            <h1 class="article-title">${post.title}</h1>
+            <p class="article-excerpt-lead">${post.excerpt}</p>
+            <div class="article-meta-bar">
+              <div class="meta-item">📅 ${formatDate(post.date)}</div>
+              <div class="meta-divider"></div>
+              <div class="meta-item">⏱ ${post.readtime} min read</div>
+              <div class="meta-divider"></div>
+              <div class="meta-item">👁 ${post.views.toLocaleString()} views</div>
+              <div class="share-btn">
+                <button class="share-pill" onclick="copyLink()">🔗 Copy link</button>
+                <button class="share-pill" onclick="shareTwitter('${encodeURIComponent(post.title)}')">𝕏 Share</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Article Body -->
+          <div class="article-body">${articleHtml}</div>
+
+          <!-- Article Footer -->
+          <div class="article-footer">
+            <div class="disclaimer-box">⚠️ <strong>Disclaimer:</strong> This article is for educational purposes only and does not constitute investment advice. Please do your own research and consult a SEBI-registered advisor before making any financial decisions.</div>
+            <a href="blog.html" class="back-to-blog">← Back to Blog</a>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="article-sidebar">
+          ${toc ? `
+          <div class="sidebar-card">
+            <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--green-light);">📋</div>In this article</div>
+            ${toc}
+          </div>` : ''}
+
+          <div class="sidebar-card">
+            <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--blue-light);">📚</div>Related Articles</div>
+            ${relatedHtml}
+          </div>
+
+          <div class="newsletter-card">
+            <h3>Enjoyed this article?</h3>
+            <p>Get the Jinn's weekly strategy breakdown every Sunday — free.</p>
+            <div class="nl-input">
+              <input type="email" placeholder="your@email.com" />
+              <button class="btn-white">Subscribe Free →</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Activate TOC scroll highlighting
+      activateTOC();
+
+    } catch (err) {
+      showError('Something went wrong', 'Could not load this article. Please try again or go back to the blog. Error: ' + err.message);
+    }
+  }
+
+  // ── TOC SCROLL HIGHLIGHT ──
+  function activateTOC() {
+    const sections = document.querySelectorAll('.article-body h2');
+    const tocItems = document.querySelectorAll('.toc-item');
+    if (!sections.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocItems.forEach(item => item.classList.remove('active'));
+          const activeItem = document.querySelector(`.toc-item a[href="#${entry.target.id}"]`);
+          if (activeItem) activeItem.parentElement.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => observer.observe(s));
+  }
+
+  // ── SHARE FUNCTIONS ──
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = event.target;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => btn.textContent = '🔗 Copy link', 2000);
+    });
+  }
+  function shareTwitter(title) {
+    window.open('https://twitter.com/intent/tweet?text=' + title + '&url=' + encodeURIComponent(window.location.href) + '&via=TheAlgoJinn', '_blank');
+  }
+
+  // ── ERROR STATE ──
+  function showError(title, msg) {
+    document.getElementById('articleWrap').innerHTML = `
+      <div class="error-state">
+        <div class="error-emoji">📭</div>
+        <h2>${title}</h2>
+        <p>${msg}</p>
+        <a href="blog.html" class="back-to-blog">← Back to Blog</a>
+      </div>`;
+  }
+
+  // ── INIT ──
+  loadArticle();
+</script>
+</body>
+</html>
