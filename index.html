@@ -198,16 +198,6 @@
     .footer-bottom-links { display: flex; gap: 20px; }
     .footer-bottom-links a:hover { color: #fff; }
  
-    /* LIVE CHART SECTION */
-    .chart-section { max-width: 1200px; margin: 0 auto; padding: 56px 24px; }
-    .chart-widget-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.06); }
-    .chart-widget-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid var(--border); }
-    .chart-symbol-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
-    .chart-tab { font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; cursor: pointer; border: 1px solid var(--border2); background: transparent; color: var(--text2); font-family: var(--sans); transition: all 0.15s; }
-    .chart-tab.active { background: var(--green); color: #fff; border-color: var(--green); }
-    .chart-tab:hover:not(.active) { background: var(--bg2); color: var(--text); }
-    .chart-disclaimer { font-size: 11px; color: var(--text3); }
- 
     /* ANIMATIONS */
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -383,57 +373,6 @@
         <div class="path-meta"><div class="path-lessons">10 lessons</div><div class="path-level level-adv">Advanced</div></div>
       </div>
     </div>
-  </div>
-</div>
- 
-<!-- LIVE CHART SECTION -->
-<div class="chart-section fade-in">
-  <div class="section-header" style="margin-bottom:20px;">
-    <div>
-      <div class="section-eyebrow">Live Market Chart</div>
-      <div class="section-title">Track the market in real time</div>
-    </div>
-    <div class="live-badge" style="font-size:11px; padding:5px 12px;">
-      <div class="live-dot"></div> Powered by TradingView
-    </div>
-  </div>
- 
-  <div class="chart-widget-wrap">
-    <div class="chart-widget-header">
-      <div class="chart-symbol-tabs">
-        <button class="chart-tab active" onclick="switchChart('INDEX:NIFTY50', this)">NIFTY 50</button>
-        <button class="chart-tab" onclick="switchChart('INDEX:SENSEX', this)">SENSEX</button>
-        <button class="chart-tab" onclick="switchChart('INDEX:BANKNIFTY', this)">BANK NIFTY</button>
-        <button class="chart-tab" onclick="switchChart('BSE:RELIANCE', this)">RELIANCE</button>
-        <button class="chart-tab" onclick="switchChart('BSE:TCS', this)">TCS</button>
-        <button class="chart-tab" onclick="switchChart('BSE:HDFCBANK', this)">HDFC BANK</button>
-        <button class="chart-tab" onclick="switchChart('BSE:INFY', this)">INFOSYS</button>
-      </div>
-      <div class="chart-disclaimer">For educational purposes only</div>
-    </div>
- 
-    <!-- TradingView Advanced Chart — iframe embed -->
-    <div id="tv-chart-container" style="height:500px; width:100%;">
-      <iframe id="tv-chart-iframe"
-        src="https://s.tradingview.com/widgetembed/?frameElementId=tv-chart-iframe&symbol=INDEX%3ANIFTY50&interval=D&hidesidetoolbar=0&hidetoptoolbar=0&symboledit=1&saveimage=0&toolbarbg=f8f7f4&studies=RSI%40tv-basicstudies%1FMACD%40tv-basicstudies&theme=light&style=1&timezone=Asia%2FKolkata&locale=en&utm_source=thealgojinn.com&utm_medium=widget"
-        style="width:100%; height:500px; border:none;"
-        allowtransparency="true"
-        scrolling="no"
-        allowfullscreen>
-      </iframe>
-    </div>
-    <script>
-      function switchChart(symbol, btn) {
-        document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
-        btn.classList.add('active');
-        var encoded = encodeURIComponent(symbol);
-        document.getElementById('tv-chart-iframe').src =
-          'https://s.tradingview.com/widgetembed/?frameElementId=tv-chart-iframe&symbol=' + encoded +
-          '&interval=D&hidesidetoolbar=0&hidetoptoolbar=0&symboledit=1&saveimage=0&toolbarbg=f8f7f4' +
-          '&studies=RSI%40tv-basicstudies%1FMACD%40tv-basicstudies&theme=light&style=1' +
-          '&timezone=Asia%2FKolkata&locale=en&utm_source=thealgojinn.com&utm_medium=widget';
-      }
-    </script>
   </div>
 </div>
  
