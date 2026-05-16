@@ -3,7 +3,7 @@ id: "001"
 title: "SEBI's algo trading rules in 2026 — what every retail trader must know"
 category: "algo"
 categoryLabel: "Algo Trading"
-date: "2026-05-16"
+date: "2026-05-14"
 readtime: 12
 excerpt: "SEBI has fundamentally changed how retail investors can use automated systems. This comprehensive guide breaks down the new framework in plain English."
 ---
