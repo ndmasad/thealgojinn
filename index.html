@@ -26,15 +26,9 @@
     body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
  
-    /* TICKER */
-    .ticker-wrap { background: var(--text); color: #fff; overflow: hidden; height: 34px; display: flex; align-items: center; }
-    .ticker-label { background: var(--green-mid); color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; padding: 0 14px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
-    .ticker-track { display: flex; animation: ticker 40s linear infinite; }
-    .ticker-track:hover { animation-play-state: paused; }
-    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .ticker-item { display: flex; align-items: center; gap: 8px; padding: 0 24px; font-family: var(--mono); font-size: 11px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.1); }
-    .ticker-name { color: rgba(255,255,255,0.6); }
-    .ticker-price { color: #fff; font-weight: 500; }
+    /* TICKER — TradingView */
+    .tv-ticker-wrap { width: 100%; background: #1a1a18; }
+    .tv-ticker-wrap .tradingview-widget-container { margin: 0 !important; }
     .up { color: var(--green); } .dn { color: var(--red); }
     .t-up { color: #4ade80; } .t-dn { color: #f87171; }
  
@@ -204,6 +198,16 @@
     .footer-bottom-links { display: flex; gap: 20px; }
     .footer-bottom-links a:hover { color: #fff; }
  
+    /* LIVE CHART SECTION */
+    .chart-section { max-width: 1200px; margin: 0 auto; padding: 56px 24px; }
+    .chart-widget-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 32px rgba(0,0,0,0.06); }
+    .chart-widget-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid var(--border); }
+    .chart-symbol-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chart-tab { font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; cursor: pointer; border: 1px solid var(--border2); background: transparent; color: var(--text2); font-family: var(--sans); transition: all 0.15s; }
+    .chart-tab.active { background: var(--green); color: #fff; border-color: var(--green); }
+    .chart-tab:hover:not(.active) { background: var(--bg2); color: var(--text); }
+    .chart-disclaimer { font-size: 11px; color: var(--text3); }
+ 
     /* ANIMATIONS */
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
@@ -230,37 +234,38 @@
 </head>
 <body>
  
-<!-- TICKER BAR -->
-<div class="ticker-wrap">
-  <div class="ticker-label">&#9679; Live</div>
-  <div style="overflow:hidden;flex:1;display:flex;">
-    <div class="ticker-track">
-      <div class="ticker-item"><span class="ticker-name">NIFTY 50</span><span class="ticker-price">24,315.85</span><span class="t-up">▲ 1.24%</span></div>
-      <div class="ticker-item"><span class="ticker-name">SENSEX</span><span class="ticker-price">80,182.20</span><span class="t-up">▲ 0.91%</span></div>
-      <div class="ticker-item"><span class="ticker-name">BANK NIFTY</span><span class="ticker-price">51,840.60</span><span class="t-dn">▼ 0.38%</span></div>
-      <div class="ticker-item"><span class="ticker-name">NIFTY IT</span><span class="ticker-price">38,924.10</span><span class="t-up">▲ 0.72%</span></div>
-      <div class="ticker-item"><span class="ticker-name">MIDCAP 150</span><span class="ticker-price">18,620.45</span><span class="t-up">▲ 0.65%</span></div>
-      <div class="ticker-item"><span class="ticker-name">USD/INR</span><span class="ticker-price">83.42</span><span class="t-dn">▼ 0.08%</span></div>
-      <div class="ticker-item"><span class="ticker-name">GOLD</span><span class="ticker-price">₹71,240</span><span class="t-up">▲ 0.31%</span></div>
-      <div class="ticker-item"><span class="ticker-name">CRUDE OIL</span><span class="ticker-price">$82.14</span><span class="t-dn">▼ 0.52%</span></div>
-      <div class="ticker-item"><span class="ticker-name">RELIANCE</span><span class="ticker-price">₹2,941</span><span class="t-up">▲ 2.41%</span></div>
-      <div class="ticker-item"><span class="ticker-name">INFY</span><span class="ticker-price">₹1,612</span><span class="t-up">▲ 1.82%</span></div>
-      <div class="ticker-item"><span class="ticker-name">HDFC BANK</span><span class="ticker-price">₹1,780</span><span class="t-dn">▼ 0.61%</span></div>
-      <div class="ticker-item"><span class="ticker-name">TCS</span><span class="ticker-price">₹3,845</span><span class="t-up">▲ 1.15%</span></div>
-      <!-- Duplicate for seamless scroll -->
-      <div class="ticker-item"><span class="ticker-name">NIFTY 50</span><span class="ticker-price">24,315.85</span><span class="t-up">▲ 1.24%</span></div>
-      <div class="ticker-item"><span class="ticker-name">SENSEX</span><span class="ticker-price">80,182.20</span><span class="t-up">▲ 0.91%</span></div>
-      <div class="ticker-item"><span class="ticker-name">BANK NIFTY</span><span class="ticker-price">51,840.60</span><span class="t-dn">▼ 0.38%</span></div>
-      <div class="ticker-item"><span class="ticker-name">NIFTY IT</span><span class="ticker-price">38,924.10</span><span class="t-up">▲ 0.72%</span></div>
-      <div class="ticker-item"><span class="ticker-name">MIDCAP 150</span><span class="ticker-price">18,620.45</span><span class="t-up">▲ 0.65%</span></div>
-      <div class="ticker-item"><span class="ticker-name">USD/INR</span><span class="ticker-price">83.42</span><span class="t-dn">▼ 0.08%</span></div>
-      <div class="ticker-item"><span class="ticker-name">GOLD</span><span class="ticker-price">₹71,240</span><span class="t-up">▲ 0.31%</span></div>
-      <div class="ticker-item"><span class="ticker-name">CRUDE OIL</span><span class="ticker-price">$82.14</span><span class="t-dn">▼ 0.52%</span></div>
-      <div class="ticker-item"><span class="ticker-name">RELIANCE</span><span class="ticker-price">₹2,941</span><span class="t-up">▲ 2.41%</span></div>
-      <div class="ticker-item"><span class="ticker-name">INFY</span><span class="ticker-price">₹1,612</span><span class="t-up">▲ 1.82%</span></div>
-      <div class="ticker-item"><span class="ticker-name">HDFC BANK</span><span class="ticker-price">₹1,780</span><span class="t-dn">▼ 0.61%</span></div>
-      <div class="ticker-item"><span class="ticker-name">TCS</span><span class="ticker-price">₹3,845</span><span class="t-up">▲ 1.15%</span></div>
-    </div>
+<!-- LIVE TICKER BAR — TradingView Widget -->
+<div class="tv-ticker-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        { "proName": "BSE:SENSEX", "title": "SENSEX" },
+        { "proName": "NSE:NIFTY", "title": "NIFTY 50" },
+        { "proName": "NSE:BANKNIFTY", "title": "BANK NIFTY" },
+        { "proName": "NSE:NIFTYIT", "title": "NIFTY IT" },
+        { "proName": "NSE:MIDCPNIFTY", "title": "MIDCAP NIFTY" },
+        { "proName": "NSE:RELIANCE", "title": "RELIANCE" },
+        { "proName": "NSE:TCS", "title": "TCS" },
+        { "proName": "NSE:HDFCBANK", "title": "HDFC BANK" },
+        { "proName": "NSE:INFY", "title": "INFOSYS" },
+        { "proName": "NSE:TATAMOTORS", "title": "TATA MOTORS" },
+        { "proName": "NSE:WIPRO", "title": "WIPRO" },
+        { "proName": "NSE:ICICIBANK", "title": "ICICI BANK" },
+        { "proName": "NSE:AXISBANK", "title": "AXIS BANK" },
+        { "proName": "NSE:BAJFINANCE", "title": "BAJAJ FINANCE" },
+        { "proName": "FX_IDC:USDINR", "title": "USD/INR" },
+        { "proName": "MCX:GOLD1!", "title": "GOLD" },
+        { "proName": "MCX:CRUDEOIL1!", "title": "CRUDE OIL" }
+      ],
+      "showSymbolLogo": false,
+      "isTransparent": false,
+      "displayMode": "adaptive",
+      "colorTheme": "dark",
+      "locale": "en"
+    }
+    </script>
   </div>
 </div>
  
@@ -320,7 +325,7 @@
   <div class="hero-card fade-in">
     <div class="card-header">
       <div class="card-title">Market Overview</div>
-      <div class="live-badge"><div class="live-dot"></div>Live</div>
+      <div class="live-badge"><div class="live-dot"></div>Indicative</div>
     </div>
     <div class="index-row">
       <div><div class="index-name">NIFTY 50</div><div class="index-sub">NSE Benchmark</div></div>
@@ -378,6 +383,57 @@
         <div class="path-meta"><div class="path-lessons">10 lessons</div><div class="path-level level-adv">Advanced</div></div>
       </div>
     </div>
+  </div>
+</div>
+ 
+<!-- LIVE CHART SECTION -->
+<div class="chart-section fade-in">
+  <div class="section-header" style="margin-bottom:20px;">
+    <div>
+      <div class="section-eyebrow">Live Market Chart</div>
+      <div class="section-title">Track the market in real time</div>
+    </div>
+    <div class="live-badge" style="font-size:11px; padding:5px 12px;">
+      <div class="live-dot"></div> Powered by TradingView
+    </div>
+  </div>
+ 
+  <div class="chart-widget-wrap">
+    <div class="chart-widget-header">
+      <div class="chart-symbol-tabs">
+        <button class="chart-tab active" onclick="switchChart('NSE:NIFTY', this)">NIFTY 50</button>
+        <button class="chart-tab" onclick="switchChart('BSE:SENSEX', this)">SENSEX</button>
+        <button class="chart-tab" onclick="switchChart('NSE:BANKNIFTY', this)">BANK NIFTY</button>
+        <button class="chart-tab" onclick="switchChart('NSE:NIFTYIT', this)">NIFTY IT</button>
+        <button class="chart-tab" onclick="switchChart('NSE:RELIANCE', this)">RELIANCE</button>
+        <button class="chart-tab" onclick="switchChart('NSE:TCS', this)">TCS</button>
+        <button class="chart-tab" onclick="switchChart('NSE:HDFCBANK', this)">HDFC BANK</button>
+      </div>
+      <div class="chart-disclaimer">For educational purposes only</div>
+    </div>
+ 
+    <!-- TradingView Advanced Chart — iframe embed (most reliable method) -->
+    <div id="tv-chart-container" style="height:500px; width:100%;">
+      <iframe id="tv-chart-iframe"
+        src="https://s.tradingview.com/widgetembed/?frameElementId=tv-chart-iframe&symbol=NSE%3ANIFTY&interval=D&hidesidetoolbar=0&hidetoptoolbar=0&symboledit=1&saveimage=0&toolbarbg=f8f7f4&studies=RSI%40tv-basicstudies%1FMACD%40tv-basicstudies&theme=light&style=1&timezone=Asia%2FKolkata&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=thealgojinn.com&utm_medium=widget"
+        style="width:100%; height:500px; border:none;"
+        allowtransparency="true"
+        scrolling="no"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <script>
+      function switchChart(symbol, btn) {
+        document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        var encoded = encodeURIComponent(symbol);
+        document.getElementById('tv-chart-iframe').src =
+          'https://s.tradingview.com/widgetembed/?frameElementId=tv-chart-iframe&symbol=' + encoded +
+          '&interval=D&hidesidetoolbar=0&hidetoptoolbar=0&symboledit=1&saveimage=0&toolbarbg=f8f7f4' +
+          '&studies=RSI%40tv-basicstudies%1FMACD%40tv-basicstudies&theme=light&style=1' +
+          '&timezone=Asia%2FKolkata&locale=en&utm_source=thealgojinn.com&utm_medium=widget';
+      }
+    </script>
   </div>
 </div>
  
