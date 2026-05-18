@@ -258,7 +258,7 @@
     <button class="tool-tab" onclick="showTool('position', this)">📐 Position Sizer</button>
     <button class="tool-tab" onclick="showTool('rr', this)">🎯 Risk / Reward</button>
     <button class="tool-tab" onclick="showTool('brokerage', this)">💸 Brokerage</button>
-    <button class="tool-tab coming-soon" title="Coming soon">📋 Tax Estimator <span class="coming-badge">Soon</span></button>
+    <button class="tool-tab" onclick="showTool('tax', this)">📋 Tax Estimator</button>
     <button class="tool-tab coming-soon" title="Coming soon">⚖️ Options P&L <span class="coming-badge">Soon</span></button>
   </div>
 
@@ -506,21 +506,91 @@
     </div>
   </div>
 
+  <!-- ── TAX ESTIMATOR ── -->
+  <div class="calc-section" id="tool-tax">
+    <div class="calc-grid">
+
+      <!-- INPUT -->
+      <div class="calc-card">
+        <div class="calc-title">Capital Gains Tax Estimator</div>
+        <div class="calc-desc">Estimate your STCG and LTCG tax on equity investments. Covers listed shares, equity mutual funds, debt funds and real estate.</div>
+
+        <div class="field">
+          <label>Asset Type</label>
+          <div class="field-row">
+            <select id="tax-type" onchange="calcTax()">
+              <option value="equity">Listed Equity Shares / Equity MF</option>
+              <option value="debt">Debt Mutual Funds</option>
+              <option value="property">Property / Real Estate</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Holding Period</label>
+          <div class="field-row">
+            <select id="tax-period" onchange="updateTaxPeriodHint();calcTax()">
+              <option value="short">Short Term</option>
+              <option value="long">Long Term</option>
+            </select>
+          </div>
+          <div id="tax-period-hint" style="font-size:12px;color:var(--text3);margin-top:6px;padding:6px 10px;background:var(--bg2);border-radius:6px;">
+            Short term for equity = held less than 12 months
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Total Purchase Cost</label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="tax-buy" value="100000" min="1" oninput="calcTax()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Total Sale Proceeds</label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="tax-sell" value="150000" min="1" oninput="calcTax()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Your Income Tax Slab</label>
+          <div class="field-row">
+            <select id="tax-slab" onchange="calcTax()">
+              <option value="0">Nil — below exemption limit</option>
+              <option value="5">5% slab</option>
+              <option value="20" selected>20% slab</option>
+              <option value="30">30% slab</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcTax()">Calculate Tax</button>
+        <button class="reset-btn" onclick="resetTax()">↺ Reset to defaults</button>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result-card" id="tax-result">
+        <div class="result-empty">
+          <div class="result-empty-icon">📋</div>
+          <div class="result-empty-text">Enter your investment details on the left<br>to estimate your tax liability</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- COMING SOON SECTION -->
   <div class="coming-soon-section">
     <div class="coming-soon-title">More tools coming soon</div>
     <div class="coming-soon-grid">
       <div class="coming-soon-card">
-        <div class="coming-soon-icon">📋</div>
-        <div class="coming-soon-name">Tax Estimator</div>
-        <div class="coming-soon-desc">Estimate your STCG and LTCG tax liability on equity gains</div>
-        <div class="coming-soon-tag">Coming next</div>
-      </div>
-      <div class="coming-soon-card">
         <div class="coming-soon-icon">⚖️</div>
         <div class="coming-soon-name">Options P&L</div>
-        <div class="coming-soon-desc">Calculate profit or loss on any options position before trading</div>
-        <div class="coming-soon-tag">Coming soon</div>
+        <div class="coming-soon-desc">Calculate profit or loss on any options position before placing the trade</div>
+        <div class="coming-soon-tag">Coming next</div>
       </div>
     </div>
   </div>
@@ -1017,8 +1087,171 @@
     calcBrokerage();
   }
 
+  // ── TAX ESTIMATOR ──
+  function updateTaxPeriodHint() {
+    const type   = document.getElementById('tax-type').value;
+    const period = document.getElementById('tax-period').value;
+    const hints  = {
+      equity:   { short: 'Short term for equity = held less than 12 months → STCG @ 20%', long: 'Long term for equity = held 12 months or more → LTCG @ 12.5% (₹1.25L exempt per year)' },
+      debt:     { short: 'Short term for debt MF = held less than 24 months → taxed as income', long: 'Long term for debt MF = held 24 months or more → taxed as income (indexation removed from Apr 2023)' },
+      property: { short: 'Short term for property = held less than 24 months → taxed at your slab rate', long: 'Long term for property = held 24 months or more → LTCG @ 20% with indexation benefit' },
+    };
+    document.getElementById('tax-period-hint').textContent = hints[type]?.[period] || '';
+  }
+
+  function calcTax() {
+    const type   = document.getElementById('tax-type').value;
+    const period = document.getElementById('tax-period').value;
+    const buy    = parseFloat(document.getElementById('tax-buy').value) || 0;
+    const sell   = parseFloat(document.getElementById('tax-sell').value) || 0;
+    const slab   = parseInt(document.getElementById('tax-slab').value);
+
+    if (!buy || !sell) return;
+
+    const gain = sell - buy;
+
+    // Capital loss scenario
+    if (gain <= 0) {
+      document.getElementById('tax-result').innerHTML = `
+        <div class="result-empty">
+          <div class="result-empty-icon">📉</div>
+          <div class="result-empty-text">
+            <strong>Capital Loss of ${fmt(Math.abs(gain))}</strong><br><br>
+            No tax is payable on a loss.<br>
+            Short-term losses can offset STCG or LTCG gains.<br>
+            Long-term losses can only offset LTCG gains.<br><br>
+            Losses can be carried forward for <strong>8 assessment years</strong>.
+          </div>
+        </div>`;
+      return;
+    }
+
+    // Tax calculation rules
+    let taxRate = 0, taxLabel = '', exemption = 0, rateNote = '';
+
+    if (type === 'equity') {
+      if (period === 'short') {
+        taxRate  = 0.20;
+        taxLabel = 'STCG @ 20%';
+        rateNote = 'Applicable on equity shares & equity MF held < 12 months (Budget 2024 rate)';
+      } else {
+        exemption = 125000;
+        taxRate   = 0.125;
+        taxLabel  = 'LTCG @ 12.5%';
+        rateNote  = '₹1.25 lakh exemption per financial year on LTCG from equity (Budget 2024)';
+      }
+    } else if (type === 'debt') {
+      // Post Apr 2023 — debt MF taxed at slab rate regardless of holding
+      taxRate  = slab / 100;
+      taxLabel = `Taxed as income @ ${slab}% (your slab)`;
+      rateNote = 'From Apr 1, 2023: Debt MF gains are added to income and taxed at slab rate. Indexation benefit removed.';
+    } else if (type === 'property') {
+      if (period === 'short') {
+        taxRate  = slab / 100;
+        taxLabel = `STCG @ ${slab}% (your slab)`;
+        rateNote = 'Property held < 24 months — gains added to income and taxed at your slab rate';
+      } else {
+        taxRate  = 0.125;
+        taxLabel = 'LTCG @ 12.5% (no indexation from Budget 2024)';
+        rateNote = 'Budget 2024: Property LTCG rate reduced to 12.5% but indexation removed. Applicable from Jul 23, 2024.';
+      }
+    }
+
+    const taxableGain  = Math.max(0, gain - exemption);
+    const baseTax      = taxableGain * taxRate;
+    const cess         = baseTax * 0.04;   // 4% Health & Education Cess
+    const surcharge    = baseTax > 5000000 ? baseTax * 0.15 : baseTax > 1000000 ? baseTax * 0.10 : 0;
+    const totalTax     = baseTax + cess + surcharge;
+    const netGain      = gain - totalTax;
+    const effectiveRate = gain > 0 ? (totalTax / gain * 100).toFixed(2) : 0;
+    const investedPct  = Math.min((buy / sell) * 100, 100).toFixed(1);
+
+    document.getElementById('tax-result').innerHTML = `
+      <div class="result-header">
+        <div class="result-icon" style="background:var(--amber-light)">📋</div>
+        <div>
+          <div class="result-label">Tax Estimate — ${taxLabel}</div>
+          <div class="result-subtitle-text">${period === 'short' ? 'Short' : 'Long'} term · ${type === 'equity' ? 'Equity' : type === 'debt' ? 'Debt MF' : 'Property'}</div>
+        </div>
+      </div>
+
+      <div class="result-hero" style="background:var(--red-light);border-color:rgba(192,57,43,0.12)">
+        <div class="result-hero-label" style="color:var(--red)">Estimated Tax Payable</div>
+        <div class="result-hero-val" style="color:var(--red)">− ${fmt(totalTax)}</div>
+        <div class="result-hero-sub" style="color:var(--red);opacity:0.8">Effective rate: ${effectiveRate}% on total gain</div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-item-label">Total Gain</div>
+          <div class="result-item-val green">+ ${fmt(gain)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Taxable Gain</div>
+          <div class="result-item-val amber">${fmt(taxableGain)}</div>
+        </div>
+        ${exemption > 0 ? `
+        <div class="result-item">
+          <div class="result-item-label">Exemption</div>
+          <div class="result-item-val green">− ${fmt(exemption)}</div>
+        </div>` : ''}
+        <div class="result-item">
+          <div class="result-item-label">Base Tax (${(taxRate * 100).toFixed(1)}%)</div>
+          <div class="result-item-val red">− ${fmt(baseTax)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Health & Ed. Cess (4%)</div>
+          <div class="result-item-val red">− ${fmt(cess)}</div>
+        </div>
+        ${surcharge > 0 ? `
+        <div class="result-item">
+          <div class="result-item-label">Surcharge</div>
+          <div class="result-item-val red">− ${fmt(surcharge)}</div>
+        </div>` : ''}
+        <div class="result-item">
+          <div class="result-item-label">Net Gain After Tax</div>
+          <div class="result-item-val green">+ ${fmt(netGain)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Effective Tax Rate</div>
+          <div class="result-item-val amber">${effectiveRate}%</div>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-label">
+          <span>💰 Cost (${investedPct}%)</span>
+          <span>📈 Gain (${(100 - parseFloat(investedPct)).toFixed(1)}%)</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${investedPct}%;background:linear-gradient(90deg,var(--blue),var(--green-mid))"></div>
+        </div>
+      </div>
+
+      <div class="insight-box" style="background:var(--amber-light);border-color:rgba(184,134,11,0.15)">
+        ⚠️ <strong>Note:</strong> ${rateNote}. This is an estimate only — does not account for surcharge slabs on very large gains, indexation calculations, or specific exemptions under Section 54. Always consult a qualified CA before filing.
+      </div>`;
+  }
+
+  function resetTax() {
+    document.getElementById('tax-type').value   = 'equity';
+    document.getElementById('tax-period').value = 'short';
+    document.getElementById('tax-buy').value    = 100000;
+    document.getElementById('tax-sell').value   = 150000;
+    document.getElementById('tax-slab').value   = 20;
+    updateTaxPeriodHint();
+    calcTax();
+  }
+
   // ── INIT ──
-  window.addEventListener('DOMContentLoaded', () => { calcSIP(); calcPS(); calcRR(); calcBrokerage(); });
+  window.addEventListener('DOMContentLoaded', () => {
+    calcSIP();
+    calcPS();
+    calcRR();
+    calcBrokerage();
+    updateTaxPeriodHint();
+    calcTax();
+  });
 </script>
 </body>
 </html>
