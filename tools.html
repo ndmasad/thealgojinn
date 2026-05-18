@@ -257,7 +257,7 @@
     <button class="tool-tab active" onclick="showTool('sip', this)">🧮 SIP Calculator</button>
     <button class="tool-tab" onclick="showTool('position', this)">📐 Position Sizer</button>
     <button class="tool-tab" onclick="showTool('rr', this)">🎯 Risk / Reward</button>
-    <button class="tool-tab coming-soon" title="Coming soon">💸 Brokerage <span class="coming-badge">Soon</span></button>
+    <button class="tool-tab" onclick="showTool('brokerage', this)">💸 Brokerage</button>
     <button class="tool-tab coming-soon" title="Coming soon">📋 Tax Estimator <span class="coming-badge">Soon</span></button>
     <button class="tool-tab coming-soon" title="Coming soon">⚖️ Options P&L <span class="coming-badge">Soon</span></button>
   </div>
@@ -446,21 +446,75 @@
     </div>
   </div>
 
+  <!-- ── BROKERAGE CALCULATOR ── -->
+  <div class="calc-section" id="tool-brokerage">
+    <div class="calc-grid">
+
+      <!-- INPUT -->
+      <div class="calc-card">
+        <div class="calc-title">Brokerage Calculator</div>
+        <div class="calc-desc">Know exactly what your broker charges before placing any trade. Compare Zerodha, Groww, Angel One and Upstox side by side.</div>
+
+        <div class="field">
+          <label>Segment</label>
+          <div class="field-row">
+            <select id="br-segment" onchange="calcBrokerage()">
+              <option value="equity_delivery">Equity — Delivery (CNC)</option>
+              <option value="equity_intraday">Equity — Intraday (MIS)</option>
+              <option value="futures">Futures (F&O)</option>
+              <option value="options">Options (F&O)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Buy Price</label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="br-buy" value="1000" min="0.05" step="0.05" oninput="calcBrokerage()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Sell Price</label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="br-sell" value="1050" min="0.05" step="0.05" oninput="calcBrokerage()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Quantity</label>
+          <div class="field-row">
+            <input type="number" id="br-qty" value="100" min="1" step="1" oninput="calcBrokerage()"/>
+            <span class="field-suffix">shares / units</span>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcBrokerage()">Calculate Charges</button>
+        <button class="reset-btn" onclick="resetBrokerage()">↺ Reset to defaults</button>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result-card" id="br-result">
+        <div class="result-empty">
+          <div class="result-empty-icon">💸</div>
+          <div class="result-empty-text">Enter your trade details on the left<br>to compare broker charges</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- COMING SOON SECTION -->
   <div class="coming-soon-section">
     <div class="coming-soon-title">More tools coming soon</div>
     <div class="coming-soon-grid">
       <div class="coming-soon-card">
-        <div class="coming-soon-icon">💸</div>
-        <div class="coming-soon-name">Brokerage Calculator</div>
-        <div class="coming-soon-desc">Compare exact charges across Zerodha, Groww, Angel One & Upstox</div>
-        <div class="coming-soon-tag">Coming next</div>
-      </div>
-      <div class="coming-soon-card">
         <div class="coming-soon-icon">📋</div>
         <div class="coming-soon-name">Tax Estimator</div>
         <div class="coming-soon-desc">Estimate your STCG and LTCG tax liability on equity gains</div>
-        <div class="coming-soon-tag">Coming soon</div>
+        <div class="coming-soon-tag">Coming next</div>
       </div>
       <div class="coming-soon-card">
         <div class="coming-soon-icon">⚖️</div>
@@ -833,8 +887,138 @@
     calcRR();
   }
 
+  // ── BROKERAGE CALCULATOR ──
+  function calcBrokerage() {
+    const seg  = document.getElementById('br-segment').value;
+    const buy  = parseFloat(document.getElementById('br-buy').value) || 0;
+    const sell = parseFloat(document.getElementById('br-sell').value) || 0;
+    const qty  = parseInt(document.getElementById('br-qty').value) || 0;
+
+    if (!buy || !sell || !qty) return;
+
+    const buyVal  = buy * qty;
+    const sellVal = sell * qty;
+    const turnover = buyVal + sellVal;
+    const grossPnL = (sell - buy) * qty;
+
+    // Charge calculator per broker
+    function charges(brokerageFee) {
+      // STT (Securities Transaction Tax)
+      let stt = 0;
+      if (seg === 'equity_delivery') stt = sellVal * 0.001;
+      else if (seg === 'equity_intraday') stt = turnover * 0.00025;
+      else if (seg === 'futures') stt = sellVal * 0.0002;
+      else if (seg === 'options') stt = sellVal * 0.000625;
+
+      // Exchange transaction charges
+      const exchTxn = turnover * (seg === 'options' ? 0.000053 : 0.0000345);
+
+      // SEBI charges
+      const sebi = turnover * 0.000001;
+
+      // Stamp duty (on buy side only)
+      let stamp = 0;
+      if (seg === 'equity_delivery') stamp = buyVal * 0.00015;
+      else if (seg === 'equity_intraday') stamp = buyVal * 0.00003;
+      else if (seg === 'futures') stamp = buyVal * 0.00002;
+      else if (seg === 'options') stamp = buyVal * 0.00003;
+
+      // GST on brokerage + exchange + SEBI
+      const gst = (brokerageFee + exchTxn + sebi) * 0.18;
+
+      const total = brokerageFee + stt + exchTxn + sebi + stamp + gst;
+      return { brokerageFee, stt, exchTxn, sebi, stamp, gst, total };
+    }
+
+    // Broker-wise brokerage fee
+    const zerodhaBr  = seg === 'equity_delivery' ? 0 : Math.min(20, turnover * 0.0003);
+    const growwBr    = seg === 'equity_delivery' ? 0 : Math.min(20, turnover * 0.001);
+    const angelBr    = seg === 'equity_delivery' ? 0 : 20;
+    const upstoxBr   = seg === 'equity_delivery' ? 0 : Math.min(20, turnover * 0.0005);
+
+    const brokers = [
+      { name: 'Zerodha',   c: charges(zerodhaBr)  },
+      { name: 'Groww',     c: charges(growwBr)     },
+      { name: 'Angel One', c: charges(angelBr)     },
+      { name: 'Upstox',    c: charges(upstoxBr)    },
+    ].sort((a, b) => a.c.total - b.c.total);
+
+    const cheapest    = brokers[0];
+    const netPnL      = grossPnL - cheapest.c.total;
+    const isProfit    = grossPnL >= 0;
+    const segLabel    = { equity_delivery: 'Equity Delivery', equity_intraday: 'Equity Intraday', futures: 'Futures', options: 'Options' }[seg];
+
+    // Charge breakdown for cheapest broker
+    const ch = cheapest.c;
+
+    document.getElementById('br-result').innerHTML = `
+      <div class="result-header">
+        <div class="result-icon" style="background:var(--amber-light)">💸</div>
+        <div>
+          <div class="result-label">Brokerage Comparison</div>
+          <div class="result-subtitle-text">${qty} shares · ${segLabel} · Turnover ${fmt(turnover)}</div>
+        </div>
+      </div>
+
+      <div class="result-hero" style="background:${isProfit ? 'var(--green-light)' : 'var(--red-light)'};border-color:rgba(0,0,0,0.08)">
+        <div class="result-hero-label" style="color:${isProfit ? 'var(--green)' : 'var(--red)'}">Gross P&L</div>
+        <div class="result-hero-val" style="color:${isProfit ? 'var(--green)' : 'var(--red)'}">${isProfit ? '+' : ''}${fmt(grossPnL)}</div>
+        <div class="result-hero-sub" style="color:${isProfit ? 'var(--green)' : 'var(--red)'};opacity:0.8">Net after ${cheapest.name} charges: ${netPnL >= 0 ? '+' : ''}${fmt(netPnL)}</div>
+      </div>
+
+      <!-- BROKER COMPARISON TABLE -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Broker Comparison</div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <thead>
+            <tr style="background:var(--bg2);">
+              <th style="padding:9px 12px;text-align:left;font-weight:600;color:var(--text2);font-size:12px;border-radius:6px 0 0 0">Broker</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;color:var(--text2);font-size:12px;">Brokerage</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;color:var(--text2);font-size:12px;">Total Charges</th>
+              <th style="padding:9px 12px;text-align:right;font-weight:600;color:var(--text2);font-size:12px;border-radius:0 6px 0 0">Net P&L</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${brokers.map((b, i) => `
+            <tr style="background:${i === 0 ? 'var(--green-light)' : 'transparent'};border-bottom:1px solid var(--border)">
+              <td style="padding:10px 12px;font-weight:600;color:var(--text)">
+                ${b.name}
+                ${i === 0 ? '<span style="font-size:9px;font-weight:700;background:var(--green);color:#fff;padding:2px 6px;border-radius:8px;margin-left:6px;vertical-align:middle">LOWEST</span>' : ''}
+              </td>
+              <td style="padding:10px 12px;text-align:right;font-family:var(--mono);color:var(--text2)">${fmtFull(Math.round(b.c.brokerageFee))}</td>
+              <td style="padding:10px 12px;text-align:right;font-family:var(--mono);color:var(--red);font-weight:500">${fmtFull(Math.round(b.c.total))}</td>
+              <td style="padding:10px 12px;text-align:right;font-family:var(--mono);font-weight:500;color:${grossPnL - b.c.total >= 0 ? 'var(--green)' : 'var(--red)'}">${grossPnL - b.c.total >= 0 ? '+' : ''}${fmt(grossPnL - b.c.total)}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CHARGE BREAKDOWN for cheapest -->
+      <div style="font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">${cheapest.name} — Charge Breakdown</div>
+      <div class="result-grid" style="margin-bottom:14px;">
+        <div class="result-item"><div class="result-item-label">Brokerage</div><div class="result-item-val">${fmtFull(Math.round(ch.brokerageFee))}</div></div>
+        <div class="result-item"><div class="result-item-label">STT</div><div class="result-item-val">${fmtFull(Math.round(ch.stt))}</div></div>
+        <div class="result-item"><div class="result-item-label">Exchange Charges</div><div class="result-item-val">${fmtFull(Math.round(ch.exchTxn))}</div></div>
+        <div class="result-item"><div class="result-item-label">GST (18%)</div><div class="result-item-val">${fmtFull(Math.round(ch.gst))}</div></div>
+        <div class="result-item"><div class="result-item-label">SEBI Charges</div><div class="result-item-val">${fmtFull(Math.round(ch.sebi))}</div></div>
+        <div class="result-item"><div class="result-item-label">Stamp Duty</div><div class="result-item-val">${fmtFull(Math.round(ch.stamp))}</div></div>
+      </div>
+
+      <div class="insight-box">
+        💡 <strong>Delivery is free on Zerodha & Groww</strong> — brokerage is ₹0 for equity delivery trades. For intraday and F&O, Zerodha charges a flat ₹20 or 0.03% whichever is lower. Charges shown are estimates and may vary slightly.
+      </div>`;
+  }
+
+  function resetBrokerage() {
+    document.getElementById('br-segment').value = 'equity_delivery';
+    document.getElementById('br-buy').value = 1000;
+    document.getElementById('br-sell').value = 1050;
+    document.getElementById('br-qty').value = 100;
+    calcBrokerage();
+  }
+
   // ── INIT ──
-  window.addEventListener('DOMContentLoaded', () => { calcSIP(); calcPS(); calcRR(); });
+  window.addEventListener('DOMContentLoaded', () => { calcSIP(); calcPS(); calcRR(); calcBrokerage(); });
 </script>
 </body>
 </html>
