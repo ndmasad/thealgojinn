@@ -259,7 +259,7 @@
     <button class="tool-tab" onclick="showTool('rr', this)">🎯 Risk / Reward</button>
     <button class="tool-tab" onclick="showTool('brokerage', this)">💸 Brokerage</button>
     <button class="tool-tab" onclick="showTool('tax', this)">📋 Tax Estimator</button>
-    <button class="tool-tab coming-soon" title="Coming soon">⚖️ Options P&L <span class="coming-badge">Soon</span></button>
+    <button class="tool-tab" onclick="showTool('options', this)">⚖️ Options P&L</button>
   </div>
 
   <!-- ── SIP CALCULATOR ── -->
@@ -582,16 +582,83 @@
     </div>
   </div>
 
-  <!-- COMING SOON SECTION -->
-  <div class="coming-soon-section">
-    <div class="coming-soon-title">More tools coming soon</div>
-    <div class="coming-soon-grid">
-      <div class="coming-soon-card">
-        <div class="coming-soon-icon">⚖️</div>
-        <div class="coming-soon-name">Options P&L</div>
-        <div class="coming-soon-desc">Calculate profit or loss on any options position before placing the trade</div>
-        <div class="coming-soon-tag">Coming next</div>
+  <!-- ── OPTIONS P&L CALCULATOR ── -->
+  <div class="calc-section" id="tool-options">
+    <div class="calc-grid">
+
+      <!-- INPUT -->
+      <div class="calc-card">
+        <div class="calc-title">Options P&L Calculator</div>
+        <div class="calc-desc">Calculate the profit or loss on any options position — buyer or seller — before placing the trade. Supports all four basic option positions.</div>
+
+        <div class="field">
+          <label>Position Type</label>
+          <div class="field-row">
+            <select id="opt-type" onchange="updateOptionsHint();calcOptions()">
+              <option value="long_call">Long Call — Buy CE (bullish)</option>
+              <option value="long_put">Long Put — Buy PE (bearish)</option>
+              <option value="short_call">Short Call — Sell CE (bearish/neutral)</option>
+              <option value="short_put">Short Put — Sell PE (bullish/neutral)</option>
+            </select>
+          </div>
+          <div id="opt-hint" style="font-size:12px;color:var(--text3);margin-top:6px;padding:6px 10px;background:var(--bg2);border-radius:6px;">
+            Profit when price rises above breakeven. Max loss = premium paid.
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Strike Price</label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="opt-strike" value="24000" min="1" step="50" oninput="calcOptions()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Premium <span id="opt-premium-lbl" style="font-size:11px;color:var(--text3);font-weight:400">paid</span></label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="opt-premium" value="150" min="0.05" step="0.05" oninput="calcOptions()"/>
+            <span class="field-suffix">per unit</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Lot Size</label>
+          <div class="field-row">
+            <input type="number" id="opt-lotsize" value="75" min="1" step="1" oninput="calcOptions()"/>
+            <span class="field-suffix">units / lot</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Number of Lots</label>
+          <div class="field-row">
+            <input type="number" id="opt-lots" value="1" min="1" step="1" oninput="calcOptions()"/>
+            <span class="field-suffix">lots</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Spot Price at Expiry <span style="font-size:11px;color:var(--text3);font-weight:400">(your estimate)</span></label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="opt-spot" value="24300" min="1" step="50" oninput="calcOptions()"/>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcOptions()">Calculate P&L</button>
+        <button class="reset-btn" onclick="resetOptions()">↺ Reset to defaults</button>
       </div>
+
+      <!-- RESULT -->
+      <div class="result-card" id="opt-result">
+        <div class="result-empty">
+          <div class="result-empty-icon">⚖️</div>
+          <div class="result-empty-text">Enter your options position details<br>to calculate profit or loss at expiry</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1243,6 +1310,162 @@
     calcTax();
   }
 
+  // ── OPTIONS P&L CALCULATOR ──
+  function updateOptionsHint() {
+    const type = document.getElementById('opt-type').value;
+    const lbl  = document.getElementById('opt-premium-lbl');
+    const hint = document.getElementById('opt-hint');
+    const hints = {
+      long_call:  { lbl: 'paid',     text: 'Profit when price rises above breakeven. Max loss = premium paid. Unlimited upside.' },
+      long_put:   { lbl: 'paid',     text: 'Profit when price falls below breakeven. Max loss = premium paid. Profit limited to strike − premium.' },
+      short_call: { lbl: 'received', text: 'Profit when price stays below breakeven. Max profit = premium received. Unlimited downside risk.' },
+      short_put:  { lbl: 'received', text: 'Profit when price stays above breakeven. Max profit = premium received. Loss if price falls below breakeven.' },
+    };
+    lbl.textContent  = hints[type].lbl;
+    hint.textContent = hints[type].text;
+  }
+
+  function calcOptions() {
+    const type    = document.getElementById('opt-type').value;
+    const strike  = parseFloat(document.getElementById('opt-strike').value) || 0;
+    const premium = parseFloat(document.getElementById('opt-premium').value) || 0;
+    const lotSize = parseInt(document.getElementById('opt-lotsize').value) || 75;
+    const lots    = parseInt(document.getElementById('opt-lots').value) || 1;
+    const spot    = parseFloat(document.getElementById('opt-spot').value) || 0;
+
+    if (!strike || !premium || !spot) return;
+
+    const totalQty     = lotSize * lots;
+    const totalPremium = premium * totalQty;
+
+    // Intrinsic value and P&L at expiry
+    let intrinsicVal = 0, pnl = 0, maxProfit = 0, maxLoss = 0, breakeven = 0;
+
+    if (type === 'long_call') {
+      intrinsicVal = Math.max(0, spot - strike);
+      pnl          = (intrinsicVal - premium) * totalQty;
+      maxLoss      = totalPremium;
+      maxProfit    = null; // unlimited
+      breakeven    = strike + premium;
+    } else if (type === 'long_put') {
+      intrinsicVal = Math.max(0, strike - spot);
+      pnl          = (intrinsicVal - premium) * totalQty;
+      maxLoss      = totalPremium;
+      maxProfit    = (strike - premium) * totalQty;
+      breakeven    = strike - premium;
+    } else if (type === 'short_call') {
+      intrinsicVal = Math.max(0, spot - strike);
+      pnl          = (premium - intrinsicVal) * totalQty;
+      maxProfit    = totalPremium;
+      maxLoss      = null; // unlimited
+      breakeven    = strike + premium;
+    } else if (type === 'short_put') {
+      intrinsicVal = Math.max(0, strike - spot);
+      pnl          = (premium - intrinsicVal) * totalQty;
+      maxProfit    = totalPremium;
+      maxLoss      = (strike - premium) * totalQty;
+      breakeven    = strike - premium;
+    }
+
+    const isProfit = pnl >= 0;
+    const isBuyer  = type.startsWith('long');
+
+    // Moneyness
+    let moneyness = '';
+    if (type.includes('call')) moneyness = spot > strike ? 'ITM' : spot < strike ? 'OTM' : 'ATM';
+    else moneyness = spot < strike ? 'ITM' : spot > strike ? 'OTM' : 'ATM';
+
+    const moneynessColor = moneyness === 'ITM' ? 'var(--green)' : moneyness === 'OTM' ? 'var(--red)' : 'var(--amber)';
+
+    // Type labels
+    const typeLabels = {
+      long_call:  'Long Call (Buy CE)',
+      long_put:   'Long Put (Buy PE)',
+      short_call: 'Short Call (Sell CE)',
+      short_put:  'Short Put (Sell PE)',
+    };
+
+    // Hero color
+    const heroColor = isProfit ? 'var(--green)' : 'var(--red)';
+    const heroBg    = isProfit ? 'var(--green-light)' : 'var(--red-light)';
+
+    document.getElementById('opt-result').innerHTML = `
+      <div class="result-header">
+        <div class="result-icon" style="background:${heroBg}">${isProfit ? '✅' : '❌'}</div>
+        <div>
+          <div class="result-label">${typeLabels[type]}</div>
+          <div class="result-subtitle-text">${lots} lot${lots > 1 ? 's' : ''} × ${lotSize} units = ${fmtN(totalQty)} total units</div>
+        </div>
+      </div>
+
+      <div class="result-hero" style="background:${heroBg};border-color:rgba(0,0,0,0.08)">
+        <div class="result-hero-label" style="color:${heroColor}">Estimated P&L at Expiry</div>
+        <div class="result-hero-val" style="color:${heroColor}">${isProfit ? '+' : ''}${fmt(pnl)}</div>
+        <div class="result-hero-sub" style="color:${heroColor};opacity:0.8">
+          Spot ${fmtFull(spot)} · Strike ${fmtFull(strike)} · <span style="font-weight:600">${moneyness}</span>
+        </div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-item-label">Premium ${isBuyer ? 'Paid' : 'Received'}</div>
+          <div class="result-item-val ${isBuyer ? 'red' : 'green'}">${isBuyer ? '−' : '+'}${fmt(totalPremium)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Intrinsic Value</div>
+          <div class="result-item-val">${fmt(intrinsicVal * totalQty)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Breakeven at Expiry</div>
+          <div class="result-item-val amber">${fmtFull(breakeven)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Moneyness</div>
+          <div class="result-item-val" style="color:${moneynessColor};font-weight:600">${moneyness}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Max Profit</div>
+          <div class="result-item-val green">${maxProfit === null ? '∞ Unlimited' : '+' + fmt(maxProfit)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Max Loss</div>
+          <div class="result-item-val red">${maxLoss === null ? '∞ Unlimited' : '−' + fmt(maxLoss)}</div>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-label">
+          <span>Strike ${fmtFull(strike)}</span>
+          <span>Spot ${fmtFull(spot)}</span>
+          <span>Breakeven ${fmtFull(breakeven)}</span>
+        </div>
+        <div class="progress-bar" style="height:6px">
+          <div class="progress-fill" style="width:${Math.min(Math.abs(pnl) / (maxProfit || totalPremium * 2) * 100, 100).toFixed(0)}%;background:${isProfit ? 'var(--green-mid)' : 'var(--red)'}"></div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        💡 <strong>At expiry only:</strong> This calculates intrinsic value at expiry. Actual P&L <em>before</em> expiry will differ due to time value (theta decay) and implied volatility (vega). ${
+          maxLoss === null
+            ? '⚠️ This is a short call — risk is theoretically unlimited if price rises sharply.'
+            : isBuyer
+            ? `Your max loss is capped at the premium paid (${fmt(totalPremium)}), regardless of how far the market moves against you.`
+            : `Premium received (${fmt(totalPremium)}) is your maximum profit on this trade.`
+        }
+      </div>`;
+  }
+
+  function resetOptions() {
+    document.getElementById('opt-type').value    = 'long_call';
+    document.getElementById('opt-strike').value  = 24000;
+    document.getElementById('opt-premium').value = 150;
+    document.getElementById('opt-lotsize').value = 75;
+    document.getElementById('opt-lots').value    = 1;
+    document.getElementById('opt-spot').value    = 24300;
+    updateOptionsHint();
+    calcOptions();
+  }
+
   // ── INIT ──
   window.addEventListener('DOMContentLoaded', () => {
     calcSIP();
@@ -1251,6 +1474,8 @@
     calcBrokerage();
     updateTaxPeriodHint();
     calcTax();
+    updateOptionsHint();
+    calcOptions();
   });
 </script>
 </body>
