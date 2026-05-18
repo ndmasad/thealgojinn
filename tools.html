@@ -255,7 +255,7 @@
   <!-- TOOL TABS -->
   <div class="tools-nav">
     <button class="tool-tab active" onclick="showTool('sip', this)">🧮 SIP Calculator</button>
-    <button class="tool-tab coming-soon" title="Coming soon">📐 Position Sizer <span class="coming-badge">Soon</span></button>
+    <button class="tool-tab" onclick="showTool('position', this)">📐 Position Sizer</button>
     <button class="tool-tab coming-soon" title="Coming soon">🎯 Risk / Reward <span class="coming-badge">Soon</span></button>
     <button class="tool-tab coming-soon" title="Coming soon">💸 Brokerage <span class="coming-badge">Soon</span></button>
     <button class="tool-tab coming-soon" title="Coming soon">📋 Tax Estimator <span class="coming-badge">Soon</span></button>
@@ -318,21 +318,79 @@
     </div>
   </div>
 
+  <!-- ── POSITION SIZER ── -->
+  <div class="calc-section" id="tool-position">
+    <div class="calc-grid">
+
+      <!-- INPUT -->
+      <div class="calc-card">
+        <div class="calc-title">Position Sizer</div>
+        <div class="calc-desc">How many shares should you buy? Enter your capital, risk tolerance and stop loss — get the exact quantity that keeps your risk controlled.</div>
+
+        <div class="field">
+          <label>Total Trading Capital <span class="field-lbl-val" id="ps-cap-lbl">₹5,00,000</span></label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="ps-capital" value="500000" min="1000" step="1000" oninput="updatePSLabels();calcPS()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Risk per Trade <span class="field-lbl-val" id="ps-risk-lbl">1%</span> <span style="font-size:11px;color:var(--text3);font-weight:400">(of capital)</span></label>
+          <div class="range-field">
+            <input type="range" id="ps-risk" min="0.5" max="5" value="1" step="0.5" oninput="document.getElementById('ps-risk-lbl').textContent=this.value+'%';calcPS()"/>
+            <div class="range-marks"><span>0.5%</span><span>1%</span><span>2.5%</span><span>5%</span></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Entry Price</label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="ps-entry" value="1000" min="1" step="1" oninput="calcPS()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Stop Loss Price</label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="ps-sl" value="950" min="1" step="1" oninput="calcPS()"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Target Price <span style="font-size:11px;color:var(--text3);font-weight:400">(optional)</span></label>
+          <div class="field-row">
+            <span class="field-prefix">₹</span>
+            <input type="number" id="ps-target" value="1100" min="1" step="1" oninput="calcPS()"/>
+          </div>
+        </div>
+
+        <button class="calc-btn" onclick="calcPS()">Calculate Position Size</button>
+        <button class="reset-btn" onclick="resetPS()">↺ Reset to defaults</button>
+      </div>
+
+      <!-- RESULT -->
+      <div class="result-card" id="ps-result">
+        <div class="result-empty">
+          <div class="result-empty-icon">📐</div>
+          <div class="result-empty-text">Enter your trade details on the left<br>to calculate the right position size</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- COMING SOON SECTION -->
   <div class="coming-soon-section">
     <div class="coming-soon-title">More tools coming soon</div>
     <div class="coming-soon-grid">
       <div class="coming-soon-card">
-        <div class="coming-soon-icon">📐</div>
-        <div class="coming-soon-name">Position Sizer</div>
-        <div class="coming-soon-desc">Exact quantity to buy based on your risk tolerance and stop loss</div>
-        <div class="coming-soon-tag">Coming next</div>
-      </div>
-      <div class="coming-soon-card">
         <div class="coming-soon-icon">🎯</div>
         <div class="coming-soon-name">Risk / Reward</div>
         <div class="coming-soon-desc">R:R ratio, breakeven win rate and P&L for any trade setup</div>
-        <div class="coming-soon-tag">Coming soon</div>
+        <div class="coming-soon-tag">Coming next</div>
       </div>
       <div class="coming-soon-card">
         <div class="coming-soon-icon">💸</div>
@@ -344,6 +402,12 @@
         <div class="coming-soon-icon">📋</div>
         <div class="coming-soon-name">Tax Estimator</div>
         <div class="coming-soon-desc">Estimate your STCG and LTCG tax liability on equity gains</div>
+        <div class="coming-soon-tag">Coming soon</div>
+      </div>
+      <div class="coming-soon-card">
+        <div class="coming-soon-icon">⚖️</div>
+        <div class="coming-soon-name">Options P&L</div>
+        <div class="coming-soon-desc">Calculate profit or loss on any options position before trading</div>
         <div class="coming-soon-tag">Coming soon</div>
       </div>
     </div>
@@ -388,6 +452,7 @@
     return '₹' + Math.round(n).toLocaleString('en-IN');
   }
   function fmtFull(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+  function fmtN(n) { return Math.round(n).toLocaleString('en-IN'); }
 
   function updateSIPLabel() {
     const v = parseFloat(document.getElementById('sip-amount').value) || 0;
@@ -498,8 +563,116 @@
     calcSIP();
   }
 
+  // ── POSITION SIZER ──
+  function updatePSLabels() {
+    const v = parseFloat(document.getElementById('ps-capital').value) || 0;
+    document.getElementById('ps-cap-lbl').textContent = fmtFull(v);
+  }
+
+  function calcPS() {
+    const capital  = parseFloat(document.getElementById('ps-capital').value) || 0;
+    const riskPct  = parseFloat(document.getElementById('ps-risk').value) / 100;
+    const entry    = parseFloat(document.getElementById('ps-entry').value) || 0;
+    const sl       = parseFloat(document.getElementById('ps-sl').value) || 0;
+    const target   = parseFloat(document.getElementById('ps-target').value) || 0;
+
+    // Validation
+    if (entry <= 0 || sl <= 0) return;
+    if (sl >= entry) {
+      document.getElementById('ps-result').innerHTML = `
+        <div class="result-empty">
+          <div class="result-empty-icon">⚠️</div>
+          <div class="result-empty-text">Stop loss must be <strong>below</strong> entry price.<br>Please check your values.</div>
+        </div>`;
+      return;
+    }
+
+    const riskAmt      = capital * riskPct;
+    const riskPerShare = entry - sl;
+    const qty          = Math.floor(riskAmt / riskPerShare);
+    const positionVal  = qty * entry;
+    const maxLoss      = qty * riskPerShare;
+    const capitalPct   = (positionVal / capital * 100).toFixed(1);
+    const slPct        = ((riskPerShare / entry) * 100).toFixed(2);
+
+    // R:R if target is provided
+    let rrRatio = null, potentialProfit = null, rrColor = '';
+    if (target > entry) {
+      const reward = target - entry;
+      rrRatio = (reward / riskPerShare).toFixed(2);
+      potentialProfit = qty * reward;
+      rrColor = parseFloat(rrRatio) >= 2 ? 'green' : parseFloat(rrRatio) >= 1 ? 'amber' : 'red';
+    }
+
+    // Capital concentration warning
+    const isOverweight = parseFloat(capitalPct) > 20;
+    const heroColor    = isOverweight ? '--amber' : '--blue';
+    const heroBg       = isOverweight ? '--amber-light' : '--blue-light';
+
+    document.getElementById('ps-result').innerHTML = `
+      <div class="result-header">
+        <div class="result-icon" style="background:var(--blue-light)">📐</div>
+        <div>
+          <div class="result-label">Position Size</div>
+          <div class="result-subtitle-text">${riskPct * 100}% risk · ${fmtFull(capital)} capital</div>
+        </div>
+      </div>
+
+      <div class="result-hero" style="background:var(${heroBg});border-color:rgba(0,0,0,0.08)">
+        <div class="result-hero-label" style="color:var(${heroColor})">Shares to Buy</div>
+        <div class="result-hero-val" style="color:var(${heroColor})">${fmtN(qty)} shares</div>
+        <div class="result-hero-sub" style="color:var(${heroColor});opacity:0.75">Position value: ${fmt(positionVal)} · ${capitalPct}% of capital</div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-item-label">Max Risk Amount</div>
+          <div class="result-item-val red">− ${fmt(riskAmt)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Risk per Share</div>
+          <div class="result-item-val red">− ${fmtFull(riskPerShare)} (${slPct}%)</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Position Value</div>
+          <div class="result-item-val blue">${fmt(positionVal)}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Stop Loss</div>
+          <div class="result-item-val">${fmtFull(sl)}</div>
+        </div>
+        ${rrRatio ? `
+        <div class="result-item">
+          <div class="result-item-label">Risk : Reward</div>
+          <div class="result-item-val ${rrColor}">1 : ${rrRatio}</div>
+        </div>
+        <div class="result-item">
+          <div class="result-item-label">Potential Profit</div>
+          <div class="result-item-val green">+ ${fmt(potentialProfit)}</div>
+        </div>` : ''}
+      </div>
+
+      <div class="insight-box" style="${isOverweight ? 'background:var(--red-light);border-color:rgba(192,57,43,0.15)' : ''}">
+        ${isOverweight
+          ? `⚠️ <strong>Position is ${capitalPct}% of your capital</strong> — this is high concentration. Consider reducing risk % or splitting across multiple trades to protect your capital.`
+          : `💡 <strong>Good sizing:</strong> You're risking exactly ${fmt(riskAmt)} (${riskPct * 100}% of capital) on this trade. Even if your stop loss is hit, your overall portfolio takes only a small controlled hit.`
+        }
+      </div>`;
+  }
+
+  function resetPS() {
+    document.getElementById('ps-capital').value = 500000;
+    document.getElementById('ps-risk').value = 1;
+    document.getElementById('ps-entry').value = 1000;
+    document.getElementById('ps-sl').value = 950;
+    document.getElementById('ps-target').value = 1100;
+    document.getElementById('ps-risk-lbl').textContent = '1%';
+    document.getElementById('ps-cap-lbl').textContent = '₹5,00,000';
+    calcPS();
+  }
+
   // ── INIT ──
-  window.addEventListener('DOMContentLoaded', () => { calcSIP(); });
+  window.addEventListener('DOMContentLoaded', () => { calcSIP(); calcPS(); });
 </script>
 </body>
 </html>
