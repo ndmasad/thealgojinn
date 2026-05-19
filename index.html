@@ -25,13 +25,13 @@
     html { scroll-behavior: smooth; }
     body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
- 
+
     /* TICKER — TradingView */
     .tv-ticker-wrap { width: 100%; background: #1a1a18; }
     .tv-ticker-wrap .tradingview-widget-container { margin: 0 !important; }
     .up { color: var(--green); } .dn { color: var(--red); }
     .t-up { color: #4ade80; } .t-dn { color: #f87171; }
- 
+
     /* NAV */
     nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
@@ -56,7 +56,7 @@
     .mobile-menu { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 16px 24px; flex-direction: column; gap: 4px; }
     .mobile-menu a { font-size: 14px; font-weight: 500; color: var(--text2); padding: 10px 12px; border-radius: 8px; display: block; }
     .mobile-menu.open { display: flex; }
- 
+
     /* HERO */
     .hero { max-width: 1200px; margin: 0 auto; padding: 64px 24px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
     .hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; background: var(--green-light); color: var(--green); font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; }
@@ -85,7 +85,7 @@
     .bar { flex: 1; border-radius: 2px 2px 0 0; }
     .bar.up-bar { background: var(--green-light); border-top: 2px solid var(--green-mid); }
     .bar.dn-bar { background: var(--red-light); border-top: 2px solid var(--red); }
- 
+
     /* LAYOUT */
     .section { max-width: 1200px; margin: 0 auto; padding: 56px 24px; }
     .divider { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -95,7 +95,7 @@
     .see-all { font-size: 13px; color: var(--green); font-weight: 500; transition: gap 0.15s; display: flex; align-items: center; gap: 4px; }
     .see-all:hover { gap: 8px; }
     .content-grid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; }
- 
+
     /* PATHS */
     .paths-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .path-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
@@ -114,7 +114,7 @@
     .level-beg { background: var(--green-light); color: var(--green); }
     .level-int { background: var(--amber-light); color: var(--amber); }
     .level-adv { background: var(--red-light); color: var(--red); }
- 
+
     /* ARTICLES */
     .article-featured { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 16px; transition: all 0.2s; cursor: pointer; }
     .article-featured:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
@@ -128,7 +128,7 @@
     .article-title { font-size: 16px; font-weight: 600; line-height: 1.4; margin-bottom: 8px; letter-spacing: -0.2px; }
     .article-excerpt { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
     .article-meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--text3); }
- 
+
     /* STRATEGIES */
     .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .strategy-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s; }
@@ -138,7 +138,7 @@
     .strategy-desc { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 14px; }
     .strategy-tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .strategy-tag { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 6px; background: var(--bg2); color: var(--text2); }
- 
+
     /* TOOLS */
     .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .tool-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; transition: all 0.2s; }
@@ -147,7 +147,7 @@
     .tool-name { font-size: 14px; font-weight: 600; }
     .tool-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
     .tool-cta { font-size: 12px; color: var(--green); font-weight: 500; margin-top: auto; }
- 
+
     /* SIDEBAR */
     .sidebar { display: flex; flex-direction: column; gap: 20px; }
     .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
@@ -182,7 +182,7 @@
     .nl-input input:focus { background: rgba(255,255,255,0.28); }
     .btn-white { background: #fff; color: var(--green); font-weight: 600; padding: 10px 18px; border-radius: 10px; font-size: 13px; cursor: pointer; border: none; font-family: var(--sans); transition: all 0.15s; width: 100%; }
     .btn-white:hover { background: var(--green-light); }
- 
+
     /* FOOTER */
     footer { background: var(--text); color: rgba(255,255,255,0.65); }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; }
@@ -197,11 +197,11 @@
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
     .footer-bottom-links { display: flex; gap: 20px; }
     .footer-bottom-links a:hover { color: #fff; }
- 
+
     /* ANIMATIONS */
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
- 
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .nav-links, .nav-right { display: none; }
@@ -223,7 +223,7 @@
   </style>
 </head>
 <body>
- 
+
 <!-- LIVE TICKER BAR — TradingView Widget -->
 <div class="tv-ticker-wrap">
   <div class="tradingview-widget-container">
@@ -258,7 +258,7 @@
     </script>
   </div>
 </div>
- 
+
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
@@ -275,7 +275,7 @@
       </div>
     </a>
     <ul class="nav-links">
-      <li><a href="#" class="active">Home</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="#">Learn</a></li>
       <li><a href="#">Strategies</a></li>
@@ -291,11 +291,11 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#">Home</a><a href="#">Blog</a><a href="#">Learn</a>
-    <a href="#">Strategies</a><a href="#">News</a><a href="#">Tools</a>
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="#">Learn</a>
+    <a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
   </div>
 </nav>
- 
+
 <!-- HERO -->
 <div class="hero">
   <div class="fade-in">
@@ -339,7 +339,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- LEARNING PATHS -->
 <div class="divider">
   <div class="section" style="padding:40px 24px;">
@@ -375,7 +375,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- MAIN CONTENT + SIDEBAR -->
 <div class="section">
   <div class="content-grid">
@@ -429,7 +429,7 @@
           </div>
         </div>
       </div>
- 
+
       <!-- STRATEGIES -->
       <div style="margin-top:48px;">
         <div class="section-header">
@@ -458,7 +458,7 @@
         </div>
       </div>
     </div>
- 
+
     <!-- SIDEBAR -->
     <div class="sidebar">
       <div class="sidebar-card fade-in">
@@ -469,7 +469,7 @@
         <div class="mover-row"><div><div class="mover-name">HDFC BANK</div><div class="mover-sector">Banking</div></div><div><div class="mover-price dn">₹1,780</div><div class="mover-chg dn">▼ 0.61%</div></div></div>
         <div class="mover-row"><div><div class="mover-name">BHARTI AIRTEL</div><div class="mover-sector">Telecom</div></div><div><div class="mover-price dn">₹1,328</div><div class="mover-chg dn">▼ 0.44%</div></div></div>
       </div>
- 
+
       <div class="sidebar-card fade-in">
         <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--blue-light);">📰</div>Market News Decoded</div>
         <div class="news-item"><div class="news-dot"></div><div><div class="news-text">SEBI tightens F&O margin norms — what changes for retail traders</div><div class="news-time">2h ago · Analysis</div></div></div>
@@ -477,7 +477,7 @@
         <div class="news-item"><div class="news-dot"></div><div><div class="news-text">Q4 results: NIFTY 50 earnings beat estimates by 8%</div><div class="news-time">6h ago · Earnings</div></div></div>
         <div class="news-item"><div class="news-dot"></div><div><div class="news-text">Rupee at 83.42 — which sectors gain and which suffer</div><div class="news-time">8h ago · Macro</div></div></div>
       </div>
- 
+
       <div class="sidebar-card fade-in">
         <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--amber-light);">🔍</div>Quick Screener</div>
         <div style="font-size:12px;color:var(--text3);margin-bottom:12px;">Pre-built filters — click to explore</div>
@@ -488,7 +488,7 @@
           <div class="pill pill-red">RSI Oversold</div><div class="pill pill-red">Near Support</div>
         </div>
       </div>
- 
+
       <div class="newsletter-card fade-in">
         <h3>Get the Jinn's Weekly Edge</h3>
         <p>One strategy breakdown, key market insights, and the best articles — every Sunday morning.</p>
@@ -500,7 +500,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- FREE TOOLS -->
 <div class="divider">
   <div class="section" style="padding:40px 24px;">
@@ -517,7 +517,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -539,7 +539,7 @@
         <div class="footer-col-title">Explore</div>
         <ul class="footer-links">
           <li><a href="#">Blog</a></li><li><a href="#">Strategy Library</a></li>
-          <li><a href="#">Market News</a></li><li><a href="#">Free Tools</a></li>
+          <li><a href="#">Market News</a></li><li><a href="tools.html">Free Tools</a></li>
           <li><a href="#">Newsletter</a></li>
         </ul>
       </div>
@@ -558,7 +558,7 @@
     </div>
   </div>
 </footer>
- 
+
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
