@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learn — TheAlgoJinn | Free Indian Stock Market Education</title>
+  <meta name="description" content="Free structured learning paths for the Indian stock market — Market Basics, Technical Analysis, Fundamental Analysis, and Algo & Quant trading."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f7f4; --bg2: #f0ede6; --bg3: #e8e3d8;
+      --card: #ffffff; --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+      --text: #1a1a18; --text2: #5a5a52; --text3: #9a9a8e;
+      --green: #1a7a52; --green-light: #e8f5ee; --green-mid: #2a9e6a;
+      --red: #c0392b; --red-light: #fdf0ee;
+      --amber: #b8860b; --amber-light: #fdf6e3;
+      --blue: #1a4a7a; --blue-light: #e8eef8;
+      --purple: #5b21b6; --purple-light: #ede9fe;
+      --mono: 'JetBrains Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* TICKER */
+    .tv-ticker-wrap { width: 100%; background: #1a1a18; }
+
+    /* NAV */
+    nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-mark { width: 36px; height: 36px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-mark svg { width: 20px; height: 20px; }
+    .logo-name { font-family: var(--serif); font-size: 17px; color: var(--text); line-height: 1.1; }
+    .logo-tagline { font-size: 10px; color: var(--text3); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text2); padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+    .nav-links a:hover { background: var(--bg2); color: var(--text); }
+    .nav-links a.active { color: var(--green); background: var(--green-light); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; font-family: var(--sans); }
+    .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+    .btn-ghost:hover { background: var(--bg2); }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: #155f40; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-menu { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 16px 24px; flex-direction: column; gap: 4px; }
+    .mobile-menu a { font-size: 14px; font-weight: 500; color: var(--text2); padding: 10px 12px; border-radius: 8px; display: block; }
+    .mobile-menu.open { display: flex; }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--card); border-bottom: 1px solid var(--border); padding: 48px 24px 40px; }
+    .page-header-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+    .page-title { font-family: var(--serif); font-size: 42px; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
+    .page-title em { font-style: italic; color: var(--green); }
+    .page-desc { font-size: 16px; color: var(--text2); max-width: 520px; line-height: 1.7; }
+    .header-stats { display: flex; gap: 28px; }
+    .hstat-val { font-family: var(--serif); font-size: 32px; color: var(--text); line-height: 1; }
+    .hstat-label { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+    /* PATH TABS */
+    .path-tabs-bar { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .path-tabs-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; overflow-x: auto; scrollbar-width: none; }
+    .path-tabs-inner::-webkit-scrollbar { display: none; }
+    .path-tab { display: flex; align-items: center; gap: 10px; padding: 16px 24px; font-size: 14px; font-weight: 500; color: var(--text2); cursor: pointer; border: none; background: transparent; font-family: var(--sans); border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
+    .path-tab:hover { color: var(--text); background: rgba(0,0,0,0.03); }
+    .path-tab.active { color: var(--text); border-bottom-color: var(--green); }
+    .path-tab-icon { font-size: 18px; }
+    .path-tab-count { font-size: 11px; font-weight: 600; color: var(--text3); background: var(--bg3); padding: 2px 7px; border-radius: 10px; }
+    .path-tab.active .path-tab-count { background: var(--green-light); color: var(--green); }
+
+    /* MAIN LAYOUT */
+    .learn-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: start; }
+
+    /* PATH SECTIONS */
+    .path-section { display: none; }
+    .path-section.active { display: block; }
+
+    /* PATH HERO */
+    .path-hero { border-radius: 20px; overflow: hidden; margin-bottom: 28px; }
+    .path-hero-banner { padding: 32px 36px; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .path-hero-banner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+    .path-hero-banner::after { content: ''; position: absolute; bottom: -60px; left: 30%; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .path-level-badge { display: inline-flex; background: rgba(255,255,255,0.18); color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.25); margin-bottom: 12px; width: fit-content; position: relative; z-index: 1; }
+    .path-hero-title { font-family: var(--serif); font-size: 28px; color: #fff; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 8px; position: relative; z-index: 1; }
+    .path-hero-desc { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.6; max-width: 500px; position: relative; z-index: 1; }
+    .path-hero-body { background: var(--card); border: 1px solid var(--border); border-top: none; padding: 20px 28px; display: flex; gap: 28px; align-items: center; border-radius: 0 0 20px 20px; flex-wrap: wrap; }
+    .path-stat-val { font-family: var(--serif); font-size: 24px; color: var(--text); }
+    .path-stat-label { font-size: 11px; color: var(--text3); }
+    .path-start-btn { margin-left: auto; padding: 10px 22px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; font-family: var(--sans); color: #fff; transition: all 0.15s; }
+    .path-start-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+    /* LESSONS */
+    .lessons-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .lessons-title { font-size: 13px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
+    .lessons-progress { font-size: 12px; color: var(--text3); }
+    .lessons-section-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; padding: 20px 0 10px; display: flex; align-items: center; gap: 10px; }
+    .lessons-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border2); }
+    .lesson-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; }
+    .lesson-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-1px); border-color: rgba(0,0,0,0.12); }
+    .lesson-num { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; font-weight: 500; }
+    .lesson-body { flex: 1; min-width: 0; }
+    .lesson-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; line-height: 1.4; }
+    .lesson-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+    .lesson-meta { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 11px; color: var(--text3); }
+    .lesson-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+    .lesson-tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .lesson-arrow { font-size: 13px; color: var(--text3); opacity: 0; transition: all 0.15s; }
+    .lesson-card:hover .lesson-arrow { opacity: 1; color: var(--green); }
+    .lessons-coming { background: var(--bg2); border: 1px dashed var(--border2); border-radius: 14px; padding: 20px; text-align: center; margin-top: 8px; }
+    .lessons-coming p { font-size: 13px; color: var(--text3); }
+    .lessons-coming-badge { display: inline-flex; margin-top: 8px; font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-light); padding: 4px 12px; border-radius: 20px; }
+
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 80px; }
+    .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+    .sidebar-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+    .path-ov-item { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 10px; cursor: pointer; transition: all 0.15s; margin-bottom: 4px; }
+    .path-ov-item:hover { background: var(--bg2); }
+    .path-ov-item.active { background: var(--green-light); }
+    .path-ov-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .path-ov-name { font-size: 13px; font-weight: 600; color: var(--text); }
+    .path-ov-meta { font-size: 11px; color: var(--text3); }
+    .path-ov-arrow { font-size: 12px; color: var(--text3); margin-left: auto; }
+    .nl-card { background: var(--green); border-radius: 16px; padding: 22px; color: #fff; }
+    .nl-card h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 6px; line-height: 1.2; }
+    .nl-card p { font-size: 13px; opacity: 0.85; margin-bottom: 14px; line-height: 1.5; }
+    .nl-input { display: flex; flex-direction: column; gap: 8px; }
+    .nl-input input { width: 100%; padding: 10px 14px; border-radius: 10px; border: none; font-family: var(--sans); font-size: 13px; background: rgba(255,255,255,0.2); color: #fff; outline: none; }
+    .nl-input input::placeholder { color: rgba(255,255,255,0.6); }
+    .btn-white { background: #fff; color: var(--green); font-weight: 600; padding: 10px; border-radius: 10px; font-size: 13px; cursor: pointer; border: none; font-family: var(--sans); width: 100%; }
+    .btn-white:hover { background: var(--green-light); }
+
+    /* FOOTER */
+    footer { background: var(--text); color: rgba(255,255,255,0.65); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 8px; }
+    .footer-desc { font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .footer-disclaimer { font-size: 11px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; line-height: 1.6; color: rgba(255,255,255,0.45); }
+    .footer-col-title { font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a:hover { color: #fff; }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) { .learn-wrap { grid-template-columns: 1fr; } .sidebar { position: static; } .page-header-inner { grid-template-columns: 1fr; } .header-stats { display: none; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) { .nav-links, .nav-right { display: none; } .hamburger { display: flex; } .page-title { font-size: 32px; } .path-start-btn { margin-left: 0; width: 100%; } }
+    @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+<!-- LIVE TICKER -->
+<div class="tv-ticker-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"INDEX:SENSEX","title":"SENSEX"},{"proName":"INDEX:NIFTY50","title":"NIFTY 50"},{"proName":"INDEX:BANKNIFTY","title":"BANK NIFTY"},{"proName":"BSE:RELIANCE","title":"RELIANCE"},{"proName":"BSE:TCS","title":"TCS"},{"proName":"BSE:HDFCBANK","title":"HDFC BANK"},{"proName":"BSE:INFY","title":"INFOSYS"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"FOREXCOM:XAUUSD","title":"GOLD"},{"proName":"TVC:USOIL","title":"CRUDE OIL"}],"showSymbolLogo":false,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 20 20" fill="none"><path d="M3 14L7 9L10 12L14 6L17 9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="9" r="1.5" fill="white"/></svg></div>
+      <div><div class="logo-name">TheAlgoJinn</div><div class="logo-tagline">Indian Market Intelligence</div></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="learn.html" class="active">Learn</a></li>
+      <li><a href="#">Strategies</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="tools.html">Tools</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">Sign in</button>
+      <button class="btn btn-primary">Subscribe Free</button>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mob">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="learn.html">Learn</a>
+    <a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <div class="page-eyebrow">Free Learning Paths</div>
+      <h1 class="page-title">Think like a <em>quant,</em><br>start from scratch</h1>
+      <p class="page-desc">Four structured paths from complete beginner to algo-minded trader. Every lesson is free, forever.</p>
+    </div>
+    <div class="header-stats">
+      <div><div class="hstat-val">4</div><div class="hstat-label">Learning paths</div></div>
+      <div><div class="hstat-val">55+</div><div class="hstat-label">Free lessons</div></div>
+      <div><div class="hstat-val">₹0</div><div class="hstat-label">Cost ever</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PATH TABS -->
+<div class="path-tabs-bar">
+  <div class="path-tabs-inner">
+    <button class="path-tab active" onclick="switchPath('basics',this)"><span class="path-tab-icon">📈</span>Market Basics<span class="path-tab-count">12 lessons</span></button>
+    <button class="path-tab" onclick="switchPath('technical',this)"><span class="path-tab-icon">🕯️</span>Technical Analysis<span class="path-tab-count">18 lessons</span></button>
+    <button class="path-tab" onclick="switchPath('fundamental',this)"><span class="path-tab-icon">📊</span>Fundamental Analysis<span class="path-tab-count">15 lessons</span></button>
+    <button class="path-tab" onclick="switchPath('algo',this)"><span class="path-tab-icon">🤖</span>Algo &amp; Quant<span class="path-tab-count">10 lessons</span></button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="learn-wrap">
+  <div>
+
+    <!-- PATH 1 — MARKET BASICS -->
+    <div class="path-section active" id="path-basics">
+      <div class="path-hero fade-in">
+        <div class="path-hero-banner" style="background:linear-gradient(135deg,#0f4c2a,#1a7a52,#2a9e6a)">
+          <div class="path-level-badge">🟢 Beginner · Start here</div>
+          <div class="path-hero-title">Market Basics</div>
+          <div class="path-hero-desc">How NSE &amp; BSE work, what stocks are, how trades execute, and how to set up your demat account — all in plain English.</div>
+        </div>
+        <div class="path-hero-body">
+          <div><div class="path-stat-val">12</div><div class="path-stat-label">Lessons</div></div>
+          <div><div class="path-stat-val">~4</div><div class="path-stat-label">Hours</div></div>
+          <div><div class="path-stat-val">Free</div><div class="path-stat-label">Forever</div></div>
+          <button class="path-start-btn" style="background:var(--green)">Start Learning →</button>
+        </div>
+      </div>
+
+      <div class="lessons-header">
+        <div class="lessons-title">All Lessons</div>
+        <div class="lessons-progress">12 lessons · ~4 hours</div>
+      </div>
+
+      <div class="lessons-section-label">Section 1 — The Indian Stock Market</div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">01</div>
+        <div class="lesson-body">
+          <div class="lesson-title">What is the stock market and why does it exist?</div>
+          <div class="lesson-desc">How companies raise capital by selling shares, and how investors buy ownership in those companies.</div>
+          <div class="lesson-meta"><span>⏱ 15 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--green-light);color:var(--green)">Intro</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">02</div>
+        <div class="lesson-body">
+          <div class="lesson-title">NSE vs BSE — what is the difference?</div>
+          <div class="lesson-desc">The two major Indian exchanges, how they differ, and why most traders prefer NSE for F&amp;O.</div>
+          <div class="lesson-meta"><span>⏱ 12 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--green-light);color:var(--green)">Basics</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">03</div>
+        <div class="lesson-body">
+          <div class="lesson-title">SEBI — who regulates Indian markets and how?</div>
+          <div class="lesson-desc">What SEBI does, why it matters for retail investors, and how regulation protects you.</div>
+          <div class="lesson-meta"><span>⏱ 10 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--green-light);color:var(--green)">Basics</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lessons-section-label">Section 2 — Getting Started</div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">04</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Demat &amp; trading accounts — how to open and choose a broker</div>
+          <div class="lesson-desc">The difference between demat and trading accounts, which broker to choose, and what to look for.</div>
+          <div class="lesson-meta"><span>⏱ 18 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--blue-light);color:var(--blue)">Guide</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">05</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Order types — market, limit, SL and SL-M explained</div>
+          <div class="lesson-desc">The four order types every Indian trader must understand before placing their first trade.</div>
+          <div class="lesson-meta"><span>⏱ 20 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--blue-light);color:var(--blue)">Guide</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">06</div>
+        <div class="lesson-body">
+          <div class="lesson-title">How does a trade actually execute on NSE?</div>
+          <div class="lesson-desc">The journey of your order from the broker app to the exchange matching engine and back.</div>
+          <div class="lesson-meta"><span>⏱ 15 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--blue-light);color:var(--blue)">Deep Dive</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lessons-section-label">Section 3 — Market Mechanics</div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">07</div>
+        <div class="lesson-body">
+          <div class="lesson-title">NIFTY 50 and SENSEX — what are indices and why they matter</div>
+          <div class="lesson-desc">How stock market indices are constructed and why they are the most-watched numbers in India.</div>
+          <div class="lesson-meta"><span>⏱ 14 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--green-light);color:var(--green)">Basics</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">08</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Bull markets, bear markets, and corrections explained</div>
+          <div class="lesson-desc">How to identify market phases, what they mean for your portfolio, and how to behave in each.</div>
+          <div class="lesson-meta"><span>⏱ 12 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--green-light);color:var(--green)">Basics</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">09</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Circuit breakers and upper/lower circuits on Indian stocks</div>
+          <div class="lesson-desc">What happens when a stock hits a circuit limit and why it matters for retail traders.</div>
+          <div class="lesson-meta"><span>⏱ 10 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--amber-light);color:var(--amber)">Advanced</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lessons-section-label">Section 4 — Taxes &amp; Settlements</div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">10</div>
+        <div class="lesson-body">
+          <div class="lesson-title">T+1 settlement — what happens after you buy a stock?</div>
+          <div class="lesson-desc">How share settlement works in India under the T+1 cycle, and what it means for your account.</div>
+          <div class="lesson-meta"><span>⏱ 10 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--blue-light);color:var(--blue)">Deep Dive</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">11</div>
+        <div class="lesson-body">
+          <div class="lesson-title">STCG, LTCG, STT — taxes every Indian investor must know</div>
+          <div class="lesson-desc">Plain-English guide to capital gains tax on Indian equity after Budget 2024 changes.</div>
+          <div class="lesson-meta"><span>⏱ 20 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--amber-light);color:var(--amber)">Must Know</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lesson-card fade-in">
+        <div class="lesson-num" style="background:var(--green-light);color:var(--green)">12</div>
+        <div class="lesson-body">
+          <div class="lesson-title">Dividends, bonus shares, splits and rights issues explained</div>
+          <div class="lesson-desc">All corporate actions that affect your holdings — and how to think about them as an investor.</div>
+          <div class="lesson-meta"><span>⏱ 16 min</span><span>📖 Article</span></div>
+        </div>
+        <div class="lesson-right">
+          <span class="lesson-tag" style="background:var(--green-light);color:var(--green)">Basics</span>
+          <span class="lesson-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="lessons-coming">
+        <p>More lessons being added — subscribe to get notified ✍️</p>
+        <div class="lessons-coming-badge">Subscribe below</div>
+      </div>
+    </div>
+
+    <!-- PATH 2 — TECHNICAL ANALYSIS (placeholder) -->
+    <div class="path-section" id="path-technical">
+      <div class="lessons-coming" style="padding:48px 24px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:12px">🕯️</div>
+        <p style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Technical Analysis — Coming in Part 2</p>
+        <p>18 lessons on candlesticks, indicators, support &amp; resistance, and chart patterns.</p>
+        <div class="lessons-coming-badge" style="margin-top:12px">Subscribe to get notified</div>
+      </div>
+    </div>
+
+    <!-- PATH 3 — FUNDAMENTAL ANALYSIS (placeholder) -->
+    <div class="path-section" id="path-fundamental">
+      <div class="lessons-coming" style="padding:48px 24px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:12px">📊</div>
+        <p style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Fundamental Analysis — Coming in Part 3</p>
+        <p>15 lessons on financial statements, valuation ratios, and sector analysis.</p>
+        <div class="lessons-coming-badge" style="margin-top:12px">Subscribe to get notified</div>
+      </div>
+    </div>
+
+    <!-- PATH 4 — ALGO & QUANT (placeholder) -->
+    <div class="path-section" id="path-algo">
+      <div class="lessons-coming" style="padding:48px 24px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:12px">🤖</div>
+        <p style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px">Algo &amp; Quant — Coming in Part 4</p>
+        <p>10 lessons on rule-based trading, backtesting, SEBI algo rules and Python for markets.</p>
+        <div class="lessons-coming-badge" style="margin-top:12px">Subscribe to get notified</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-card fade-in">
+      <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--green-light)">🗺️</div>All Learning Paths</div>
+      <div class="path-ov-item active" id="ov-basics" onclick="switchPath('basics',null)">
+        <div class="path-ov-icon" style="background:var(--green-light)">📈</div>
+        <div><div class="path-ov-name">Market Basics</div><div class="path-ov-meta">12 lessons · Beginner</div></div>
+        <div class="path-ov-arrow">→</div>
+      </div>
+      <div class="path-ov-item" id="ov-technical" onclick="switchPath('technical',null)">
+        <div class="path-ov-icon" style="background:var(--blue-light)">🕯️</div>
+        <div><div class="path-ov-name">Technical Analysis</div><div class="path-ov-meta">18 lessons · Intermediate</div></div>
+        <div class="path-ov-arrow">→</div>
+      </div>
+      <div class="path-ov-item" id="ov-fundamental" onclick="switchPath('fundamental',null)">
+        <div class="path-ov-icon" style="background:var(--amber-light)">📊</div>
+        <div><div class="path-ov-name">Fundamental Analysis</div><div class="path-ov-meta">15 lessons · Intermediate</div></div>
+        <div class="path-ov-arrow">→</div>
+      </div>
+      <div class="path-ov-item" id="ov-algo" onclick="switchPath('algo',null)">
+        <div class="path-ov-icon" style="background:var(--purple-light)">🤖</div>
+        <div><div class="path-ov-name">Algo &amp; Quant</div><div class="path-ov-meta">10 lessons · Advanced</div></div>
+        <div class="path-ov-arrow">→</div>
+      </div>
+    </div>
+
+    <div class="sidebar-card fade-in">
+      <div class="sidebar-title"><div class="sidebar-icon" style="background:var(--blue-light)">💡</div>Learning Tips</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;gap:10px"><div style="font-size:16px;flex-shrink:0">📍</div><div style="font-size:12px;color:var(--text2);line-height:1.5"><strong>Start with Basics</strong> — even if you've traded before. The foundation changes everything.</div></div>
+        <div style="display:flex;gap:10px"><div style="font-size:16px;flex-shrink:0">📝</div><div style="font-size:12px;color:var(--text2);line-height:1.5"><strong>Take notes</strong> — concepts stick better when written in your own words.</div></div>
+        <div style="display:flex;gap:10px"><div style="font-size:16px;flex-shrink:0">🔁</div><div style="font-size:12px;color:var(--text2);line-height:1.5"><strong>Paper trade first</strong> — apply every concept before using real money.</div></div>
+        <div style="display:flex;gap:10px"><div style="font-size:16px;flex-shrink:0">⏳</div><div style="font-size:12px;color:var(--text2);line-height:1.5"><strong>One path at a time</strong> — finish Market Basics before jumping to TA.</div></div>
+      </div>
+    </div>
+
+    <div class="nl-card fade-in">
+      <h3>Get new lessons in your inbox</h3>
+      <p>New lessons drop every week. Subscribe and never miss one.</p>
+      <div class="nl-input">
+        <input type="email" placeholder="your@email.com"/>
+        <button class="btn-white">Notify Me →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TheAlgoJinn</div>
+        <p class="footer-desc">India's algo-minded stock market knowledge hub. Free education, strategy breakdowns, and tools for the serious retail investor.</p>
+        <div class="footer-disclaimer">⚠️ All content is for educational purposes only. Nothing here constitutes investment advice or a SEBI-registered recommendation.</div>
+      </div>
+      <div><div class="footer-col-title">Learn</div><ul class="footer-links"><li><a href="learn.html">Market Basics</a></li><li><a href="learn.html">Technical Analysis</a></li><li><a href="learn.html">Fundamental Analysis</a></li><li><a href="learn.html">Algo &amp; Quant</a></li></ul></div>
+      <div><div class="footer-col-title">Explore</div><ul class="footer-links"><li><a href="blog.html">Blog</a></li><li><a href="tools.html">Free Tools</a></li><li><a href="#">Strategy Library</a></li><li><a href="#">Newsletter</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Disclaimer</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TheAlgoJinn.com · Made with ♥ for India's retail investors</div>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function switchPath(id, btn) {
+    document.querySelectorAll('.path-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.path-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.path-ov-item').forEach(o => o.classList.remove('active'));
+    document.getElementById('path-' + id).classList.add('active');
+    document.getElementById('ov-' + id).classList.add('active');
+    if (btn) btn.classList.add('active');
+    else document.querySelectorAll('.path-tab').forEach(t => { if (t.getAttribute('onclick')?.includes("'" + id + "'")) t.classList.add('active'); });
+    setTimeout(() => {
+      document.querySelectorAll('#path-' + id + ' .fade-in').forEach((el, i) => {
+        el.classList.remove('visible');
+        setTimeout(() => el.classList.add('visible'), i * 50);
+      });
+    }, 20);
+  }
+  const obs = new IntersectionObserver((entries) => { entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60); }); }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
