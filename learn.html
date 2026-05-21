@@ -162,6 +162,17 @@
     @media (max-width: 960px) { .learn-wrap { grid-template-columns: 1fr; } .sidebar { position: static; } .page-header-inner { grid-template-columns: 1fr; } .header-stats { display: none; } .footer-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 768px) { .nav-links, .nav-right { display: none; } .hamburger { display: flex; } .page-title { font-size: 32px; } .path-start-btn { margin-left: 0; width: 100%; } }
     @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } }
+    /* MOBILE TOUCH FIX */
+    @media (max-width: 768px) {
+      .path-tab { padding: 18px 16px; min-height: 56px; font-size: 13px; }
+      .path-tab-icon { font-size: 20px; }
+      .lesson-card { min-height: 72px; padding: 16px; }
+      .lesson-num { width: 40px; height: 40px; font-size: 13px; }
+      .path-ov-item { min-height: 52px; padding: 12px; }
+      .btn, .btn-ghost, .btn-primary { min-height: 44px; padding: 10px 20px; }
+      .path-start-btn { min-height: 48px; font-size: 14px; }
+      .lessons-section-label { min-height: 40px; padding: 16px 0 10px; }
+    }
   </style>
 </head>
 <body>
