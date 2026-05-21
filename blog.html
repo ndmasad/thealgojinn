@@ -154,6 +154,15 @@
     @media (max-width: 960px) { .blog-wrap { grid-template-columns: 1fr; } .sidebar { position: static; } .footer-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 768px) { .nav-links, .nav-right { display: none; } .hamburger { display: flex; } .page-title { font-size: 32px; } .article-card { flex-direction: column; } }
     @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } }
+    /* MOBILE TOUCH FIX */
+    @media (max-width: 768px) {
+      .btn, .btn-ghost, .btn-primary { min-height: 44px; padding: 10px 20px; }
+      .filter-btn { padding: 10px 18px; min-height: 44px; }
+      .article-card { min-height: 56px; }
+      .tag-pill { padding: 8px 14px; min-height: 44px; }
+      .cat-item { min-height: 44px; }
+      .featured-article { cursor: pointer; }
+    }
   </style>
 </head>
 <body>
@@ -178,7 +187,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="blog.html" class="active">Blog</a></li>
-      <li><a href="#">Learn</a></li>
+      <li><a href="learn.html">Learn</a></li>
       <li><a href="#">Strategies</a></li>
       <li><a href="#">News</a></li>
       <li><a href="tools.html">Tools</a></li>
@@ -192,7 +201,7 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="#">Learn</a><a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="learn.html">Learn</a><a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
   </div>
 </nav>
 
