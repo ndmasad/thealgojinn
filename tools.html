@@ -195,6 +195,17 @@
     @media (max-width: 960px) { .calc-grid { grid-template-columns: 1fr; } .coming-soon-grid { grid-template-columns: repeat(2,1fr); } .footer-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 768px) { .nav-links, .nav-right { display: none; } .hamburger { display: flex; } .page-title { font-size: 32px; } .result-hero-val { font-size: 32px; } }
     @media (max-width: 560px) { .result-grid { grid-template-columns: 1fr; } .coming-soon-grid { grid-template-columns: 1fr 1fr; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 12px; text-align: center; } }
+    /* MOBILE TOUCH FIX */
+    @media (max-width: 768px) {
+      .tool-tab { padding: 12px 16px; min-height: 48px; font-size: 13px; }
+      .btn, .btn-ghost, .btn-primary { min-height: 44px; padding: 10px 20px; }
+      .calc-btn { min-height: 52px; font-size: 15px; }
+      .reset-btn { min-height: 44px; }
+      .field-row input, .field-row select { min-height: 44px; font-size: 16px; }
+      .field-row { min-height: 44px; }
+      .range-field { padding: 14px 16px; }
+      input[type=range] { height: 20px; }
+    }
   </style>
 </head>
 <body>
@@ -221,7 +232,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="blog.html">Blog</a></li>
-      <li><a href="#">Learn</a></li>
+      <li><a href="learn.html">Learn</a></li>
       <li><a href="#">Strategies</a></li>
       <li><a href="#">News</a></li>
       <li><a href="tools.html" class="active">Tools</a></li>
@@ -235,7 +246,7 @@
     </button>
   </div>
   <div class="mobile-menu" id="mob">
-    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="#">Learn</a>
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="learn.html">Learn</a>
     <a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
   </div>
 </nav>
