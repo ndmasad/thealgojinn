@@ -384,6 +384,15 @@
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
     }
+    /* MOBILE TOUCH FIX */
+    @media (max-width: 768px) {
+      .btn, .btn-ghost, .btn-primary { min-height: 44px; padding: 10px 20px; }
+      .share-pill { min-height: 44px; padding: 8px 16px; }
+      .back-to-blog { min-height: 48px; padding: 12px 22px; font-size: 14px; }
+      .toc-item a { min-height: 44px; display: flex; align-items: center; padding: 8px 10px; }
+      .related-item { min-height: 56px; padding: 12px 0; }
+      .article-body a { padding: 2px 0; }
+    }
   </style>
 </head>
 <body>
@@ -440,7 +449,7 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="blog.html" class="active">Blog</a></li>
-      <li><a href="#">Learn</a></li>
+      <li><a href="learn.html">Learn</a></li>
       <li><a href="#">Strategies</a></li>
       <li><a href="#">News</a></li>
       <li><a href="tools.html">Tools</a></li>
@@ -454,7 +463,7 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="#">Learn</a>
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="learn.html">Learn</a>
     <a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
   </div>
 </nav>
