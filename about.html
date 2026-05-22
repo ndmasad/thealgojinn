@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — TheAlgoJinn | Indian Stock Market Intelligence</title>
+  <meta name="description" content="TheAlgoJinn is India's algo-minded stock market knowledge hub — free education, strategy breakdowns and tools for the serious retail investor."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f7f4; --bg2: #f0ede6; --bg3: #e8e3d8;
+      --card: #ffffff; --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+      --text: #1a1a18; --text2: #5a5a52; --text3: #9a9a8e;
+      --green: #1a7a52; --green-light: #e8f5ee; --green-mid: #2a9e6a;
+      --red: #c0392b; --red-light: #fdf0ee;
+      --amber: #b8860b; --amber-light: #fdf6e3;
+      --blue: #1a4a7a; --blue-light: #e8eef8;
+      --purple: #5b21b6; --purple-light: #ede9fe;
+      --mono: 'JetBrains Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* TICKER */
+    .tv-ticker-wrap { width: 100%; background: #1a1a18; }
+
+    /* NAV */
+    nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-mark { width: 36px; height: 36px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-mark svg { width: 20px; height: 20px; }
+    .logo-name { font-family: var(--serif); font-size: 17px; color: var(--text); line-height: 1.1; }
+    .logo-tagline { font-size: 10px; color: var(--text3); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text2); padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+    .nav-links a:hover { background: var(--bg2); color: var(--text); }
+    .nav-links a.active { color: var(--green); background: var(--green-light); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; font-family: var(--sans); }
+    .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+    .btn-ghost:hover { background: var(--bg2); }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: #155f40; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-menu { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 16px 24px; flex-direction: column; gap: 4px; }
+    .mobile-menu a { font-size: 14px; font-weight: 500; color: var(--text2); padding: 10px 12px; border-radius: 8px; display: block; min-height: 44px; display: flex; align-items: center; }
+    .mobile-menu.open { display: flex; }
+
+    /* HERO */
+    .about-hero {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 24px 56px;
+    }
+    .about-hero-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; }
+    .hero-title { font-family: var(--serif); font-size: 48px; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+    .hero-title em { font-style: italic; color: var(--green); }
+    .hero-desc { font-size: 18px; color: var(--text2); line-height: 1.8; max-width: 600px; margin: 0 auto 36px; }
+    .hero-logo-mark {
+      width: 72px; height: 72px; background: var(--green); border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px; box-shadow: 0 8px 32px rgba(26,122,82,0.25);
+    }
+    .hero-logo-mark svg { width: 40px; height: 40px; }
+
+    /* STATS STRIP */
+    .stats-strip { background: var(--green); padding: 32px 24px; }
+    .stats-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .stat-item { text-align: center; }
+    .stat-val { font-family: var(--serif); font-size: 36px; color: #fff; line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.75); }
+
+    /* MAIN CONTENT */
+    .about-wrap { max-width: 900px; margin: 0 auto; padding: 64px 24px 80px; }
+
+    /* STORY SECTION */
+    .story-section { margin-bottom: 64px; }
+    .section-eyebrow { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+    .section-title { font-family: var(--serif); font-size: 32px; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 24px; }
+    .story-body { font-size: 16px; color: var(--text2); line-height: 1.85; }
+    .story-body p { margin-bottom: 20px; }
+    .story-body p:last-child { margin-bottom: 0; }
+    .story-body strong { color: var(--text); font-weight: 600; }
+
+    /* PULL QUOTE */
+    .pull-quote {
+      border-left: 3px solid var(--green-mid);
+      padding: 20px 24px;
+      margin: 32px 0;
+      background: var(--green-light);
+      border-radius: 0 14px 14px 0;
+    }
+    .pull-quote p { font-family: var(--serif); font-size: 20px; color: var(--green); line-height: 1.5; font-style: italic; }
+
+    /* DIVIDER */
+    .section-divider { height: 1px; background: var(--border); margin: 56px 0; }
+
+    /* WHAT WE OFFER */
+    .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+    .offer-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; transition: all 0.2s; }
+    .offer-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
+    .offer-icon { font-size: 28px; margin-bottom: 12px; }
+    .offer-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .offer-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+    /* VALUES */
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    .value-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; text-align: center; }
+    .value-icon { font-size: 32px; margin-bottom: 12px; }
+    .value-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .value-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+    /* DISCLAIMER BOX */
+    .disclaimer-box {
+      background: var(--amber-light);
+      border: 1px solid rgba(184,134,11,0.2);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+    .disclaimer-title { font-size: 14px; font-weight: 600; color: var(--amber); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .disclaimer-body { font-size: 13px; color: var(--text2); line-height: 1.7; }
+    .disclaimer-body p { margin-bottom: 8px; }
+    .disclaimer-body p:last-child { margin-bottom: 0; }
+
+    /* CONTACT SECTION */
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    .contact-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px; text-align: center;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .contact-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-2px); border-color: var(--green); }
+    .contact-icon { font-size: 28px; margin-bottom: 10px; }
+    .contact-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .contact-handle { font-size: 13px; color: var(--green); font-weight: 500; }
+    .contact-desc { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+    /* CTA STRIP */
+    .cta-strip {
+      background: linear-gradient(135deg, #0f4c2a, #1a7a52, #2a9e6a);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      color: #fff;
+      margin-top: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-strip::before { content: ''; position: absolute; top: -40px; right: -40px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+    .cta-strip::after { content: ''; position: absolute; bottom: -60px; left: 20%; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+    .cta-title { font-family: var(--serif); font-size: 32px; letter-spacing: -0.5px; margin-bottom: 12px; position: relative; z-index: 1; }
+    .cta-desc { font-size: 16px; opacity: 0.85; margin-bottom: 28px; line-height: 1.6; position: relative; z-index: 1; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+    .btn-white { background: #fff; color: var(--green); font-weight: 600; padding: 12px 24px; border-radius: 12px; font-size: 14px; cursor: pointer; border: none; font-family: var(--sans); transition: all 0.15s; min-height: 48px; }
+    .btn-white:hover { background: var(--green-light); transform: translateY(-1px); }
+    .btn-outline-white { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--sans); transition: all 0.15s; min-height: 48px; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+
+    /* FOOTER */
+    footer { background: var(--text); color: rgba(255,255,255,0.65); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 8px; }
+    .footer-desc { font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .footer-disclaimer { font-size: 11px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; line-height: 1.6; color: rgba(255,255,255,0.45); }
+    .footer-col-title { font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a:hover { color: #fff; }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+      .hero-title { font-size: 36px; }
+      .hero-desc { font-size: 16px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .offer-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cta-title { font-size: 26px; }
+      .cta-strip { padding: 32px 24px; }
+      .btn, .btn-ghost, .btn-primary, .btn-white, .btn-outline-white { min-height: 48px; padding: 12px 22px; }
+    }
+    @media (max-width: 560px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .hero-title { font-size: 30px; }
+      .section-title { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIVE TICKER -->
+<div class="tv-ticker-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"INDEX:SENSEX","title":"SENSEX"},{"proName":"INDEX:NIFTY50","title":"NIFTY 50"},{"proName":"INDEX:BANKNIFTY","title":"BANK NIFTY"},{"proName":"BSE:RELIANCE","title":"RELIANCE"},{"proName":"BSE:TCS","title":"TCS"},{"proName":"BSE:HDFCBANK","title":"HDFC BANK"},{"proName":"BSE:INFY","title":"INFOSYS"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"FOREXCOM:XAUUSD","title":"GOLD"},{"proName":"TVC:USOIL","title":"CRUDE OIL"}],"showSymbolLogo":false,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M3 14L7 9L10 12L14 6L17 9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="9" r="1.5" fill="white"/></svg>
+      </div>
+      <div><div class="logo-name">TheAlgoJinn</div><div class="logo-tagline">Indian Market Intelligence</div></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="#">Strategies</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="tools.html">Tools</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">Sign in</button>
+      <button class="btn btn-primary">Subscribe Free</button>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mob">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="learn.html">Learn</a>
+    <a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="about-hero-inner">
+    <div class="hero-logo-mark fade-in">
+      <svg viewBox="0 0 40 40" fill="none">
+        <path d="M6 28L13 18L19 24L27 12L34 18" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="34" cy="18" r="3" fill="white"/>
+      </svg>
+    </div>
+    <div class="hero-eyebrow fade-in">About TheAlgoJinn</div>
+    <h1 class="hero-title fade-in">Built for the <em>serious</em><br>Indian retail investor</h1>
+    <p class="hero-desc fade-in">A free, independent knowledge platform for Indian stock market education — no paid tips, no SEBI-registered advice, no agenda. Just honest, structured learning.</p>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-val">4</div>
+      <div class="stat-label">Learning paths</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-val">55+</div>
+      <div class="stat-label">Free lessons</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-val">6</div>
+      <div class="stat-label">Free tools</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-val">₹0</div>
+      <div class="stat-label">Cost — forever</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="about-wrap">
+
+  <!-- THE STORY -->
+  <div class="story-section fade-in">
+    <div class="section-eyebrow">The Story</div>
+    <h2 class="section-title">Why TheAlgoJinn exists</h2>
+    <div class="story-body">
+      <p>TheAlgoJinn started with a simple idea — <strong>build an algo that trades for you</strong>. The name says it all: a Jinn (a genie) that uses algorithms to do the hard work of trading while you sleep.</p>
+      <p>That dream ran into a wall called SEBI. India's market regulator has strict rules around automated trading — every algo must be formally approved, tested in a sandbox, and tagged on every order. For a retail investor without institutional backing, running an approved automated trading system is genuinely difficult. So that original plan had to change.</p>
+      <p>But the thinking behind it didn't. <strong>The algo mindset — systematic, rule-based, unemotional — is more valuable than the automation itself.</strong> Most retail traders lose money not because they lack information, but because they lack a system. They buy on tips, sell on panic, and repeat the cycle.</p>
+      <p>TheAlgoJinn pivoted to teach exactly that: <strong>how to think like an algo trader, even if you place your orders manually</strong>. Structured education, strategy breakdowns, market news decoded, and free tools — all in one place, all free, forever.</p>
+
+      <div class="pull-quote">
+        <p>"You don't have to be an algorithm to think like one. Discipline, rules and consistency are available to every retail investor."</p>
+      </div>
+
+      <p>India now has over 16 crore demat accounts. Most of those investors have no formal market education. SEBI's own data shows that over 90% of F&O traders lose money. The gap between information available and knowledge actually absorbed by retail investors is enormous — and that's the gap TheAlgoJinn is here to fill.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- WHAT WE OFFER -->
+  <div class="fade-in">
+    <div class="section-eyebrow">What We Offer</div>
+    <h2 class="section-title">Everything in one place, free forever</h2>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="offer-icon">📚</div>
+        <div class="offer-title">Structured Learning Paths</div>
+        <div class="offer-desc">Four complete paths — Market Basics, Technical Analysis, Fundamental Analysis, and Algo & Quant — with 55+ lessons written in plain English for Indian markets.</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">✍️</div>
+        <div class="offer-title">In-Depth Blog Articles</div>
+        <div class="offer-desc">Long-form articles on trading strategies, market news decoded, SEBI regulations, options, and everything a serious Indian investor needs to stay sharp.</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">🧮</div>
+        <div class="offer-title">Free Trading Tools</div>
+        <div class="offer-desc">SIP calculator, position sizer, risk/reward analyser, brokerage comparator, tax estimator and options P&L — all free, no login required.</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">📈</div>
+        <div class="offer-title">Strategy Breakdowns</div>
+        <div class="offer-desc">Weekly deep-dives into specific trading strategies — entry rules, exit rules, stop loss, backtested on Indian markets. Rule-based thinking made practical.</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">📰</div>
+        <div class="offer-title">Market News Decoded</div>
+        <div class="offer-desc">Raw news is everywhere. We explain what RBI decisions, FII flows, Budget announcements and SEBI circulars actually mean for your portfolio.</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">🔴</div>
+        <div class="offer-title">Live Market Ticker</div>
+        <div class="offer-desc">Real-time SENSEX, NIFTY, BANK NIFTY, key stocks, USD/INR, gold and crude oil prices — always visible at the top of every page.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- OUR VALUES -->
+  <div class="fade-in">
+    <div class="section-eyebrow">Our Values</div>
+    <h2 class="section-title">What we stand for</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🆓</div>
+        <div class="value-title">Always Free</div>
+        <div class="value-desc">Education should not be behind a paywall. Everything on TheAlgoJinn is free and will remain free. No premium tiers, no locked content.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <div class="value-title">No Tips, No Advice</div>
+        <div class="value-desc">We are not SEBI-registered advisors. We never tell you what to buy or sell. We teach frameworks so you can make your own informed decisions.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤖</div>
+        <div class="value-title">Algo Mindset</div>
+        <div class="value-desc">Rule-based, systematic, data-driven thinking over gut instinct and tips. We believe the best traders think like machines even when they trade manually.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🇮🇳</div>
+        <div class="value-title">India First</div>
+        <div class="value-desc">Built specifically for NSE, BSE, SEBI regulations and Indian market conditions. Not generic global content — everything is tailored to the Indian investor.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">✅</div>
+        <div class="value-title">Honest &amp; Transparent</div>
+        <div class="value-desc">We clearly disclose what we are and what we aren't. No hidden agendas, no broker kickbacks influencing content, no fake track records.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📖</div>
+        <div class="value-title">Plain English</div>
+        <div class="value-desc">No unnecessary jargon. If a concept can be explained simply, we explain it simply. Complex ideas deserve clear explanations, not complicated ones.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- DISCLAIMER -->
+  <div class="fade-in">
+    <div class="section-eyebrow">Important Disclaimer</div>
+    <h2 class="section-title">Please read before using this site</h2>
+    <div class="disclaimer-box">
+      <div class="disclaimer-title">⚠️ Educational Content Only</div>
+      <div class="disclaimer-body">
+        <p><strong>TheAlgoJinn is not a SEBI-registered investment advisor, research analyst, or portfolio manager.</strong> Nothing on this website — including articles, blog posts, learning materials, strategy breakdowns, calculators, market data, or any other content — constitutes investment advice, a recommendation to buy or sell any security, or financial advice of any kind.</p>
+        <p>All content is published purely for <strong>educational and informational purposes</strong>. The stock market involves significant risk. Past performance of any strategy discussed does not guarantee future results. You may lose money trading or investing in the stock market.</p>
+        <p><strong>Always do your own research (DYOR)</strong> before making any investment or trading decision. Consider consulting a SEBI-registered investment advisor or financial planner if you need personalised advice.</p>
+        <p>All calculators and tools on this site provide estimates only. Actual brokerage charges, tax liabilities and investment returns may differ from the estimates shown.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- CONTACT -->
+  <div class="fade-in">
+    <div class="section-eyebrow">Get in Touch</div>
+    <h2 class="section-title">We'd love to hear from you</h2>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:8px;line-height:1.7">Have a topic you'd like us to cover? Found an error? Want to collaborate? Reach out — we read every message.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📧</div>
+        <div class="contact-title">Email</div>
+        <div class="contact-handle">hello@thealgojinn.com</div>
+        <div class="contact-desc">Best for detailed queries and collaborations</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">𝕏</div>
+        <div class="contact-title">Twitter / X</div>
+        <div class="contact-handle">@TheAlgoJinn</div>
+        <div class="contact-desc">Market updates, quick takes and new content</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">💬</div>
+        <div class="contact-title">Telegram</div>
+        <div class="contact-handle">t.me/TheAlgoJinn</div>
+        <div class="contact-desc">Community discussions and lesson announcements</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip fade-in">
+    <div class="cta-title">Ready to start learning?</div>
+    <p class="cta-desc">55+ free lessons, 6 free tools, weekly strategy breakdowns — all free, no sign-up required. Start wherever you are.</p>
+    <div class="cta-buttons">
+      <button class="btn-white" onclick="window.location.href='learn.html'">Start Learning Free →</button>
+      <button class="btn-outline-white" onclick="window.location.href='blog.html'">Read the Blog</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TheAlgoJinn</div>
+        <p class="footer-desc">India's algo-minded stock market knowledge hub. Free education, strategy breakdowns, and tools for the serious retail investor.</p>
+        <div class="footer-disclaimer">⚠️ All content is for educational purposes only. Nothing here constitutes investment advice or a SEBI-registered recommendation. Please do your own research before making any financial decisions.</div>
+      </div>
+      <div><div class="footer-col-title">Learn</div><ul class="footer-links"><li><a href="learn.html">Market Basics</a></li><li><a href="learn.html">Technical Analysis</a></li><li><a href="learn.html">Fundamental Analysis</a></li><li><a href="learn.html">Algo & Quant</a></li></ul></div>
+      <div><div class="footer-col-title">Explore</div><ul class="footer-links"><li><a href="blog.html">Blog</a></li><li><a href="tools.html">Free Tools</a></li><li><a href="#">Strategy Library</a></li><li><a href="#">Newsletter</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Disclaimer</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TheAlgoJinn.com · Made with ♥ for India's retail investors</div>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="about.html">About</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
