@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — TheAlgoJinn</title>
+  <meta name="description" content="Privacy Policy for TheAlgoJinn.com — how we collect, use and protect your information."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f7f4; --bg2: #f0ede6; --bg3: #e8e3d8;
+      --card: #ffffff; --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+      --text: #1a1a18; --text2: #5a5a52; --text3: #9a9a8e;
+      --green: #1a7a52; --green-light: #e8f5ee; --green-mid: #2a9e6a;
+      --amber: #b8860b; --amber-light: #fdf6e3;
+      --blue: #1a4a7a; --blue-light: #e8eef8;
+      --mono: 'JetBrains Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* TICKER */
+    .tv-ticker-wrap { width: 100%; background: #1a1a18; }
+
+    /* NAV */
+    nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-mark { width: 36px; height: 36px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-mark svg { width: 20px; height: 20px; }
+    .logo-name { font-family: var(--serif); font-size: 17px; color: var(--text); line-height: 1.1; }
+    .logo-tagline { font-size: 10px; color: var(--text3); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text2); padding: 6px 12px; border-radius: 8px; transition: all 0.15s; text-decoration: none; }
+    .nav-links a:hover { background: var(--bg2); color: var(--text); text-decoration: none; }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; font-family: var(--sans); text-decoration: none; }
+    .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+    .btn-ghost:hover { background: var(--bg2); text-decoration: none; }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: #155f40; transform: translateY(-1px); text-decoration: none; }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-menu { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 16px 24px; flex-direction: column; gap: 4px; }
+    .mobile-menu a { font-size: 14px; font-weight: 500; color: var(--text2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; min-height: 44px; text-decoration: none; }
+    .mobile-menu.open { display: flex; }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--card); border-bottom: 1px solid var(--border); padding: 48px 24px 40px; }
+    .page-header-inner { max-width: 760px; margin: 0 auto; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+    .page-title { font-family: var(--serif); font-size: 40px; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
+    .page-meta { font-size: 13px; color: var(--text3); display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .page-meta span { display: flex; align-items: center; gap: 4px; }
+
+    /* LAYOUT */
+    .policy-wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; display: grid; grid-template-columns: 1fr 220px; gap: 48px; align-items: start; }
+
+    /* TABLE OF CONTENTS */
+    .toc-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; position: sticky; top: 80px; }
+    .toc-title { font-size: 12px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list li a { display: block; font-size: 12px; color: var(--text2); padding: 6px 10px; border-radius: 6px; transition: all 0.15s; line-height: 1.4; text-decoration: none; }
+    .toc-list li a:hover { background: var(--bg2); color: var(--text); text-decoration: none; }
+    .toc-list li a.active { background: var(--green-light); color: var(--green); font-weight: 500; }
+
+    /* POLICY CONTENT */
+    .policy-content { min-width: 0; }
+    .policy-section { margin-bottom: 48px; }
+    .policy-section:last-child { margin-bottom: 0; }
+    .policy-section h2 { font-family: var(--serif); font-size: 26px; letter-spacing: -0.3px; color: var(--text); margin-bottom: 16px; padding-top: 8px; }
+    .policy-section p { font-size: 15px; color: var(--text2); line-height: 1.8; margin-bottom: 14px; }
+    .policy-section p:last-child { margin-bottom: 0; }
+    .policy-section ul { padding-left: 20px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .policy-section ul li { font-size: 15px; color: var(--text2); line-height: 1.7; }
+    .policy-section strong { color: var(--text); font-weight: 600; }
+
+    /* HIGHLIGHT BOX */
+    .highlight-box { background: var(--green-light); border: 1px solid rgba(26,122,82,0.15); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; }
+    .highlight-box p { font-size: 14px; color: var(--green); line-height: 1.7; margin: 0; font-weight: 500; }
+
+    /* INFO BOX */
+    .info-box { background: var(--blue-light); border: 1px solid rgba(26,74,122,0.15); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; }
+    .info-box p { font-size: 14px; color: var(--blue); line-height: 1.7; margin: 0; }
+
+    /* SECTION RULE */
+    .policy-rule { height: 1px; background: var(--border); margin: 48px 0; }
+
+    /* CONTACT BOX */
+    .contact-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-top: 32px; }
+    .contact-box-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .contact-box p { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 8px; }
+    .contact-box p:last-child { margin-bottom: 0; }
+
+    /* FOOTER */
+    footer { background: var(--text); color: rgba(255,255,255,0.65); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 8px; }
+    .footer-desc { font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .footer-disclaimer { font-size: 11px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; line-height: 1.6; color: rgba(255,255,255,0.45); }
+    .footer-col-title { font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; transition: color 0.15s; text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { text-decoration: none; }
+    .footer-bottom-links a:hover { color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+      .page-title { font-size: 30px; }
+      .policy-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .toc-card { position: static; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .btn, .btn-ghost, .btn-primary { min-height: 44px; }
+    }
+    @media (max-width: 560px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIVE TICKER -->
+<div class="tv-ticker-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"INDEX:SENSEX","title":"SENSEX"},{"proName":"INDEX:NIFTY50","title":"NIFTY 50"},{"proName":"INDEX:BANKNIFTY","title":"BANK NIFTY"},{"proName":"BSE:RELIANCE","title":"RELIANCE"},{"proName":"BSE:TCS","title":"TCS"},{"proName":"BSE:HDFCBANK","title":"HDFC BANK"},{"proName":"BSE:INFY","title":"INFOSYS"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"FOREXCOM:XAUUSD","title":"GOLD"},{"proName":"TVC:USOIL","title":"CRUDE OIL"}],"showSymbolLogo":false,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M3 14L7 9L10 12L14 6L17 9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="9" r="1.5" fill="white"/></svg>
+      </div>
+      <div><div class="logo-name">TheAlgoJinn</div><div class="logo-tagline">Indian Market Intelligence</div></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="#">Strategies</a></li>
+      <li><a href="#">News</a></li>
+      <li><a href="tools.html">Tools</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">Sign in</button>
+      <button class="btn btn-primary">Subscribe Free</button>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mob">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="learn.html">Learn</a>
+    <a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Legal</div>
+    <h1 class="page-title">Privacy Policy</h1>
+    <div class="page-meta">
+      <span>📅 Effective date: May 22, 2026</span>
+      <span>🔄 Last updated: May 22, 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="policy-wrap">
+
+  <!-- TABLE OF CONTENTS -->
+  <div style="order:2">
+    <div class="toc-card">
+      <div class="toc-title">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#overview">1. Overview</a></li>
+        <li><a href="#information">2. Information We Collect</a></li>
+        <li><a href="#how-we-use">3. How We Use Information</a></li>
+        <li><a href="#cookies">4. Cookies &amp; Tracking</a></li>
+        <li><a href="#third-party">5. Third-Party Services</a></li>
+        <li><a href="#data-storage">6. Data Storage &amp; Security</a></li>
+        <li><a href="#your-rights">7. Your Rights</a></li>
+        <li><a href="#children">8. Children's Privacy</a></li>
+        <li><a href="#external-links">9. External Links</a></li>
+        <li><a href="#changes">10. Changes to This Policy</a></li>
+        <li><a href="#contact">11. Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- POLICY CONTENT -->
+  <div class="policy-content" style="order:1">
+
+    <div class="highlight-box">
+      <p>✅ The short version: We collect minimal data, we do not sell your information to anyone, and we use what little we collect only to make TheAlgoJinn better for you.</p>
+    </div>
+
+    <!-- 1. OVERVIEW -->
+    <div class="policy-section" id="overview">
+      <h2>1. Overview</h2>
+      <p>This Privacy Policy explains how <strong>TheAlgoJinn</strong> ("we", "us", "our"), operating at <strong>thealgojinn.com</strong>, collects, uses, and protects information when you visit our website.</p>
+      <p>By using TheAlgoJinn, you agree to the practices described in this policy. If you do not agree, please discontinue use of the website.</p>
+      <p>TheAlgoJinn is an educational platform providing free content about Indian stock markets. We are not a financial services company, bank, or SEBI-registered entity. We do not offer investment advice or handle any financial transactions on your behalf.</p>
+    </div>
+
+    <!-- 2. INFORMATION WE COLLECT -->
+    <div class="policy-section" id="information">
+      <h2>2. Information We Collect</h2>
+      <p>We collect two types of information:</p>
+
+      <p><strong>A. Information you provide voluntarily</strong></p>
+      <ul>
+        <li><strong>Newsletter subscription:</strong> If you subscribe to our newsletter, we collect your email address. This is entirely optional.</li>
+        <li><strong>Contact messages:</strong> If you contact us via email or social media, we retain that correspondence to respond to you.</li>
+      </ul>
+
+      <p><strong>B. Information collected automatically</strong></p>
+      <ul>
+        <li><strong>Usage data:</strong> Pages visited, time spent, links clicked — collected via Google Analytics (see Section 4).</li>
+        <li><strong>Device information:</strong> Browser type, operating system, screen size — collected to ensure the site displays correctly.</li>
+        <li><strong>IP address:</strong> Collected automatically by our hosting provider (Cloudflare) for security and performance purposes.</li>
+        <li><strong>Referral source:</strong> How you arrived at our website (e.g., Google search, direct link, social media).</li>
+      </ul>
+
+      <p>We do <strong>not</strong> collect your name, phone number, financial information, Aadhaar, PAN, or any sensitive personal information unless you explicitly provide it when contacting us.</p>
+    </div>
+
+    <!-- 3. HOW WE USE -->
+    <div class="policy-section" id="how-we-use">
+      <h2>3. How We Use Your Information</h2>
+      <p>We use the information we collect for the following purposes only:</p>
+      <ul>
+        <li><strong>Newsletter delivery:</strong> To send you new articles, lessons and updates if you have subscribed. You can unsubscribe at any time.</li>
+        <li><strong>Site improvement:</strong> To understand which content is most useful and how to improve the site experience.</li>
+        <li><strong>Technical maintenance:</strong> To identify and fix errors, ensure security, and maintain site performance.</li>
+        <li><strong>Communication:</strong> To respond to messages or queries you send us.</li>
+      </ul>
+      <p>We do <strong>not</strong> use your information for advertising targeting, profiling, or selling to third parties — ever.</p>
+    </div>
+
+    <!-- 4. COOKIES -->
+    <div class="policy-section" id="cookies">
+      <h2>4. Cookies &amp; Tracking</h2>
+      <p>TheAlgoJinn uses cookies and similar tracking technologies for the following purposes:</p>
+
+      <p><strong>Essential cookies</strong> — Required for the website to function correctly. These cannot be disabled.</p>
+
+      <p><strong>Analytics cookies (Google Analytics)</strong> — We use Google Analytics to understand how visitors use our site. Google Analytics collects anonymised data about pages visited, session duration and traffic sources. This data is aggregated and does not identify you personally.</p>
+      <ul>
+        <li>You can opt out of Google Analytics tracking by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</li>
+        <li>We have enabled IP anonymisation in Google Analytics — your full IP address is never stored by Google Analytics.</li>
+      </ul>
+
+      <p><strong>TradingView widgets</strong> — Our live market ticker and chart widgets are powered by TradingView. TradingView may set its own cookies when these widgets load. Please refer to <a href="https://www.tradingview.com/privacy-policy/" target="_blank" rel="noopener">TradingView's Privacy Policy</a> for details.</p>
+
+      <p>You can control or delete cookies through your browser settings. Note that disabling cookies may affect how some features of the site work.</p>
+    </div>
+
+    <!-- 5. THIRD PARTY -->
+    <div class="policy-section" id="third-party">
+      <h2>5. Third-Party Services</h2>
+      <p>TheAlgoJinn uses the following third-party services. Each has its own privacy policy:</p>
+      <ul>
+        <li><strong>Cloudflare</strong> — Website hosting, CDN and security. Cloudflare processes traffic data to protect the site from attacks. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy →</a></li>
+        <li><strong>Google Analytics</strong> — Website analytics. Anonymised usage data is sent to Google's servers. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy →</a></li>
+        <li><strong>TradingView</strong> — Live market data widgets (ticker, charts). TradingView processes market data requests. <a href="https://www.tradingview.com/privacy-policy/" target="_blank" rel="noopener">TradingView Privacy Policy →</a></li>
+        <li><strong>Google Fonts</strong> — Font files are loaded from Google's servers. Google may log this request. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy →</a></li>
+      </ul>
+      <p>We do not use advertising networks, affiliate tracking pixels, or social media tracking scripts on our website.</p>
+    </div>
+
+    <!-- 6. DATA STORAGE -->
+    <div class="policy-section" id="data-storage">
+      <h2>6. Data Storage &amp; Security</h2>
+      <p>TheAlgoJinn is a static website hosted on <strong>Cloudflare Pages</strong>. We do not operate our own database or server infrastructure that stores personal data.</p>
+      <ul>
+        <li><strong>Newsletter emails</strong> are stored with our email service provider in encrypted form.</li>
+        <li><strong>Analytics data</strong> is stored with Google Analytics on Google's servers.</li>
+        <li><strong>Contact emails</strong> are stored in our email inbox and are not shared with third parties.</li>
+      </ul>
+      <p>All data transmission between your browser and TheAlgoJinn is encrypted using <strong>HTTPS/TLS</strong> provided by Cloudflare.</p>
+      <p>We take reasonable precautions to protect your information. However, no internet transmission is 100% secure and we cannot guarantee absolute security.</p>
+    </div>
+
+    <!-- 7. YOUR RIGHTS -->
+    <div class="policy-section" id="your-rights">
+      <h2>7. Your Rights</h2>
+      <p>You have the following rights regarding your personal data:</p>
+      <ul>
+        <li><strong>Right to access:</strong> You can request a copy of any personal data we hold about you.</li>
+        <li><strong>Right to deletion:</strong> You can request that we delete your personal data. We will comply unless we are required to retain it by law.</li>
+        <li><strong>Right to unsubscribe:</strong> Every newsletter email contains an unsubscribe link. You can opt out at any time and we will remove your email promptly.</li>
+        <li><strong>Right to correction:</strong> If any information we hold about you is inaccurate, you can ask us to correct it.</li>
+        <li><strong>Right to object:</strong> You can object to our processing of your data for analytics purposes at any time.</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <strong>hello@thealgojinn.com</strong>. We will respond within 30 days.</p>
+
+      <div class="info-box">
+        <p>📧 To unsubscribe from our newsletter, simply click the unsubscribe link in any email we send you. You can also email us at hello@thealgojinn.com and we will remove you immediately.</p>
+      </div>
+    </div>
+
+    <!-- 8. CHILDREN -->
+    <div class="policy-section" id="children">
+      <h2>8. Children's Privacy</h2>
+      <p>TheAlgoJinn is intended for adults and is not directed at children under the age of 18. We do not knowingly collect personal information from anyone under 18.</p>
+      <p>If you are a parent or guardian and believe your child has provided us with personal information, please contact us at hello@thealgojinn.com and we will delete it promptly.</p>
+    </div>
+
+    <!-- 9. EXTERNAL LINKS -->
+    <div class="policy-section" id="external-links">
+      <h2>9. External Links</h2>
+      <p>TheAlgoJinn may contain links to external websites such as NSE, BSE, SEBI, Screener.in, Zerodha, Groww and other financial platforms.</p>
+      <p>We are not responsible for the privacy practices of external websites. When you click a link and leave TheAlgoJinn, this Privacy Policy no longer applies. We encourage you to read the privacy policy of any external site you visit.</p>
+    </div>
+
+    <!-- 10. CHANGES -->
+    <div class="policy-section" id="changes">
+      <h2>10. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page.</p>
+      <p>For significant changes, we will make reasonable efforts to notify newsletter subscribers. Continued use of TheAlgoJinn after any changes constitutes your acceptance of the updated policy.</p>
+      <p>We encourage you to review this page periodically to stay informed about how we protect your information.</p>
+    </div>
+
+    <!-- 11. CONTACT -->
+    <div class="policy-section" id="contact">
+      <h2>11. Contact Us</h2>
+      <p>If you have any questions, concerns or requests regarding this Privacy Policy or how we handle your personal data, please contact us:</p>
+      <div class="contact-box">
+        <div class="contact-box-title">TheAlgoJinn — Privacy Contact</div>
+        <p>📧 <strong>Email:</strong> hello@thealgojinn.com</p>
+        <p>🌐 <strong>Website:</strong> thealgojinn.com</p>
+        <p>📍 <strong>Country of operation:</strong> India</p>
+        <p style="margin-top:12px;font-size:13px;color:var(--text3)">We aim to respond to all privacy-related queries within <strong>30 days</strong>.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TheAlgoJinn</div>
+        <p class="footer-desc">India's algo-minded stock market knowledge hub. Free education, strategy breakdowns, and tools for the serious retail investor.</p>
+        <div class="footer-disclaimer">⚠️ All content is for educational purposes only. Nothing here constitutes investment advice or a SEBI-registered recommendation.</div>
+      </div>
+      <div><div class="footer-col-title">Learn</div><ul class="footer-links"><li><a href="learn.html">Market Basics</a></li><li><a href="learn.html">Technical Analysis</a></li><li><a href="learn.html">Fundamental Analysis</a></li><li><a href="learn.html">Algo & Quant</a></li></ul></div>
+      <div><div class="footer-col-title">Explore</div><ul class="footer-links"><li><a href="blog.html">Blog</a></li><li><a href="tools.html">Free Tools</a></li><li><a href="#">Strategy Library</a></li><li><a href="#">Newsletter</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="#">Contact</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="#">Disclaimer</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TheAlgoJinn.com · Made with ♥ for India's retail investors</div>
+      <div class="footer-bottom-links"><a href="privacy.html">Privacy</a><a href="#">Terms</a><a href="about.html">About</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // TOC active link highlighting on scroll
+  const sections = document.querySelectorAll('.policy-section');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
