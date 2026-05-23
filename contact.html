@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — TheAlgoJinn</title>
+  <meta name="description" content="Get in touch with TheAlgoJinn — for content suggestions, feedback, collaborations or any queries."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f7f4; --bg2: #f0ede6; --bg3: #e8e3d8;
+      --card: #ffffff; --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+      --text: #1a1a18; --text2: #5a5a52; --text3: #9a9a8e;
+      --green: #1a7a52; --green-light: #e8f5ee; --green-mid: #2a9e6a;
+      --red: #c0392b; --red-light: #fdf0ee;
+      --amber: #b8860b; --amber-light: #fdf6e3;
+      --blue: #1a4a7a; --blue-light: #e8eef8;
+      --serif: 'DM Serif Display', serif; --sans: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* TICKER */
+    .tv-ticker-wrap { width: 100%; background: #1a1a18; }
+
+    /* NAV */
+    nav { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-mark { width: 36px; height: 36px; background: var(--green); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-mark svg { width: 20px; height: 20px; }
+    .logo-name { font-family: var(--serif); font-size: 17px; color: var(--text); line-height: 1.1; }
+    .logo-tagline { font-size: 10px; color: var(--text3); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text2); padding: 6px 12px; border-radius: 8px; transition: all 0.15s; }
+    .nav-links a:hover { background: var(--bg2); color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; font-family: var(--sans); min-height: 44px; }
+    .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+    .btn-ghost:hover { background: var(--bg2); }
+    .btn-primary { background: var(--green); color: #fff; }
+    .btn-primary:hover { background: #155f40; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-menu { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 16px 24px; flex-direction: column; gap: 4px; }
+    .mobile-menu a { font-size: 14px; font-weight: 500; color: var(--text2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; min-height: 44px; }
+    .mobile-menu.open { display: flex; }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--card); border-bottom: 1px solid var(--border); padding: 56px 24px 48px; }
+    .page-header-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .page-eyebrow { font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+    .page-title { font-family: var(--serif); font-size: 44px; letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; }
+    .page-title em { font-style: italic; color: var(--green); }
+    .page-desc { font-size: 17px; color: var(--text2); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    /* CONTACT CHANNELS */
+    .channels-wrap { max-width: 1100px; margin: 0 auto; padding: 48px 24px 0; }
+    .channels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .channel-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 24px;
+      text-align: center; transition: all 0.2s; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .channel-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); border-color: rgba(0,0,0,0.12); }
+    .channel-icon { font-size: 36px; }
+    .channel-name { font-size: 16px; font-weight: 600; color: var(--text); }
+    .channel-handle { font-size: 14px; color: var(--green); font-weight: 500; }
+    .channel-desc { font-size: 13px; color: var(--text3); line-height: 1.5; }
+    .channel-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 20px; border-radius: 10px; font-size: 13px;
+      font-weight: 600; cursor: pointer; border: none;
+      font-family: var(--sans); transition: all 0.15s;
+      background: var(--green-light); color: var(--green);
+      margin-top: 4px; min-height: 44px;
+    }
+    .channel-btn:hover { background: var(--green); color: #fff; }
+
+    /* MAIN LAYOUT */
+    .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; }
+
+    /* CONTACT FORM */
+    .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; }
+    .form-title { font-family: var(--serif); font-size: 26px; letter-spacing: -0.3px; margin-bottom: 6px; }
+    .form-desc { font-size: 14px; color: var(--text2); margin-bottom: 28px; line-height: 1.6; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 7px; }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1px solid var(--border2); border-radius: 10px;
+      background: var(--bg); font-family: var(--sans);
+      font-size: 14px; color: var(--text); outline: none;
+      transition: all 0.15s; min-height: 46px;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--green); box-shadow: 0 0 0 3px var(--green-light); background: #fff;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--text3); }
+    .field select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239a9a8e' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .field textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+    .char-count { font-size: 11px; color: var(--text3); text-align: right; margin-top: 4px; }
+
+    .submit-btn {
+      width: 100%; padding: 14px; background: var(--green); color: #fff;
+      border: none; border-radius: 12px; font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: var(--sans); transition: all 0.15s;
+      margin-top: 4px; min-height: 52px; display: flex;
+      align-items: center; justify-content: center; gap: 8px;
+    }
+    .submit-btn:hover { background: #155f40; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,122,82,0.3); }
+    .submit-btn:disabled { background: var(--text3); cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* SUCCESS STATE */
+    .success-state { display: none; text-align: center; padding: 40px 20px; }
+    .success-icon { font-size: 48px; margin-bottom: 16px; }
+    .success-title { font-family: var(--serif); font-size: 26px; margin-bottom: 10px; color: var(--green); }
+    .success-desc { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; }
+    .send-another { background: var(--green-light); color: var(--green); border: none; padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--sans); min-height: 44px; }
+    .send-another:hover { background: var(--green); color: #fff; }
+
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 80px; }
+    .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .sidebar-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-icon { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+    /* FAQ ITEMS */
+    .faq-item { border-bottom: 1px solid var(--border); padding: 12px 0; cursor: pointer; }
+    .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .faq-q { font-size: 13px; font-weight: 500; color: var(--text); display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; line-height: 1.4; }
+    .faq-arrow { font-size: 12px; color: var(--text3); flex-shrink: 0; transition: transform 0.2s; }
+    .faq-item.open .faq-arrow { transform: rotate(90deg); }
+    .faq-a { font-size: 12px; color: var(--text2); line-height: 1.6; margin-top: 8px; display: none; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* RESPONSE TIME */
+    .response-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .response-item:last-child { border-bottom: none; }
+    .response-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .response-label { font-size: 13px; color: var(--text); font-weight: 500; }
+    .response-time { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+    /* DISCLAIMER NOTE */
+    .disclaimer-note { background: var(--amber-light); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 14px 16px; }
+    .disclaimer-note p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+    .disclaimer-note strong { color: var(--amber); }
+
+    /* FOOTER */
+    footer { background: var(--text); color: rgba(255,255,255,0.65); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-logo { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 8px; }
+    .footer-desc { font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .footer-disclaimer { font-size: 11px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 12px; line-height: 1.6; color: rgba(255,255,255,0.45); }
+    .footer-col-title { font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a:hover { color: #fff; }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .contact-wrap { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .channels-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: flex; }
+      .page-title { font-size: 34px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .channels-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIVE TICKER -->
+<div class="tv-ticker-wrap">
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {"symbols":[{"proName":"INDEX:SENSEX","title":"SENSEX"},{"proName":"INDEX:NIFTY50","title":"NIFTY 50"},{"proName":"INDEX:BANKNIFTY","title":"BANK NIFTY"},{"proName":"BSE:RELIANCE","title":"RELIANCE"},{"proName":"BSE:TCS","title":"TCS"},{"proName":"BSE:HDFCBANK","title":"HDFC BANK"},{"proName":"BSE:INFY","title":"INFOSYS"},{"proName":"FX_IDC:USDINR","title":"USD/INR"},{"proName":"FOREXCOM:XAUUSD","title":"GOLD"},{"proName":"TVC:USOIL","title":"CRUDE OIL"}],"showSymbolLogo":false,"isTransparent":false,"displayMode":"adaptive","colorTheme":"dark","locale":"en"}
+    </script>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 20 20" fill="none"><path d="M3 14L7 9L10 12L14 6L17 9" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17" cy="9" r="1.5" fill="white"/></svg></div>
+      <div><div class="logo-name">TheAlgoJinn</div><div class="logo-tagline">Indian Market Intelligence</div></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="blog.html">Blog</a></li>
+      <li><a href="learn.html">Learn</a></li><li><a href="#">Strategies</a></li>
+      <li><a href="#">News</a></li><li><a href="tools.html">Tools</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn btn-ghost">Sign in</button>
+      <button class="btn btn-primary">Subscribe Free</button>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mob">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="learn.html">Learn</a>
+    <a href="#">Strategies</a><a href="#">News</a><a href="tools.html">Tools</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Get in Touch</div>
+    <h1 class="page-title">We'd love to <em>hear</em> from you</h1>
+    <p class="page-desc">Content suggestions, feedback, errors you spotted, collaboration ideas — we read every message and reply to all.</p>
+  </div>
+</div>
+
+<!-- CONTACT CHANNELS -->
+<div class="channels-wrap">
+  <div class="channels-grid">
+    <div class="channel-card fade-in" onclick="window.location.href='mailto:hello@thealgojinn.com'">
+      <div class="channel-icon">📧</div>
+      <div class="channel-name">Email</div>
+      <div class="channel-handle">hello@thealgojinn.com</div>
+      <div class="channel-desc">Best for detailed queries, content suggestions and collaboration requests</div>
+      <button class="channel-btn">Send Email →</button>
+    </div>
+    <div class="channel-card fade-in" onclick="window.open('https://twitter.com/TheAlgoJinn','_blank')">
+      <div class="channel-icon">𝕏</div>
+      <div class="channel-name">Twitter / X</div>
+      <div class="channel-handle">@TheAlgoJinn</div>
+      <div class="channel-desc">Market updates, quick takes, new content drops and community discussions</div>
+      <button class="channel-btn">Follow Us →</button>
+    </div>
+    <div class="channel-card fade-in" onclick="window.open('https://t.me/TheAlgoJinn','_blank')">
+      <div class="channel-icon">💬</div>
+      <div class="channel-name">Telegram</div>
+      <div class="channel-handle">t.me/TheAlgoJinn</div>
+      <div class="channel-desc">Join our community for lesson announcements, market discussions and Q&A</div>
+      <button class="channel-btn">Join Channel →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT FORM + SIDEBAR -->
+<div class="contact-wrap">
+
+  <!-- FORM -->
+  <div class="form-card fade-in">
+    <div id="formState">
+      <div class="form-title">Send us a message</div>
+      <p class="form-desc">Fill in the form below and we'll get back to you within 48 hours. Fields marked * are required.</p>
+
+      <div class="form-row">
+        <div class="field">
+          <label>First Name *</label>
+          <input type="text" id="fname" placeholder="Rahul" required />
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" id="lname" placeholder="Sharma" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email Address *</label>
+        <input type="email" id="email" placeholder="rahul@example.com" required />
+      </div>
+
+      <div class="field">
+        <label>Subject *</label>
+        <select id="subject">
+          <option value="" disabled selected>Select a topic</option>
+          <option value="content">Content suggestion or topic request</option>
+          <option value="error">Error or inaccuracy found</option>
+          <option value="feedback">General feedback</option>
+          <option value="collaboration">Collaboration or partnership</option>
+          <option value="newsletter">Newsletter related</option>
+          <option value="tools">Calculator or tool issue</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Message *</label>
+        <textarea id="message" placeholder="Tell us what's on your mind..." oninput="updateCount()" maxlength="1000"></textarea>
+        <div class="char-count"><span id="charCount">0</span> / 1000</div>
+      </div>
+
+      <div class="field" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px">
+        <input type="checkbox" id="disclaimer" style="margin-top:3px;width:16px;height:16px;accent-color:var(--green);flex-shrink:0;cursor:pointer"/>
+        <label for="disclaimer" style="font-size:13px;color:var(--text2);line-height:1.5;cursor:pointer">
+          I understand that TheAlgoJinn provides educational content only and does not offer investment advice. I will not request stock tips or trading recommendations.
+        </label>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+        <span>Send Message</span> <span>→</span>
+      </button>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">✅</div>
+      <div class="success-title">Message sent!</div>
+      <p class="success-desc">Thank you for reaching out. We've received your message and will reply to your email within 48 hours.</p>
+      <button class="send-another" onclick="resetForm()">Send another message</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- RESPONSE TIMES -->
+    <div class="sidebar-card fade-in">
+      <div class="sidebar-title">
+        <div class="sidebar-icon" style="background:var(--green-light)">⏱️</div>
+        Response Times
+      </div>
+      <div class="response-item">
+        <div class="response-dot" style="background:var(--green-mid)"></div>
+        <div>
+          <div class="response-label">Email</div>
+          <div class="response-time">Within 48 hours</div>
+        </div>
+      </div>
+      <div class="response-item">
+        <div class="response-dot" style="background:var(--blue)"></div>
+        <div>
+          <div class="response-label">Twitter / X mentions</div>
+          <div class="response-time">Within 24 hours (weekdays)</div>
+        </div>
+      </div>
+      <div class="response-item">
+        <div class="response-dot" style="background:var(--amber)"></div>
+        <div>
+          <div class="response-label">Telegram</div>
+          <div class="response-time">Community — peer-assisted</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="sidebar-card fade-in">
+      <div class="sidebar-title">
+        <div class="sidebar-icon" style="background:var(--blue-light)">❓</div>
+        Common Questions
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Can you recommend stocks to buy? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">No. TheAlgoJinn is an educational platform and is not SEBI-registered. We do not provide stock tips or investment advice of any kind.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Can I suggest a topic for an article? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Absolutely! We love topic suggestions. Select "Content suggestion" in the form and describe what you'd like us to cover.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">I found an error in an article. How do I report it? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Thank you — we take accuracy seriously. Select "Error or inaccuracy found" and describe the issue. We'll verify and correct it promptly.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Can I republish your content on my site? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Short excerpts with attribution and a link back are fine. Full reproduction requires written permission. Use the form to get in touch.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">How do I unsubscribe from the newsletter? <span class="faq-arrow">›</span></div>
+        <div class="faq-a">Click the unsubscribe link in any newsletter email we send you. You'll be removed immediately.</div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER NOTE -->
+    <div class="disclaimer-note fade-in">
+      <p>⚠️ <strong>Please note:</strong> We do not provide stock tips, trading calls, or personalised investment advice. Messages requesting such content will not be answered. TheAlgoJinn is an educational platform only.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TheAlgoJinn</div>
+        <p class="footer-desc">India's algo-minded stock market knowledge hub. Free education, strategy breakdowns, and tools for the serious retail investor.</p>
+        <div class="footer-disclaimer">⚠️ All content is for educational purposes only. Nothing here constitutes investment advice or a SEBI-registered recommendation.</div>
+      </div>
+      <div><div class="footer-col-title">Learn</div><ul class="footer-links"><li><a href="learn.html">Market Basics</a></li><li><a href="learn.html">Technical Analysis</a></li><li><a href="learn.html">Fundamental Analysis</a></li><li><a href="learn.html">Algo & Quant</a></li></ul></div>
+      <div><div class="footer-col-title">Explore</div><ul class="footer-links"><li><a href="blog.html">Blog</a></li><li><a href="tools.html">Free Tools</a></li><li><a href="#">Strategy Library</a></li><li><a href="#">Newsletter</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="disclaimer.html">Disclaimer</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 TheAlgoJinn.com · Made with ♥ for India's retail investors</div>
+      <div class="footer-bottom-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="about.html">About</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Char counter
+  function updateCount() {
+    const len = document.getElementById('message').value.length;
+    document.getElementById('charCount').textContent = len;
+  }
+
+  // FAQ toggle
+  function toggleFAQ(el) {
+    el.classList.toggle('open');
+  }
+
+  // Form submit
+  function handleSubmit() {
+    const fname    = document.getElementById('fname').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const subject  = document.getElementById('subject').value;
+    const message  = document.getElementById('message').value.trim();
+    const disc     = document.getElementById('disclaimer').checked;
+
+    if (!fname) { alert('Please enter your first name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+    if (!subject) { alert('Please select a subject.'); return; }
+    if (!message || message.length < 10) { alert('Please enter a message (at least 10 characters).'); return; }
+    if (!disc) { alert('Please check the disclaimer box to proceed.'); return; }
+
+    // Simulate form submission (replace with your form backend / Formspree / EmailJS)
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span>Sending...</span>';
+
+    setTimeout(() => {
+      document.getElementById('formState').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+    }, 1200);
+  }
+
+  // Reset form
+  function resetForm() {
+    document.getElementById('formState').style.display = 'block';
+    document.getElementById('successState').style.display = 'none';
+    document.getElementById('fname').value = '';
+    document.getElementById('lname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('subject').value = '';
+    document.getElementById('message').value = '';
+    document.getElementById('disclaimer').checked = false;
+    document.getElementById('charCount').textContent = '0';
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = false;
+    btn.innerHTML = '<span>Send Message</span><span>→</span>';
+  }
+
+  // Scroll animations
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
